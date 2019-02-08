@@ -14,35 +14,25 @@ Shreddit is a simplified, shredded-down clone of reddit, built using React and e
 * Search in overall posts and posts within a subreddit.
 
 ## Design Docs
-* View Wireframes
-* React Components
+* Wireframes
+* React Components - in progress
 * API Endpoints
 * DB Schema
-* Sample State
+* Sample State - in progress
 
-priorities:
-  DB Schema
-  MVP 
-  API routes
-  Plan - timeline
-
-  components
-  sample state
-
-## Implementation Timeline
-  ### Phase 1 (3 days): this ....
-  * Objective: this ....
+## Implementation Timeline - in progress
+  ### Phase 1 (3 days): ...
+  * Objective: ...
 
 ## Wireframes
-
 * Landing Page  
   * Trending / Popular view
   * Home / All view
 * User Profile
-* User Login (in progress)
-* Sub-shreddit (in progress)
-* Single Post View (in progress) R
-* Create Post / Comment view (in progress)
+* User Login - in progress
+* Sub-shreddit - in progress
+* Single Post View - in progress
+* Create Post / Comment view - in progress
 
 ## Future Features
 * Flairs (reddit "hashtags")
