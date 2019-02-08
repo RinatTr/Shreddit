@@ -22,7 +22,7 @@ Shreddit is a simplified, shredded-down clone of reddit, built using React and e
 
 priorities:
   DB Schema
-  MVP V
+  MVP 
   API routes
   Plan - timeline
 

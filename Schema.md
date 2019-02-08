@@ -16,7 +16,7 @@
 
 **Subscriptions**
 - id: int primary key.
-- user_id: int references users(id)
+- subscriber_id: int references users(id)
 - subshreddit_id: int references subshreddits(id)
 
 **Subshreddits**
