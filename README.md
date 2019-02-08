@@ -45,6 +45,7 @@ priorities:
 * Create Post / Comment view (in progress)
 
 ## Future Features
+* Flairs (reddit "hashtags")
 * Comment on comments
 * Private messaging
 * Trending Subjects
