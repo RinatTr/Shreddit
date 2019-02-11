@@ -18,11 +18,37 @@ Shreddit is a simplified, shredded-down clone of reddit, built using React and e
 * [React Components](./Components.md)
 * [API Endpoints](./API_Endpoints.md)
 * [DB Schema](./Schema.md)
-* Sample State - in progress
 
 ## Implementation Timeline - in progress
-  ### Phase 1 (3 days): ...
-  * Objective: ...
+### Phase 1: Setup Backend (2 days) ###
+* Objective:
+Routes, queries and database
+
+### Phase 2: Frontend: Homepage and Feed(4 days) ###
+* Objective:
+Completed navbar
+Full Feed of all comments and posts (minimized)
+Upvotes/Downvotes, affecting order of posts.
+Popular posts view.
+
+### Phase 3: Frontend: User Profile and Create Post (5 days) ###
+* Objective:
+User sign up, login and delete account
+User profile view
+Following
+Posts: create, delete, save, hide and pin posts
+
+### Phase 4: Frontend: Subshreddits and Feed Continued (4 days) ###
+* Objective:
+Search in overall posts and posts within a subreddit.
+Subreddit communities and user subscriptions.
+Single Post View
+
+### Phase 5: Frontend: Styling and Testing(2 days) ###
+* Objective:
+Style all components.
+Testing features globally and debugging. 
+
 
 ## Future Features
 * Flairs (reddit "hashtags")
