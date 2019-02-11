@@ -17,7 +17,7 @@ Shreddit is a simplified, shredded-down clone of reddit, built using React and e
 * [Wireframes](./wireframes)
 * React Components - in progress
 * [API Endpoints](./API_Endpoints.md)
-* [DB Schema](./schema.md)
+* [DB Schema](./Schema.md)
 * Sample State - in progress
 
 ## Implementation Timeline - in progress
