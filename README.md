@@ -14,10 +14,10 @@ Shreddit is a simplified, shredded-down clone of reddit, built using React and e
 * Search in overall posts and posts within a subreddit.
 
 ## Design Docs
-* Wireframes
+* [Wireframes] (./wireframes)
 * React Components - in progress
-* API Endpoints
-* DB Schema
+* [API Endpoints] (./API_Endpoints.md)
+* DB Schema (./schema.md)
 * Sample State - in progress
 
 ## Implementation Timeline - in progress
