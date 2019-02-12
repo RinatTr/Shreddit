@@ -6,6 +6,7 @@
 - Id: serial primary key.
 - Username: string.
 - Password: string.
+- Avatar_url: string.
 - Email: string.
 - timestamp: date.
 

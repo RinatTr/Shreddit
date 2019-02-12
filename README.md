@@ -55,7 +55,8 @@ Shreddit is a simplified, shredded-down clone of reddit, built using React and e
 3. FE Search overall posts, users, subshreddits and posts within a Subshreddit.
 
 ### Phase 6: Styling, Testing and Tweaks (3 Days) ###
-1. FE Advanced styling.
+`Objectives:`
+1. FE Advanced CSS styling.
 2. Comprehensive testing:
   * Complete UX flow.
   * Edge cases.
