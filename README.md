@@ -34,7 +34,7 @@ Shreddit is a simplified, shredded-down clone of reddit, built using React and e
 ### Phase 2: Homepage and Feed (4 days) ###
 `Objectives:`
 1. FE Basic Navbar.
-2. BE + FE Homepage (Posts - collapsed view, Votes).
+2. BE + FE Homepage (Most recent posts - collapsed view, Votes).
 4. FE Popular posts view.
 
 ### Phase 3: Posts and Comments (3 days) ###

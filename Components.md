@@ -12,13 +12,13 @@
 * Posts
 
 **UserProfile**
-* Navbar
+* User Navbar
 * Posts
 * Comments
 
 **Posts**
 * VotesContainer
-* Post
+* PostView
 * Comments
 
 **PostView**
