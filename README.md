@@ -3,8 +3,8 @@
 ## Minimum Viable Product
 Shreddit is a simplified, shredded-down clone of reddit, built using React and express. By the end of the production period, this app will, at a minimum, include the following features:
 
-* User sign up, login and delete account
-* User profile view
+* User sign up, login and delete account.
+* User profile view.
 * Posts: create, delete, save, hide and pin posts in subshreddits.
 * Following.
 * Comments.
@@ -52,14 +52,14 @@ Shreddit is a simplified, shredded-down clone of reddit, built using React and e
 `Objectives:`
 1. BE + FE Subshreddits and Subscriptions.
 2. BE + FE Navbar complete menu (select).
-3. FE Search overall posts, users, subshreddits and posts within a Subshreddit.
+3. FE Search overall posts, users, Subshreddits and posts within a Subshreddit.
 
 ### Phase 6: Styling, Testing and Tweaks (3 Days) ###
 `Objectives:`
 1. FE Advanced CSS styling.
 2. Comprehensive testing:
-  * Complete UX flow.
-  * Edge cases.
+    * Complete UX flow.
+    * Edge cases.
 3. Final tweaks.
 
 ## Future Features
