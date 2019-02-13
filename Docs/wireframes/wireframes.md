@@ -1,9 +1,11 @@
 ## Wireframes
 * Landing Page  
-  * Trending / Popular view
-  * Home / All view
+  * Home - Popular view
+  * Home - All view
+  * Home Logged-out
 * User Profile
-* User Login - in progress
+* User Login
+* User Sign Up
 * Subshreddit - in progress
-* Single Post View - in progress
+* Single Post View
 * Create Post / Comment view - in progress

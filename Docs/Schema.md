@@ -4,11 +4,11 @@
 
 **Users**
 - Id: serial primary key.
-- Username: string.
+- Username: string UNIQUE NOT NULL.
 - Password: string.
 - Avatar_url: string.
-- Email: string.
-- timestamp: date.
+- Email: UNIQUE NOT NULL.
+- created_at: timestamp (TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
 
 **Follows**
 - id: serial primary key.
@@ -28,7 +28,7 @@
 - id: serial primary key.
 - poster_id: int references users(id)
 - subshreddit_id: int references subshreddits(id)
-- timestamp: Date obj.
+- created_at: TIMESTAMP
 - votes: int.
 - header: string.
 - body: string.
@@ -45,3 +45,4 @@
 - commenter_id: int references users(id).
 - post_id: int references users(id)
 - votes: int.
+- created_at: TIMESTAMP
