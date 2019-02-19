@@ -15,14 +15,14 @@
 - follower_id: int references users(id)
 - followed_id: int references users(id)
 
+**Subshreddits**
+- id: serial primary key.
+- groupname: string.
+
 **Subscriptions**
 - id: serial primary key.
 - subscriber_id: int references users(id)
 - subshreddit_id: int references subshreddits(id)
-
-**Subshreddits**
-- id: serial primary key.
-- groupname: string.
 
 **Posts**
 - id: serial primary key.
@@ -43,6 +43,6 @@
 **Comments**
 - id: serial primary key.
 - commenter_id: int references users(id).
-- post_id: int references users(id)
+- post_id: int references posts(id)
 - votes: int.
 - created_at: TIMESTAMP
