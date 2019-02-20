@@ -31,9 +31,10 @@
 3. create GET all routes. ✅
 4. plan how to GET all on FE (redux, API util etc, componentDidMount)
 `current phase:`
-  - FE Basic Navbar.
+  - FE Basic Navbar. ✅
   - BE + FE Homepage (Most recent posts - collapsed view, Votes).
   - FE Popular posts view.
 
 ### Issues ###
 - Seed all fake posts at once gives them the same exact timestamp. Will need to seed a few new posts later to test correctly "sort by most recent posts" feature, or use time interval.
+- will need to implement redux later for menu and search instead of current use of this.state.
