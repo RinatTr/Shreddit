@@ -5,7 +5,7 @@
 ### Users
 * `GET /api/users/`
   * Fetches all users for search
-* `POST /api/users`
+* `POST /api/users/`
   * Creates new user
 * `GET /api/users/:userId`
   * Fetches single existing user data

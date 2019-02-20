@@ -1,17 +1,49 @@
 const express = require('express');
+const session = require("express-session");
+const passport = require("passport");
 const bodyParser = require('body-parser')
 const users = require('./routes/users.js')
+const posts = require('./routes/posts.js')
+const subshreddits = require('./routes/subshreddits.js')
+const cookieParser = require("cookie-parser");
 const app = express()
 
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser("shreddit passport"));
 
-app.use('/users', users)
+app.use('/api/users', users)
+app.use('/api/posts', posts)
+app.use('/api/subshreddits', subshreddits)
 
-app.use(function (err, req, res, next) {
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
-})
+app.use(
+  session({
+    secret: "shreddit passport",
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error("Not Found");
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render("error");
+});
 
 app.listen(3100, () => {
   console.log('Shreddit: listening to 3100');

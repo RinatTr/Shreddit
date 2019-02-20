@@ -7,10 +7,11 @@ const { loginRequired } = require("../auth/helpers");
 
 router.get('/', getAllUsers)
 
-/* GET users listing. */
 router.post("/new", db.createUser);
 router.post("/login", passport.authenticate("local", {}), db.loginUser);
 router.get("/isLoggedIn", db.isLoggedIn);
 router.post("/logout", loginRequired, db.logoutUser);
 
+
+//add loginRequired to each protected route
 module.exports = router;
