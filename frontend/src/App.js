@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './css/App.css';
 
-import Home from './components/Home'
-import Post from './components/Post'
-import Nav from './components/Navbar'
+import PostsContainer from './components/Posts/PostsContainer'
+import Navbar from './components/Navbar'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Nav />
+        <Navbar />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/:post_id" component={Post} />
+          <Route path="/all" component={PostsContainer} />
+          <Route path="/popular" component={PostsContainer} />
         </Switch>
     </div>
     );

@@ -1,0 +1,47 @@
+.post-collapsed {
+  background: white;
+  height: 150px;
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: solid #ffd221 1px;
+}
+
+.votes {
+  display: flex;
+  flex-direction: column;
+  width: 40px;
+  align-items: center;
+  justify-content: flex-start;
+  background: #fff2c6;
+}
+
+.votes img {
+  margin: 5px;
+  width: 16px;
+  height: 16px;
+}
+
+.votes img:hover {
+  cursor: pointer;
+}
+.post-content {
+  display: block;
+  position: relative;
+  margin-left: 5px;
+}
+
+.post-text {
+  text-align: left;
+}
+
+.post-buttons {
+  text-align: left;
+}
+
+.post-collapsed:hover {
+  border: solid #e2b500 1px;
+}

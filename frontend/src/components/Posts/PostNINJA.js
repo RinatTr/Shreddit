@@ -30,7 +30,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    //dispatch expects an action obj. deletePost returns one. 
+    //dispatch expects an action obj. deletePost returns one.
     deletePost: (id) => { dispatch(deletePost(id)) }
   }
 }

@@ -22,7 +22,7 @@ class Navbar extends Component {
 
   render() {
     let { searchInput, select } = this.state;
-    console.log(select);
+
     return (
       <nav>
         <Link to="/"><img alt="icon" src={icon}/>shreddit</Link>

@@ -29,12 +29,32 @@
 1. Create Subshreddits, Posts basic BE ✅
 2. insert values posts and subshreddits. ✅
 3. create GET all routes. ✅
-4. plan how to GET all on FE (redux, API util etc, componentDidMount)
-`current phase:`
-  - FE Basic Navbar. ✅
-  - BE + FE Homepage (Most recent posts - collapsed view, Votes).
-  - FE Popular posts view.
+4. plan how to GET all on FE (redux, API util etc, componentDidMount) ✅
+
 
 ### Issues ###
 - Seed all fake posts at once gives them the same exact timestamp. Will need to seed a few new posts later to test correctly "sort by most recent posts" feature, or use time interval.
 - will need to implement redux later for menu and search instead of current use of this.state.
+
+**02 21 19**
+`current phase:`
+  - FE Basic Navbar. ✅
+  - BE + FE Homepage (Most recent posts - collapsed view, Votes).✅
+  - FE Popular posts view. ✅
+
+### Issues ###
+- current posts info in FE only has the ID's of subshreddits and users. how to display the info? make another api call, or a JOIN call to fetch names of these ? a couple of JOINs will probably be best to do. ✅
+- realized that I forgot to add img_url for subshredditts in DB. added using ALTER TABLE and UPDATE✅
+
+**02 22 19**
+- add voting functionality.
+  - with every click activate corresponding UPDATE vote.
+  - `UPDATE TableName SET TableField = TableField + 1 WHERE SomeFilterField = @ParameterID` 
+`current phase:`
+  - FE Basic Navbar. ✅
+  - BE + FE Homepage (Most recent posts - collapsed view, Votes). ✅
+  - FE Popular posts view. ✅
+
+
+### Issues ###
+  - timestamp convert to JS, need a module to display days ago, hours ago etc. found a npm react-timeago package. ✅
