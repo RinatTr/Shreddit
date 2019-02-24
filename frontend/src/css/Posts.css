@@ -1,3 +1,22 @@
+.black {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+}
+
+.posts {
+  margin-top: 50px;
+}
+
 .post-collapsed {
   background: white;
   height: 150px;
@@ -8,6 +27,26 @@
   margin-bottom: 10px;
   border-radius: 5px;
   border: solid #ffd221 1px;
+  cursor: pointer;
+}
+
+.post-expanded {
+  background: white;
+  height: 92vh;
+  width: 84vw;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.close {
+  background: black;
+  color: #909192;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
 }
 
 .votes {
@@ -17,6 +56,35 @@
   align-items: center;
   justify-content: flex-start;
   background: #fff2c6;
+  font-weight: 800;
+  color: #5a5c5d;
+}
+
+.close .votes {
+  flex-direction: row;
+  background: none;
+  color: #909192;
+  margin-left: 30px;
+}
+
+.close span {
+  margin-right: 30px;
+  font-size: 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  height: 60%;
+  border-radius: 8px;
+}
+
+.close span:hover {
+  background: #90919278;
+}
+
+.close span div {
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 5px;
+  margin-top: 2px;
 }
 
 .votes img {
@@ -29,13 +97,45 @@
   cursor: pointer;
 }
 .post-content {
-  display: block;
-  position: relative;
+  display: flex;
+  flex-direction: column;
   margin-left: 5px;
+}
+
+.post-expanded .post-content {
+  height: 100%;
+  border-right: 30px solid #fdcc078c;
+  border-left: 30px solid #fdcc078c;
+  margin-left: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.post-content img {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
 .post-text {
   text-align: left;
+}
+
+.post-text .info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.post-text .info > * {
+  margin-right: 5px;
+}
+
+.post-text .info span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .post-buttons {

@@ -16,13 +16,17 @@ const getAllUsers = (req, res, next) => {
 
 const createUser = (req, res, next) => {
   const hash = authHelpers.createHash(req.body.password);
-
+  console.log("original password and username", req.body.password, req.body.username);
   db.none(
-    "INSERT INTO users (username, password_digest) VALUES (${username}, ${password})",
-    { username: req.body.username, password: hash }
+    "INSERT INTO users (username, password_digest, avatar_url, email) VALUES (${username}, ${password_digest}, ${avatar_url}, ${email})",
+    { username: req.body.username,
+      password_digest: hash,
+      avatar_url: `https://api.adorable.io/avatars/285/`+req.body.username,
+      email: req.body.email
+    }
   )
     .then(() => {
-      res.status(200).json({
+      res.status(200).json({ //same as doing res.send, but .json helps send a json ready to the client.
         message: "Registration successful."
       });
     })
@@ -39,7 +43,7 @@ const logoutUser = (req, res, next) => {
 }
 
 const loginUser = (req, res) => {
-  res.json(req.user);
+  res.json(req.user.username);
 }
 
 const isLoggedIn = (req, res) => {

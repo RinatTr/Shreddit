@@ -10,17 +10,31 @@ const Post = ({ id,
                 body,
                 username,
                 groupname,
-                handleVote }) => {
+                groupImgUrl,
+                handleVote,
+                handleExpand }) => {
     return (
-      <div className="post-collapsed">
+      <React.Fragment>
+      <div className="post-collapsed" id={id} onClick={handleExpand}>
         <div className="votes">
-          <img alt="upvote" src={upvote} id={id} onClick={handleVote}/>
+          <img alt="upvote" className="upvote" src={upvote} id={id} onClick={handleVote}/>
             {votes}
-          <img alt="downvote" src={downvote} id={id} onClick={handleVote}/>
+          <img alt="downvote" className="downvote" src={downvote} id={id} onClick={handleVote}/>
         </div>
         <div className="post-content">
           <div className="post-text">
-            <p><strong>/r/{groupname}</strong> Posted by {username} <TimeAgo date={timestamp}/></p>
+            <p className="info">
+              <span>
+                <img alt={groupImgUrl} src={groupImgUrl} />
+                <strong>/r/{groupname}</strong>
+              </span>
+              <span>
+               Posted by /u/{username}
+              </span>
+              <span>
+               <TimeAgo date={timestamp}/>
+              </span>
+             </p>
             <h3>{header}</h3>
             <p>{body.slice(0,100)}...</p>
           </div>
@@ -29,6 +43,7 @@ const Post = ({ id,
           </div>
         </div>
       </div>
+      </React.Fragment>
     )
   }
 

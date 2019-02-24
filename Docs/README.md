@@ -45,7 +45,7 @@ Shreddit is a simplified, shredded-down clone of reddit, built using React and e
 ### Phase 4: User Profile and Create Post (4 Days) ###
 `Objectives:`
 1. FE User Profile.
-2. BE + FE Following.
+2. BE     + FE Following.
 3. BE + FE Create a post.
 
 ### Phase 5: Subshreddits and Navbar Menus (4 Days) ###

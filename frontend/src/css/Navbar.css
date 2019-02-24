@@ -11,6 +11,7 @@ nav {
   font-family: 'PT Sans Narrow', sans-serif;
   font-size: 25px;
   font-weight: bold;
+  position: fixed;
 }
 
 img {

@@ -5,6 +5,7 @@ function comparePass(userPass, databasePass) {
 //the second (hashed) argument. We have to hash
 //instead of decrypt because it is impossible to
 //decrypt hashes.
+  console.log(bcrypt.compareSync(userPass, databasePass));
   return bcrypt.compareSync(userPass, databasePass);
 }
 

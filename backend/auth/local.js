@@ -8,19 +8,19 @@ const LocalStrategy = require("passport-local").Strategy;
 const init = require("./passport");
 const helpers = require("./helpers");
 
-const pgp = require("pg-promise")({});
-const connectionString = "postgres://localhost/userlist";
-const db = pgp(connectionString);
+const { db } = require('../queries/q-index')
 
+// WHERE id = $1`, [post_id])
 passport.use(
   new LocalStrategy((username, password, done) => {
     db.one("SELECT * FROM users WHERE username = ${username}", {
       username: username
-    })
+    }) //username coming from the body of the request
       .then(user => {
         if (!helpers.comparePass(password, user.password_digest)) {
-          return done(null, false);
+          return done(null, false); //done allows it to go to the next middleware
         } else {
+          console.log("correct pass", done);
           return done(null, user);
         }
       })

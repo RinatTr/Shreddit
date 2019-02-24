@@ -47,14 +47,36 @@
 - realized that I forgot to add img_url for subshredditts in DB. added using ALTER TABLE and UPDATE✅
 
 **02 22 19**
-- add voting functionality.
-  - with every click activate corresponding UPDATE vote.
-  - `UPDATE TableName SET TableField = TableField + 1 WHERE SomeFilterField = @ParameterID` 
+- add voting functionality.✅
+  - with every click activate corresponding UPDATE vote.✅
+  - `UPDATE TableName SET TableField = TableField + 1 WHERE SomeFilterField = @ParameterID`✅
+
 `current phase:`
   - FE Basic Navbar. ✅
   - BE + FE Homepage (Most recent posts - collapsed view, Votes). ✅
   - FE Popular posts view. ✅
-
-
+`next phase:`
+  1. FE Post-single post expanded view.
+  2. BE + FE Comments, add new comment.
 ### Issues ###
   - timestamp convert to JS, need a module to display days ago, hours ago etc. found a npm react-timeago package. ✅
+
+**02 23 19**
+`current phase:`
+1. FE Post-single post expanded view.
+2. BE + FE Comments, add new comment.
+
+**02 24 19**
+`current phase:`
+1. FE Post-single post expanded view. ✅
+2. BE + FE Comments, add new comment.
+
+-close button functionality : isOpen handler ✅
+
+### Issues ###
+- clicking on a vote also expands the post. preventing it
+by putting an if statement in the expand handler to determine correct origin of event. ✅
+- clicking close changes route to /post/ and doesn't show anything.✅
+- css issue: text overflows outside of box.❌
+
+networking date with yisselda ? after my shreddit is done

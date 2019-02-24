@@ -13,6 +13,7 @@ class App extends Component {
         <Switch>
           <Route path="/all" component={PostsContainer} />
           <Route path="/popular" component={PostsContainer} />
+          <Route path="/post/:id" component={PostsContainer} />
         </Switch>
     </div>
     );
