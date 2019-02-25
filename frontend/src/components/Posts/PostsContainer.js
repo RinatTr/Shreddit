@@ -1,17 +1,18 @@
 import Posts from "./Posts";
 import { connect } from "react-redux";
-import { fetchPosts } from "../../actions/PostActions";
+import { fetchPosts, fetchCommentsPerPost } from "../../actions/PostActions";
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    posts: state.posts,
-    selectedId: ownProps.match.params.id
+    posts: state.posts.posts,
+    comments: state.posts.comments
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchPosts: () => dispatch(fetchPosts())
+    fetchPosts: () => dispatch(fetchPosts()),
+    fetchCommentsPerPost: (id) => dispatch(fetchCommentsPerPost(id))
   };
 };
 

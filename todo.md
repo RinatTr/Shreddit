@@ -71,12 +71,22 @@
 1. FE Post-single post expanded view. ✅
 2. BE + FE Comments, add new comment.
 
--close button functionality : isOpen handler ✅
+- close button functionality : isOpen handler ✅
+- seed comments DB, backend routing ✅
+- comments per post fetch using redux. ✅
 
 ### Issues ###
 - clicking on a vote also expands the post. preventing it
 by putting an if statement in the expand handler to determine correct origin of event. ✅
 - clicking close changes route to /post/ and doesn't show anything.✅
-- css issue: text overflows outside of box.❌
+- css issue: text overflows outside of box. max-height✅
+- sql issue - how to get poster username in comments ? used two joins on users table. ✅
 
 networking date with yisselda ? after my shreddit is done
+
+**02 24 19**
+`current phase:`
+1. FE Post-single post expanded view. ✅
+2. BE + FE Comments, add new comment.
+
+architect my components differently - have another component render the post on top of the thing. 

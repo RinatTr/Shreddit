@@ -1,4 +1,5 @@
 import { RECEIVE_POSTS } from '../actions/PostActions';
+import { RECEIVE_COMMENTS } from '../actions/PostActions';
 
 // const normalizeData = arr => {
 //   let obj = {};
@@ -12,7 +13,11 @@ const PostsReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
     case RECEIVE_POSTS:
-      return (action.posts)
+      return {...oldState, posts: action.posts}
+      break;
+    case RECEIVE_COMMENTS:
+      return {...oldState, comments: action.comments}
+      break;
     default:
       return oldState
   }

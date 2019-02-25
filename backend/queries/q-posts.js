@@ -14,6 +14,19 @@ const getAllPosts = (req, res, next) => {
     .catch(err => next(err));
 };
 
+const getAllCommentsPerPost = (req, res, next) => {
+  let post_id = parseInt(req.params.id)
+  db.any(`SELECT * FROM comments WHERE post_id = $1`,[post_id])
+    .then(data => {
+      res.status(200).json({
+        status: "success",
+        message: "got all comments per post",
+        comments: data
+      })
+    })
+}
+
+
 //patch
 const updateVote = (req, res, next) => {
   let post_id = parseInt(req.params.id)
@@ -33,28 +46,6 @@ const updateVote = (req, res, next) => {
 
 module.exports = {
   getAllPosts,
+  getAllCommentsPerPost,
   updateVote
 };
-
-/*
-* `GET /api/posts/` V
-  * Fetches all posts
-* `GET /api/posts/:userId`
-  * Fetches all posts by user
-* `GET /api/posts/:userId/saved`
-  * Fetches all saved posts by a user
-* `POST /api/posts/`
-  * Add a new post
-* `GET /api/posts/:id`
-  * Get a single post
-* `GET /api/posts/:id/comments`
-  * Get all comments for a single post
-* `DELETE /api/posts/:id`
-  * Delete a post
-* `POST /api/posts/:id/comments`
-  * Add a comment for a single post
-* `DELETE /api/posts/:id/comments`
-  * Delete a comment for a single post
-* `GET /api/comments/:userId`
-  * Fetches all comments by user
-*/

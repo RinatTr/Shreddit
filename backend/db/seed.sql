@@ -20,7 +20,8 @@ CREATE TABLE follows (
 
 CREATE TABLE subshreddits (
   id SERIAL PRIMARY KEY,
-  groupname VARCHAR
+  groupname VARCHAR,
+  img_url VARCHAR
 );
 
 CREATE TABLE subscriptions (

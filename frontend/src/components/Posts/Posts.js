@@ -15,7 +15,9 @@ export default class Posts extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchPosts()
+    let { match, fetchPosts, fetchCommentsPerPost } = this.props;
+    fetchPosts();
+    fetchCommentsPerPost(5);
   }
 
   handleVote = (e) => {
@@ -41,7 +43,7 @@ export default class Posts extends Component {
   }
 
   render() {
-    let { posts, match } = this.props;
+    let { posts, comments, match } = this.props;
     let { currentPostId, isOpen } = this.state;
     let mapPosts;
     let currentPost;
@@ -65,7 +67,7 @@ export default class Posts extends Component {
 
       currentPost = match.params.id ? posts.find(post => post.id === + match.params.id) : null;
     }
-
+    console.log("comments =>",comments);
     return (
       <div className="posts">
         <h4>{match.path}</h4>
