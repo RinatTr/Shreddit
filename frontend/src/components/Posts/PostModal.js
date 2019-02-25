@@ -12,7 +12,9 @@ const PostModal = ({  id,
                       groupname,
                       groupImgUrl,
                       handleVote,
-                      handleExpand }) => {
+                      handleExpand,
+                      comments }) => {
+      console.log("inside modal=>" , comments);
     return (
       <React.Fragment>
       <div className="black">

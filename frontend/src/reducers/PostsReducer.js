@@ -14,10 +14,8 @@ const PostsReducer = (oldState = {}, action) => {
   switch (action.type) {
     case RECEIVE_POSTS:
       return {...oldState, posts: action.posts}
-      break;
     case RECEIVE_COMMENTS:
       return {...oldState, comments: action.comments}
-      break;
     default:
       return oldState
   }

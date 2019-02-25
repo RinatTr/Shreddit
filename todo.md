@@ -82,11 +82,8 @@ by putting an if statement in the expand handler to determine correct origin of 
 - css issue: text overflows outside of box. max-height✅
 - sql issue - how to get poster username in comments ? used two joins on users table. ✅
 
-networking date with yisselda ? after my shreddit is done
 
-**02 24 19**
+**02 25 19**
 `current phase:`
 1. FE Post-single post expanded view. ✅
 2. BE + FE Comments, add new comment.
-
-architect my components differently - have another component render the post on top of the thing. 

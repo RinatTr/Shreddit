@@ -12,12 +12,12 @@ export default class Posts extends Component {
       currentPostId: "",
       isOpen: false
     }
+    this.handleExpand = this.handleExpand.bind(this)
   }
 
   componentDidMount() {
-    let { match, fetchPosts, fetchCommentsPerPost } = this.props;
+    let { match, fetchPosts } = this.props;
     fetchPosts();
-    fetchCommentsPerPost(5);
   }
 
   handleVote = (e) => {
@@ -27,14 +27,19 @@ export default class Posts extends Component {
     this.props.fetchPosts()
   }
 
-  handleExpand = (e) => {
+  async handleExpand(e) {
     let dontToggle = ["upvote","downvote","close"]
 
     if (!dontToggle.includes(e.target.className) && e.target.innerText !== "CLOSE") {
       let postId = e.currentTarget.id;
-      this.props.history.push('/post/' + postId);
-      this.setState({ currentPostId: postId,
-                      isOpen: true })
+
+      this.props.fetchCommentsPerPost(postId)
+                .then(() => {
+                  console.log("comments =>",this.props.comments);
+                  this.props.history.push('/post/' + postId);
+                  this.setState({ currentPostId: postId,
+                    isOpen: true })
+                })
     }
 
     if (e.target.className === "close" || e.target.innerText === "CLOSE") {
@@ -67,8 +72,9 @@ export default class Posts extends Component {
 
       currentPost = match.params.id ? posts.find(post => post.id === + match.params.id) : null;
     }
-    console.log("comments =>",comments);
+
     return (
+
       <div className="posts">
         <h4>{match.path}</h4>
         {match.params.id && currentPostId && isOpen
@@ -84,6 +90,7 @@ export default class Posts extends Component {
               handleVote={this.handleVote}
               handleExpand={this.handleExpand}
               isOpen={isOpen}
+              comments={this.props.comments}
             />
           : null}
         {mapPosts ? mapPosts : null}
