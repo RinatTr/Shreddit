@@ -1,7 +1,8 @@
 import React from "react";
+import TimeAgo from "react-timeago";
 import upvote from '../../icons/up_arrow.png'
 import downvote from '../../icons/down_arrow.png'
-import TimeAgo from "react-timeago";
+import Comment from '../Comments/CommentDisplay'
 
 const PostModal = ({  id,
                       votes,
@@ -14,19 +15,28 @@ const PostModal = ({  id,
                       handleVote,
                       handleExpand,
                       comments }) => {
-      console.log("inside modal=>" , comments);
+
+    let mapComments = comments.map(comment => {
+      return <Comment id={comment.id}
+                commenter={comment.commenter}
+                timestamp={comment.created_at}
+                body={comment.body}
+                handleVote={handleVote}
+              />
+          })
+
     return (
       <React.Fragment>
       <div className="black">
-        <div className="post-expanded">
-          <div className="close">
-            <div className="votes">
-              <img alt="upvote" className="upvote" src={upvote} id={id} onClick={handleVote}/>
-                {votes}
-              <img alt="downvote" className="downvote" src={downvote} id={id} onClick={handleVote}/>
-            </div>
-            <span className="close" onClick={handleExpand}><div>CLOSE</div>&times;</span>
+        <div className="close-modal">
+          <div className="votes">
+            <img alt="upvote" className="upvote" src={upvote} id={id} onClick={handleVote}/>
+            {votes}
+            <img alt="downvote" className="downvote" src={downvote} id={id} onClick={handleVote}/>
           </div>
+          <span className="close" onClick={handleExpand}><div>CLOSE</div>&times;</span>
+        </div>
+        <div className="post-expanded">
           <div className="post-content">
             <div className="post-text">
               <p className="info">
@@ -47,6 +57,9 @@ const PostModal = ({  id,
             <div className="post-buttons">
               [icon] NUM Comments [icon] Save [icon] Hide
             </div>
+          </div>
+          <div className="comments">
+            {mapComments}
           </div>
         </div>
       </div>

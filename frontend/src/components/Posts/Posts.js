@@ -35,7 +35,6 @@ export default class Posts extends Component {
 
       this.props.fetchCommentsPerPost(postId)
                 .then(() => {
-                  console.log("comments =>",this.props.comments);
                   this.props.history.push('/post/' + postId);
                   this.setState({ currentPostId: postId,
                     isOpen: true })
@@ -74,7 +73,6 @@ export default class Posts extends Component {
     }
 
     return (
-
       <div className="posts">
         <h4>{match.path}</h4>
         {match.params.id && currentPostId && isOpen
@@ -89,8 +87,7 @@ export default class Posts extends Component {
               groupImgUrl={currentPost.img_url}
               handleVote={this.handleVote}
               handleExpand={this.handleExpand}
-              isOpen={isOpen}
-              comments={this.props.comments}
+              comments={comments}
             />
           : null}
         {mapPosts ? mapPosts : null}

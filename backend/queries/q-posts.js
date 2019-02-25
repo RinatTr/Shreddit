@@ -3,7 +3,8 @@ const { db } = require("./q-index.js");
 const getAllPosts = (req, res, next) => {
   db.any(`SELECT posts.*, users.username, subshreddits.groupname, subshreddits.img_url FROM posts
           JOIN subshreddits ON posts.subshreddit_id = subshreddits.id
-          JOIN users ON posts.poster_id = users.id`)
+          JOIN users ON posts.poster_id = users.id
+          ORDER BY votes DESC`)
     .then(data => {
       res.status(200).json({
         status: "success",
@@ -16,7 +17,10 @@ const getAllPosts = (req, res, next) => {
 
 const getAllCommentsPerPost = (req, res, next) => {
   let post_id = parseInt(req.params.id)
-  db.any(`SELECT * FROM comments WHERE post_id = $1`,[post_id])
+  db.any(`SELECT comments.*, users.username AS commenter FROM comments
+          JOIN users ON comments.commenter_id = users.id
+          WHERE post_id = $1
+          ORDER BY votes DESC`,[post_id])
     .then(data => {
       res.status(200).json({
         status: "success",
@@ -25,7 +29,6 @@ const getAllCommentsPerPost = (req, res, next) => {
       })
     })
 }
-
 
 //patch
 const updateVote = (req, res, next) => {

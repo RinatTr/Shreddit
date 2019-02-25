@@ -82,8 +82,11 @@ by putting an if statement in the expand handler to determine correct origin of 
 - css issue: text overflows outside of box. max-height✅
 - sql issue - how to get poster username in comments ? used two joins on users table. ✅
 
-
 **02 25 19**
 `current phase:`
 1. FE Post-single post expanded view. ✅
 2. BE + FE Comments, add new comment.
+
+- build a CommentDisplay component (similar structure to PostDisplay)
+- import into PostModal and map it in it.
+- change order posts by number of votes on the backend, rather than sorting on front end. 

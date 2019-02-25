@@ -1,0 +1,40 @@
+.comments {
+  display: block;
+  margin-left: 30px;
+  margin-right: 20px;
+  margin-bottom: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 0px 0px 5px 5px;
+  background: white;
+}
+
+.comment-collapsed {
+  display: flex;
+  flex-direction: row;
+}
+
+.comment-votes {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-votes img {
+  margin: 5px;
+  width: 16px;
+  height: 16px;
+}
+
+.comment-votes img:hover {
+  cursor: pointer;
+}
+
+.comment-content {
+  display: block;
+  text-align: left;
+  width: 100%;
+}
+
+.comment-text {
+
+}
