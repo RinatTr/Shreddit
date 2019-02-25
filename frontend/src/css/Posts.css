@@ -74,12 +74,14 @@
 .close-modal span {
   display: flex;
   flex-direction: row;
-  margin-right: 30px;
+  align-items: center;
+  margin-right: 20px;
   font-size: 25px;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   cursor: pointer;
-  height: 60%;
-  border-radius: 8px;
+  height: 40%;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .close-modal span:hover {
@@ -90,7 +92,7 @@
   font-size: 15px;
   font-weight: bold;
   margin-right: 5px;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .votes img {
@@ -164,4 +166,5 @@ p {
 
 h3 {
   margin-block-start: 0em;
+  text-align: left;
 }

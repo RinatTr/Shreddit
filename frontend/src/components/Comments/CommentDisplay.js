@@ -8,6 +8,7 @@ const Comment = ({  id,
                     commenter,
                     timestamp,
                     body,
+                    votes,
                     handleVote
                       }) => {
     return (
@@ -20,10 +21,13 @@ const Comment = ({  id,
         <div className="comment-content">
           <div className="comment-text">
             <p className="info">
-              <span>
+              <span className="comment-username">
                 {commenter}
               </span>
-              <span>
+              <span className="comment-points">
+                {votes} Points ·
+              </span>
+              <span className="comment-timeago">
                <TimeAgo date={timestamp}/>
               </span>
             </p>

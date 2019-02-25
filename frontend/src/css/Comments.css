@@ -17,6 +17,7 @@
 .comment-votes {
   display: flex;
   flex-direction: column;
+  margin-top: 4px;
 }
 
 .comment-votes img {
@@ -36,5 +37,17 @@
 }
 
 .comment-text {
+  margin-left: 5px;
+}
 
+.comment-text .info > * {
+  margin-right: 5px;
+}
+
+.comment-username {
+  color: #4cb8d2;
+}
+
+.comment-points, .comment-timeago {
+  font-size: 12px;
 }

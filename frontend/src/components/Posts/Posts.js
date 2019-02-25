@@ -67,7 +67,7 @@ export default class Posts extends Component {
                   handleVote={this.handleVote}
                   handleExpand={this.handleExpand}
                 />
-      }).sort((a,b) => b.props.votes-a.props.votes)
+      })
 
       currentPost = match.params.id ? posts.find(post => post.id === + match.params.id) : null;
     }

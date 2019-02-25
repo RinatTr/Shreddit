@@ -21,6 +21,7 @@ const PostModal = ({  id,
                 commenter={comment.commenter}
                 timestamp={comment.created_at}
                 body={comment.body}
+                votes={comment.votes}
                 handleVote={handleVote}
               />
           })
@@ -59,6 +60,7 @@ const PostModal = ({  id,
             </div>
           </div>
           <div className="comments">
+          <hr />
             {mapComments}
           </div>
         </div>
