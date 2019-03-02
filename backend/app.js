@@ -17,7 +17,8 @@ app.use(
   session({
     secret: "shreddit passport",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {maxAge: 1 * 24 * 60 * 60 * 1000} //one day in miliseconds 
   })
 );
 
@@ -74,4 +75,6 @@ app.listen(3100, () => {
   * Delete a comment for a single post
 * `GET /api/comments/:userId` ✅
   * Fetches all comments by user
+* `GET /api/comments/counts` ✅
+  * Fetches all comment counts
 */

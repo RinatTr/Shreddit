@@ -1,6 +1,9 @@
 import React from "react";
 import upvote from '../../icons/up_arrow.png'
 import downvote from '../../icons/down_arrow.png'
+import comment from '../../icons/comment.png'
+import hide from '../../icons/hide.png'
+import save from '../../icons/save.png'
 import TimeAgo from "react-timeago";
 
 const Post = ({ id,
@@ -8,6 +11,7 @@ const Post = ({ id,
                 timestamp,
                 header,
                 body,
+                commentCount,
                 username,
                 groupname,
                 groupImgUrl,
@@ -39,7 +43,12 @@ const Post = ({ id,
             <p>{body.slice(0,100)}...</p>
           </div>
           <div className="post-buttons">
-            [icon] NUM Comments [icon] Save [icon] Hide
+            <img alt="comment" src={comment} />
+            {commentCount} Comments
+            <img alt="save" src={save} />
+            Save 
+            <img alt="hide" src={hide} />
+            Hide
           </div>
         </div>
       </div>

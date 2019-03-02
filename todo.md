@@ -85,8 +85,48 @@ by putting an if statement in the expand handler to determine correct origin of 
 **02 25 19**
 `current phase:`
 1. FE Post-single post expanded view. ✅
-2. BE + FE Comments, add new comment.
+2. BE + FE Comments, ✅ add new comment.
 
-- build a CommentDisplay component (similar structure to PostDisplay)
-- import into PostModal and map it in it.
-- change order posts by number of votes on the backend, rather than sorting on front end. 
+- build a CommentDisplay component (similar structure to PostDisplay) ✅
+- import into PostModal and map it in it. ✅
+- change order posts by number of votes on the backend, rather than sorting on front end. ✅
+- add voting functionality to comments ✅
+
+**02 26 19**
+`current phase:`
+1. FE Post-single post expanded view. ✅
+2. BE + FE Comments, ✅ add new comment.
+
+`current-past phase:`
+1. BE + FE Users, Login, Create, Delete.
+
+- count comments SQL query ✅
+- implement comment count on FE all Posts ✅
+- walkthrough BE auth ✅
+
+**02 27 19 - 02 29 19**
+- implement FE authentication
+- add Votes table to db
+- update the updateVotes functionality:
+ - adds/deletes a row in votes table
+ - adds/substracts a vote in posts/columns table's votes column
+- create Add Comment component (container, display, ask advice before planning)
+
+Stages for FE userAuth :
+1. Store the logged in / signed up  user info in state.
+  state = { session: { currentUser: null,
+                        errors }} //login or signup errors.
+    once the user has logged in, we want to replace the null with their information, ex { username: sonso, id:5}
+
+  2. any connected component (any component that has a container), has access to any part of state they want.
+  in this case, we will need to connect them to the session part of state.
+    - Navbar (menu, buttons, avatar)
+    - userProfile
+    - posts (create post, add comment, voting)
+
+  3. in navbar / userprofile view, if there is a currentUser in the props, then display our username and replace the login / signup buttons in nav, in reddit's case.
+
+  4. use the user information to restrict access to specific routes and redirect back to login or allowed content page. with similar if / else statement in compDM: if currentUser,display form, else, redirect.
+
+  resource :
+  https://www.aaonline.io/full-stack-online-react/834f43e0-4973-4793-9357-2439270c9666

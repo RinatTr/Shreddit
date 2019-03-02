@@ -1,6 +1,5 @@
 import * as Util from '../util/util.js';
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
-export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 
 export const receivePosts = posts => {
   return {
@@ -9,14 +8,7 @@ export const receivePosts = posts => {
   }
 }
 
-export const receiveComments = comments => {
-  return {
-    type: RECEIVE_COMMENTS,
-    comments
-  }
-}
-
-export const fetchPosts = () => dispatch => {
+export const fetchPosts = () => dispatch => { // thunk is expecting a function not an action. action is sent to reducer, hence wrapped in another function.
   return Util.getPosts()
             .then(res => {
               return dispatch(receivePosts(res.data.posts))
@@ -25,12 +17,3 @@ export const fetchPosts = () => dispatch => {
               console.log(err)
             })
 };
-
-export const fetchCommentsPerPost = (id) => dispatch => {
-  return Util.getCommentsPerPost(id)
-              .then(res => {
-                return dispatch(receiveComments(res.data.comments))
-              }).catch(err => {
-                console.log(err);
-              })
-}

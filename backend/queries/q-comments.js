@@ -17,13 +17,22 @@ const getAllCommentsPerUser = (req, res, next) => {
     .catch(err => next(err));
 };
 
-// SELECT a.Name AS Employee
-// FROM Employee a
-// JOIN Employee b ON
-// (a.ManagerId = b.Id) --SELF JOIN: outputs {"headers":["Employee"],"values":[["Joe"],["Henry"]]}
-// WHERE a.Salary > b.Salary
+// GET api/comments/counts
+const getCommentsCount = (req, res, next) => {
+  db.any(`SELECT posts.id AS post_id, COUNT(comments.id) AS comments_count FROM Comments
+          JOIN posts ON comments.post_id = posts.id
+          GROUP BY posts.id
+          ORDER BY posts.id`)
+    .then(data => {
+      res.status(200).json({
+        status: "success",
+        message: "got all comment counts",
+        counts: data
+      })
+    })
+}
 
-//patch
+//PATCH /comments/:id
 const updateVote = (req, res, next) => {
   let comment_id = parseInt(req.params.id)
   let type = (req.body.type === "upvote") ? "+" : "-";
@@ -32,7 +41,7 @@ const updateVote = (req, res, next) => {
     .then(() => {
       res.status(200).json({
         status: "success",
-        message: "you updated a vote"
+        message: "you've updated a comment vote"
       })
     })
     .catch(err => {
@@ -42,5 +51,6 @@ const updateVote = (req, res, next) => {
 
 module.exports = {
   getAllCommentsPerUser,
+  getCommentsCount,
   updateVote
 };

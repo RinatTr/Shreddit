@@ -4,7 +4,8 @@ import downvote from '../../icons/down_arrow.png'
 import TimeAgo from "react-timeago";
 import '../../css/Comments.css';
 
-const Comment = ({  id,
+const Comment = ({  commentId,
+                    postId,
                     commenter,
                     timestamp,
                     body,
@@ -13,10 +14,10 @@ const Comment = ({  id,
                       }) => {
     return (
       <React.Fragment>
-      <div className="comment-collapsed" id={id} >
-        <div className="comment-votes">
-          <img alt="upvote" className="upvote" src={upvote} id={id} onClick={handleVote}/>
-          <img alt="downvote" className="downvote" src={downvote} id={id} onClick={handleVote}/>
+      <div className="comment-collapsed" id={commentId} >
+        <div className="comment-votes" id={postId}>
+          <img alt="upvote" className="upvote" src={upvote} id={commentId} name="vote-comment" onClick={handleVote}/>
+          <img alt="downvote" className="downvote" src={downvote} id={commentId} name="vote-comment" onClick={handleVote}/>
         </div>
         <div className="comment-content">
           <div className="comment-text">

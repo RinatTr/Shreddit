@@ -20,7 +20,6 @@ passport.use(
         if (!helpers.comparePass(password, user.password_digest)) {
           return done(null, false); //done allows it to go to the next middleware
         } else {
-          console.log("correct pass", done);
           return done(null, user);
         }
       })

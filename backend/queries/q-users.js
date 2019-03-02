@@ -16,7 +16,6 @@ const getAllUsers = (req, res, next) => {
 
 const createUser = (req, res, next) => {
   const hash = authHelpers.createHash(req.body.password);
-  console.log("original password and username", req.body.password, req.body.username);
   db.none(
     "INSERT INTO users (username, password_digest, avatar_url, email) VALUES (${username}, ${password_digest}, ${avatar_url}, ${email})",
     { username: req.body.username,

@@ -30,7 +30,6 @@ const getAllCommentsPerPost = (req, res, next) => {
     })
 }
 
-//patch
 const updateVote = (req, res, next) => {
   let post_id = parseInt(req.params.id)
   let type = (req.body.type === "upvote") ? "+" : "-";

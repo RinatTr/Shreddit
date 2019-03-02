@@ -59,3 +59,5 @@
   * Delete a comment for a single post
 * `GET /api/comments/:userId`
   * Fetches all comments by user
+* `GET /api/comments/counts`
+  * Fetches all comment counts for all posts

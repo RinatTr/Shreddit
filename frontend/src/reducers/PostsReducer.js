@@ -1,5 +1,5 @@
 import { RECEIVE_POSTS } from '../actions/PostActions';
-import { RECEIVE_COMMENTS } from '../actions/PostActions';
+import { RECEIVE_COMMENTS, RECEIVE_COMMENT_COUNT } from '../actions/CommentActions';
 
 // const normalizeData = arr => {
 //   let obj = {};
@@ -16,6 +16,8 @@ const PostsReducer = (oldState = {}, action) => {
       return {...oldState, posts: action.posts}
     case RECEIVE_COMMENTS:
       return {...oldState, comments: action.comments}
+    case RECEIVE_COMMENT_COUNT:
+      return {...oldState, comment_count: action.commentCount}
     default:
       return oldState
   }

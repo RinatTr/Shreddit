@@ -153,6 +153,9 @@
 .post-buttons {
   text-align: left;
   max-height: 20%;
+  font-weight: bold;
+  display: flex;
+  color: #4C4C4C;
 }
 
 .post-collapsed:hover {
@@ -166,5 +169,9 @@ p {
 
 h3 {
   margin-block-start: 0em;
+  text-align: left;
+}
+
+h4 {
   text-align: left;
 }

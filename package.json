@@ -1,0 +1,19 @@
+{
+  "name": "shreddit",
+  "version": "1.0.0",
+  "description": "Shreddit is a simplified, shredded-down clone of reddit, built using React and express.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RinatTr/Shreddit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RinatTr/Shreddit/issues"
+  },
+  "homepage": "https://github.com/RinatTr/Shreddit#readme"
+}

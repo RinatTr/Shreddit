@@ -39,8 +39,8 @@ class Navbar extends Component {
         />
         <Link to="/popular"><img alt="all" src={popular}/></Link>
         <Link to="/all"><img alt="all" src={all}/></Link>
-        <button>LOG IN</button>
-        <button>SIGN UP</button>
+        <Link to="/auth/login"><button>LOG IN</button></Link>
+        <Link to="/auth/signup"><button>SIGN UP</button></Link>
       </nav>
     )
   }
