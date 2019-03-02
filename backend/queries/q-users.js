@@ -13,7 +13,6 @@ const getAllUsers = (req, res, next) => {
     .catch(err => next(err));
 };
 
-
 const createUser = (req, res, next) => {
   const hash = authHelpers.createHash(req.body.password);
   db.none(

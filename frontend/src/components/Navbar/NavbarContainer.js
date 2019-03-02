@@ -1,11 +1,10 @@
-import AuthForm from "./AuthForm";
+import Navbar from "./Navbar";
 import { connect } from "react-redux";
-import { signUpUser, loginUser, logoutUser, checkAuthenticateStatus } from "../../actions/AuthActions";
+import { logoutUser, checkAuthenticateStatus } from "../../actions/AuthActions";
 
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    signedUpUser: state.auth.signedUpUser,
     loggedInUser: state.auth.loggedUser,
     authError: state.auth.error
   };
@@ -13,15 +12,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    signUpUser: (newUser) => dispatch(signUpUser(newUser)),
-    loginUser: (user) => dispatch(loginUser(user)),
     logoutUser: () => dispatch(logoutUser()),
     checkAuthenticateStatus: () => dispatch(checkAuthenticateStatus())
   };
 };
 
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AuthForm);
+)(Navbar);

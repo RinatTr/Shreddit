@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import icon from '../icons/iconfinder_Faint_2695614.png'
-import all from '../icons/iconfinder_ic_clear_all_48px_352269.png'
-import popular from '../icons/iconfinder_ic_trending_up_48px_352184.png'
-import '../css/Navbar.css';
+import icon from '../../icons/iconfinder_Faint_2695614.png'
+import all from '../../icons/iconfinder_ic_clear_all_48px_352269.png'
+import popular from '../../icons/iconfinder_ic_trending_up_48px_352184.png'
+import '../../css/Navbar.css';
 
 class Navbar extends Component {
   constructor() {
@@ -14,6 +14,15 @@ class Navbar extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.checkAuthenticateStatus();
+  }
+
+  handleLogout = () => {
+    this.props.logoutUser();
+    window.location.reload();
+  }
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -22,6 +31,7 @@ class Navbar extends Component {
 
   render() {
     let { searchInput, select } = this.state;
+    let currentUser = this.props.loggedInUser ? this.props.loggedInUser.username : ""
 
     return (
       <nav>
@@ -39,8 +49,11 @@ class Navbar extends Component {
         />
         <Link to="/popular"><img alt="all" src={popular}/></Link>
         <Link to="/all"><img alt="all" src={all}/></Link>
-        <Link to="/auth/login"><button>LOG IN</button></Link>
-        <Link to="/auth/signup"><button>SIGN UP</button></Link>
+        {currentUser
+          ? <>{currentUser}<button onClick={this.handleLogout}>LOG OUT</button></>
+          : <><Link to="/auth/login"><button>LOG IN</button></Link>
+              <Link to="/auth/signup"><button>SIGN UP</button></Link>
+              </>}
       </nav>
     )
   }

@@ -4,13 +4,13 @@ import './css/App.css';
 
 import PostsContainer from './components/Posts/PostsContainer'
 import AuthContainer from './components/Auth/AuthContainer'
-import Navbar from './components/Navbar'
+import NavbarContainer from './components/Navbar/NavbarContainer'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar />
+        <NavbarContainer />
         <Switch>
           <Route path="/all" component={PostsContainer} />
           <Route path="/popular" component={PostsContainer} />

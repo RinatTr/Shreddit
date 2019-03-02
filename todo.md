@@ -104,13 +104,18 @@ by putting an if statement in the expand handler to determine correct origin of 
 - implement comment count on FE all Posts ✅
 - walkthrough BE auth ✅
 
-**02 27 19 - 02 29 19**
-- implement FE authentication
+**02 27 19 - 03 02 19**
+- implement FE authentication ✅
+- redirect after loggedin in login / signup routes. ✅
+- fix logout routing. ✅
+- create Add Comment component.
+- handle login/signup errors.
+- update icons on navbar.
+- update navbar buttons and avatar.
 - add Votes table to db
 - update the updateVotes functionality:
  - adds/deletes a row in votes table
  - adds/substracts a vote in posts/columns table's votes column
-- create Add Comment component (container, display, ask advice before planning)
 
 Stages for FE userAuth :
 1. Store the logged in / signed up  user info in state.

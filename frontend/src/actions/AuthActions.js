@@ -18,6 +18,14 @@ export const login = loggedUser => {
     loggedUser
   }
 }
+
+export const getError = (key, errCode) => {
+  return {
+    type: RECEIVE_ERROR,
+    key,
+    errCode
+  }
+}
 //fill the loginUser
 // in component, fire signup and .then() login from props when registering.
 //
@@ -29,7 +37,7 @@ export const signUpUser = (user) => dispatch => {
               return dispatch(signUp(user.username))
             })
             .catch(err => {
-              console.log("ERROR",err)
+              return dispatch(getError("signup", err.response.status))
             })
 };
 
@@ -39,10 +47,10 @@ export const loginUser = (user) => dispatch => {
               Auth.authenticateUser(user.username)
             })
             .then(() => {
-              checkAuthenticateStatus()
+              return dispatch(checkAuthenticateStatus())
             })
             .catch(err => {
-              console.log("ERROR",err);
+              return dispatch(getError("login", err.response.status))
             })
 }
 
@@ -53,7 +61,10 @@ export const logoutUser = () => dispatch => {
             })
             .then(() => {
               checkAuthenticateStatus()
-            });
+            })
+            .catch(err => {
+              return dispatch(getError(err))
+            })
 }
 
 export const checkAuthenticateStatus = () => dispatch => {
