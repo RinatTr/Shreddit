@@ -13,6 +13,19 @@ const getAllUsers = (req, res, next) => {
     .catch(err => next(err));
 };
 
+const getOneUser = (req, res, next) => {
+  let username = req.params.username
+  db.one("SELECT id, username, avatar_url FROM users WHERE username=$1", [username])
+    .then(data => {
+      res.status(200).json({
+        status: "success",
+        message: "got one user",
+        user: data
+      })
+    })
+    .catch(err => next(err))
+}
+
 const createUser = (req, res, next) => {
   const hash = authHelpers.createHash(req.body.password);
   db.none(
@@ -54,6 +67,7 @@ const isLoggedIn = (req, res) => {
 
 module.exports = {
   getAllUsers,
+  getOneUser,
   createUser,
   logoutUser,
   loginUser,

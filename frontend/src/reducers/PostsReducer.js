@@ -1,5 +1,5 @@
 import { RECEIVE_POSTS } from '../actions/PostActions';
-import { RECEIVE_COMMENTS, RECEIVE_COMMENT_COUNT } from '../actions/CommentActions';
+import { RECEIVE_COMMENTS, RECEIVE_COMMENT_COUNT, ADD_COMMENT } from '../actions/CommentActions';
 
 // const normalizeData = arr => {
 //   let obj = {};
@@ -18,6 +18,8 @@ const PostsReducer = (oldState = {}, action) => {
       return {...oldState, comments: action.comments}
     case RECEIVE_COMMENT_COUNT:
       return {...oldState, comment_count: action.commentCount}
+    case ADD_COMMENT:
+      return {...oldState, added_comment: action.comment}
     default:
       return oldState
   }

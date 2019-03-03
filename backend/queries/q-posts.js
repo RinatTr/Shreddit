@@ -28,6 +28,19 @@ const getAllCommentsPerPost = (req, res, next) => {
         comments: data
       })
     })
+    .catch(err => next(err))
+}
+
+const addComment = (req, res, next) => {
+  let post_id = parseInt(req.params.id);
+  db.none("INSERT INTO comments(commenter_id, post_id, votes, body) VALUES(${commenter_id}, ${post_id}, ${votes}, ${body})", req.body)
+    .then(() => {
+      res.status(200).json({
+        status: "success",
+        message: "added a comment"
+      })
+    })
+    .catch(err => next(err))
 }
 
 const updateVote = (req, res, next) => {
@@ -48,6 +61,7 @@ const updateVote = (req, res, next) => {
 
 module.exports = {
   getAllPosts,
+  addComment,
   getAllCommentsPerPost,
   updateVote
 };

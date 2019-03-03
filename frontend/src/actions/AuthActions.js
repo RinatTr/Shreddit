@@ -26,9 +26,9 @@ export const getError = (key, errCode) => {
     errCode
   }
 }
-//fill the loginUser
-// in component, fire signup and .then() login from props when registering.
-//
+//load full user details when logging in. will need them.
+//fire either here or navbar component and map to props.
+
 
 export const signUpUser = (user) => dispatch => {
 // thunk is expecting a function not an action. action is sent to reducer, hence wrapped in another function.
@@ -71,10 +71,14 @@ export const checkAuthenticateStatus = () => dispatch => {
   return Util.isLoggedIn()
               .then(res => {
                 if (res.data.username === Auth.getToken()) {
-                  return dispatch(login({
-                    isLoggedIn: Auth.isUserAuthenticated(),
-                    username: Auth.getToken()
-                  }))
+                  Util.getUser(res.data.username)
+                      .then(user => {
+                        return dispatch(login({
+                          isLoggedIn: Auth.isUserAuthenticated(),
+                          username: Auth.getToken(),
+                          userData: user.data.user
+                        }))
+                      })
                 } else {
                   if (res.data.username) {
                     logoutUser();
@@ -82,5 +86,8 @@ export const checkAuthenticateStatus = () => dispatch => {
                     Auth.deauthenticateUser();
                   }
                 }
+              })
+              .catch(err => {
+                return dispatch(getError(err))
               })
 }

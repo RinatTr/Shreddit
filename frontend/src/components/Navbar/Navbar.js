@@ -16,6 +16,7 @@ class Navbar extends Component {
 
   componentDidMount() {
     this.props.checkAuthenticateStatus();
+    //add loading logged user redux function 
   }
 
   handleLogout = () => {

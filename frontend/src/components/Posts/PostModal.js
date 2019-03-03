@@ -6,6 +6,7 @@ import comment from '../../icons/comment.png'
 import hide from '../../icons/hide.png'
 import save from '../../icons/save.png'
 import Comment from '../Comments/CommentDisplay'
+import AddCommentContainer from '../Comments/AddCommentContainer'
 
 const PostModal = ({  id,
                       votes,
@@ -71,7 +72,7 @@ const PostModal = ({  id,
               Hide
             </div>
           </div>
-          {/* addComment component*/}
+          <AddCommentContainer postId={id}/>
           <div className="comments">
           <hr />
             {mapComments}

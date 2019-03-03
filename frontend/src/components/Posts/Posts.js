@@ -50,7 +50,7 @@ export default class Posts extends Component {
     }
     if (e.target.className === "close" || e.target.innerText === "CLOSE") {
       this.setState({ isOpen: false})
-      this.props.history.push(this.state.lastRoute);
+      this.props.history.push(this.state.lastRoute); //fix needed - only works if route before was not another post.
     }
   }
 

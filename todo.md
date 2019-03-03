@@ -104,14 +104,37 @@ by putting an if statement in the expand handler to determine correct origin of 
 - implement comment count on FE all Posts ✅
 - walkthrough BE auth ✅
 
-**02 27 19 - 03 02 19**
+**02 27 19 - 03 03 19**
 - implement FE authentication ✅
-- redirect after loggedin in login / signup routes. ✅
+- redirect after loggedin✅
+- login / signup routes. ✅
 - fix logout routing. ✅
-- create Add Comment component.
+- add logged user get request + redux, call in navbar.✅
+- map state of logged user to addcomment. ✅
+- create Add Comment component.✅
+
+`completed phase:`
+1. FE Post-single post expanded view. ✅
+2. BE + FE Comments,  add new comment. ✅
+
+`past phase:`
+1. BE + FE Users, Login, Create,✅ Delete.
+
+`current phase:`
+1. FE User Profile.
+2. BE + FE Following.
+3. BE + FE Create a post.
+
+### Issues ###
+- comment count does not update when adding a comment ✅
+- loggedUser.username undefined error ✅
+- will not load modal on post/:id (attn: line 53 in posts.js)
+
+###GENERAL TASKS###
 - handle login/signup errors.
 - update icons on navbar.
 - update navbar buttons and avatar.
+- fix post routing.
 - add Votes table to db
 - update the updateVotes functionality:
  - adds/deletes a row in votes table
