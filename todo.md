@@ -123,13 +123,16 @@ by putting an if statement in the expand handler to determine correct origin of 
 ### Issues ###
 - comment count does not update when adding a comment ✅
 - loggedUser.username undefined error ✅
-- will not load modal on post/:id (attn: line 53 in posts.js history.push last route)
 
 **03 04 19**
 `current phase:`
 1. FE User Profile.
 2. BE + FE Following.
 3. BE + FE Create a post.
+
+### Issues ###
+- have to fix nested routing
+before mapping all posts. 
 
 ###GENERAL TASKS###
 - redesign post/modal architecture to nested routing.
@@ -138,6 +141,7 @@ by putting an if statement in the expand handler to determine correct origin of 
 - update icons on navbar.
 - update navbar buttons and avatar.
 - fix Post routing.
+(attn: line 53 in posts.js history.push last route)
 - add links to users and subshreddits.
 - add Votes table to db
 - update the updateVotes functionality:
