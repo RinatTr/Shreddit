@@ -6,10 +6,10 @@ const passport = require("../auth/local.js");
 const { loginRequired } = require("../auth/helpers");
 
 // each request made to api/users/new => handled by db.createUser
-router.post("/new", db.createUser); //middleware
-router.post("/login", passport.authenticate("local", {}), db.loginUser);
-router.get("/isLoggedIn", db.isLoggedIn);
-router.post("/logout", loginRequired, db.logoutUser);
+router.post("/auth/new", db.createUser); //middleware
+router.post("/auth/login", passport.authenticate("local", {}), db.loginUser);
+router.get("/auth/isLoggedIn", db.isLoggedIn);
+router.post("/auth/logout", loginRequired, db.logoutUser);
 
 //position after auth to avoid clashing paths
 router.get('/', getAllUsers)

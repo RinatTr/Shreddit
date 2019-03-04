@@ -1,7 +1,6 @@
 const { db } = require("./q-index.js");
 const authHelpers = require("../auth/helpers");
 
-
 const getAllUsers = (req, res, next) => {
   db.any("SELECT * FROM users")
     .then(data => {
@@ -29,14 +28,15 @@ const getOneUser = (req, res, next) => {
 
 const getPostsPerUser = (req, res, next) => {
   let userId = parseInt(req.params.userId)
-  db.any(`SELECT posts.id, posts.subshreddit_id, posts.created_at, posts.votes, posts.header
+  db.any(`SELECT posts.id, posts.subshreddit_id, subshreddits.groupname, posts.created_at, posts.votes, posts.header
           FROM posts JOIN users ON posts.poster_id = users.id
+          JOIN subshreddits ON posts.subshreddit_id = subshreddits.id
           WHERE posts.poster_id=$1`, [userId])
           .then(data => {
             res.status(200).json({
               status: "success",
               message: "got all posts per user",
-              user: data
+              posts: data
             })
           })
           .catch(err => next(err))
@@ -44,9 +44,10 @@ const getPostsPerUser = (req, res, next) => {
 
 const getSavedPosts = (req, res, next) => {
   let userId = parseInt(req.params.userId)
-  db.any(`SELECT users.username AS posted_by, saved_posts.id, posts.id AS post_id, posts.poster_id, posts.subshreddit_id, posts.created_at, posts.votes, posts.poster_id FROM posts
+  db.any(`SELECT users.username AS posted_by, saved_posts.id, posts.id AS post_id, posts.poster_id, posts.subshreddit_id, subshreddits.groupname, posts.created_at, posts.votes, posts.poster_id FROM posts
           JOIN saved_posts ON posts.id = saved_posts.post_id
           JOIN users ON posts.poster_id = users.id
+          JOIN subshreddits ON posts.subshreddit_id = subshreddits.id
           WHERE saved_posts.user_id=$1`, [userId])
     .then(data => {
       res.status(200).json({
