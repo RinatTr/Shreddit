@@ -41,9 +41,9 @@
 ### Posts and Comments
 * `GET /api/posts/`
   * Fetches all posts
-* `GET /api/posts/:userId`
+* `GET /api/users/:userId/posts/`
   * Fetches all posts by user
-* `GET /api/posts/:userId/saved`
+* `GET /api/users/:userId/posts/saved`
   * Fetches all saved posts by a user
 * `POST /api/posts/`
   * Add a new post
@@ -57,7 +57,7 @@
   * Add a comment for a single post
 * `DELETE /api/posts/:id/comments`
   * Delete a comment for a single post
-* `GET /api/comments/:userId`
+* `GET /api/users/:userId/comments`
   * Fetches all comments by user
 * `GET /api/comments/counts`
   * Fetches all comment counts for all posts

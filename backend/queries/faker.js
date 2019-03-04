@@ -31,21 +31,30 @@ const faker = require("faker");
 //   let str = `(${poster_id}, ${subshreddit_id}, '${votes}', '${header}', '${body}')`;
 //   posts.push(str);
 // }
-let comments = [];
+// let comments = [];
+//
+// for (let i = 0; i < 75; i++) {
+//   let commenter_id = Math.floor(Math.random() * 29) + 1;
+//   let post_id = Math.floor(Math.random() * 100) + 1;
+//   let votes = Math.floor(Math.random() * 50);
+//   let body = faker.lorem.paragraph()
+//   let str = `(${commenter_id}, ${post_id}, '${votes}', '${body}')`;
+//   comments.push(str);
+// }
+let savedPosts = [];
 
 for (let i = 0; i < 75; i++) {
-  let commenter_id = Math.floor(Math.random() * 29) + 1;
+  let user_id = Math.floor(Math.random() * 29) + 1;
   let post_id = Math.floor(Math.random() * 100) + 1;
-  let votes = Math.floor(Math.random() * 50);
-  let body = faker.lorem.paragraph()
-  let str = `(${commenter_id}, ${post_id}, '${votes}', '${body}')`;
-  comments.push(str);
+  let str = `(${user_id}, ${post_id})`; //only add '' to values if you need it to be a string.
+  savedPosts.push(str);
 }
 
 // users = users.join(", ");
 // subshreddits = subshreddits.join(", ");
 // posts = posts.join(", ");
-comments = comments.join(", ");
+// comments = comments.join(", ");
+savedPosts = savedPosts.join(", ");
 // votes = votes.join(", ");
 //
 // db.none(
@@ -55,8 +64,8 @@ comments = comments.join(", ");
 //     console.log(err);
 //   });
 db.none(
-  "INSERT INTO comments(commenter_id, post_id, votes, body) VALUES " +
-    comments +
+  "INSERT INTO saved_posts(user_id, post_id) VALUES " +
+    savedPosts +
     ";"
 )
   .catch(err => {

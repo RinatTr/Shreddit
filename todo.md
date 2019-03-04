@@ -120,31 +120,38 @@ by putting an if statement in the expand handler to determine correct origin of 
 `past phase:`
 1. BE + FE Users, Login, Create,✅ Delete.
 
+### Issues ###
+- comment count does not update when adding a comment ✅
+- loggedUser.username undefined error ✅
+- will not load modal on post/:id (attn: line 53 in posts.js history.push last route)
+
+**03 04 19**
 `current phase:`
 1. FE User Profile.
 2. BE + FE Following.
 3. BE + FE Create a post.
 
-### Issues ###
-- comment count does not update when adding a comment ✅
-- loggedUser.username undefined error ✅
-- will not load modal on post/:id (attn: line 53 in posts.js)
-
 ###GENERAL TASKS###
-- handle login/signup errors.
+- redesign post/modal architecture to nested routing.
+- handle login/signup errors display to user.
+- adapt login/signup modals.
 - update icons on navbar.
 - update navbar buttons and avatar.
-- fix post routing.
+- fix Post routing.
+- add links to users and subshreddits.
 - add Votes table to db
 - update the updateVotes functionality:
  - adds/deletes a row in votes table
- - adds/substracts a vote in posts/columns table's votes column
+ - adds/subtracts a vote in posts/columns table's votes column
 
+
+
+###NOTES###
 Stages for FE userAuth :
 1. Store the logged in / signed up  user info in state.
   state = { session: { currentUser: null,
                         errors }} //login or signup errors.
-    once the user has logged in, we want to replace the null with their information, ex { username: sonso, id:5}
+    once the user has logged in, we want to replace the null with their information, ex { username: "sonso", id:5}
 
   2. any connected component (any component that has a container), has access to any part of state they want.
   in this case, we will need to connect them to the session part of state.
