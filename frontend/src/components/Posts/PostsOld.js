@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from 'axios';
 import Post from './PostDisplay'
 import PostModal from './PostModal'
-import { Link } from 'react-router-dom'
 import '../../css/Posts.css'
 
 export default class Posts extends Component {
@@ -10,18 +9,16 @@ export default class Posts extends Component {
     super()
     this.state = {
       currentPostId: "",
+      isOpen: false,
       lastRoute: ""
     }
     this.handleExpand = this.handleExpand.bind(this)
   }
 
-  async componentDidMount() {
-    let { fetchPosts, fetchCommentCount, fetchCommentsPerPost, match } = this.props;
-    const posts = await fetchPosts();
-    const count = await fetchCommentCount();
-    if (match.params.id) {
-        const comments = await fetchCommentsPerPost(match.params.id);
-      }
+  componentDidMount() {
+    let { fetchPosts, fetchCommentCount } = this.props;
+    fetchPosts();
+    fetchCommentCount();
   }
   //handle UI
   handleVote = (e) => {
@@ -43,12 +40,16 @@ export default class Posts extends Component {
     let dontToggle = ["upvote","downvote","close"]
     if (!dontToggle.includes(e.target.className) && e.target.innerText !== "CLOSE") {
       let postId = e.currentTarget.id;
-      this.props.fetchCommentsPerPost(postId).then(() => {
-        this.setState({ lastRoute: this.props.match.path })
-        this.props.history.push('/post/' + postId);
-      })
+      this.props.fetchCommentsPerPost(postId)
+                .then(() => {
+                  this.setState({ currentPostId: postId,
+                                  isOpen: true,
+                                  lastRoute: this.props.match.path})
+                  this.props.history.push('/post/' + postId);
+                })
     }
     if (e.target.className === "close" || e.target.innerText === "CLOSE") {
+      this.setState({ isOpen: false})
       this.props.history.push(this.state.lastRoute); //fix needed - only works if route before was not another post.
     }
   }
@@ -63,13 +64,12 @@ export default class Posts extends Component {
 
   render() {
     let { posts, comments, count, match } = this.props;
+    let { currentPostId, isOpen } = this.state;
     let mapPosts;
     let currentPost;
 
-
     if (Array.isArray(posts) && count) {
-
-       mapPosts = posts.map((post) => {
+       mapPosts = posts.map(post => {
         return <Post
                   key={post.id}
                   id={post.id}
@@ -92,7 +92,7 @@ export default class Posts extends Component {
     return (
       <div className="posts">
         <h4>{match.path}</h4>
-        {match.params.id && currentPost && comments && count
+        {match.params.id && currentPostId && isOpen
           ? <PostModal
               id={currentPost.id}
               votes={currentPost.votes}

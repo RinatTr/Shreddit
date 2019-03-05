@@ -15,7 +15,7 @@ router.post("/auth/logout", loginRequired, db.logoutUser);
 router.get('/', getAllUsers)
 router.get('/:username', getOneUser)
 router.get('/:userId/posts', getPostsPerUser)
-router.get('/:userId/posts/saved', getSavedPosts)
+router.get('/:userId/posts/saved', loginRequired, getSavedPosts)
 router.get('/:userId/comments', getCommentsPerUser)
 
 //add loginRequired to each protected route

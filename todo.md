@@ -130,9 +130,15 @@ by putting an if statement in the expand handler to determine correct origin of 
 2. BE + FE Following.
 3. BE + FE Create a post.
 
+- protect BE routing for get all saved posts per user.✅
+
 ### Issues ###
-- have to fix nested routing
-before mapping all posts. 
+- fix nested routing
+before mapping all posts.
+- post/:id renders modal,
+BUT also all posts.
+- route post/:id separately,
+  to be appearing on top of current component. 
 
 ###GENERAL TASKS###
 - redesign post/modal architecture to nested routing.
