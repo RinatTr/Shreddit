@@ -6,6 +6,7 @@ const session = require("express-session");
 const users = require('./routes/users.js')
 const posts = require('./routes/posts.js')
 const comments = require('./routes/comments.js')
+const follows = require('./routes/follows.js')
 const subshreddits = require('./routes/subshreddits.js')
 const app = express()
 
@@ -18,7 +19,7 @@ app.use(
     secret: "shreddit passport",
     resave: false,
     saveUninitialized: true,
-    cookie: {maxAge: 1 * 24 * 60 * 60 * 1000} //one day in miliseconds 
+    cookie: {maxAge: 1 * 24 * 60 * 60 * 1000} //one day in miliseconds
   })
 );
 
@@ -29,6 +30,7 @@ app.use('/api/users', users)
 app.use('/api/posts', posts)
 app.use('/api/comments', comments)
 app.use('/api/subshreddits', subshreddits)
+app.use('/api/follows', follows)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

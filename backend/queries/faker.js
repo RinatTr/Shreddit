@@ -41,20 +41,25 @@ const faker = require("faker");
 //   let str = `(${commenter_id}, ${post_id}, '${votes}', '${body}')`;
 //   comments.push(str);
 // }
-let savedPosts = [];
+let follows = [];
 
-for (let i = 0; i < 75; i++) {
-  let user_id = Math.floor(Math.random() * 29) + 1;
-  let post_id = Math.floor(Math.random() * 100) + 1;
-  let str = `(${user_id}, ${post_id})`; //only add '' to values if you need it to be a string.
-  savedPosts.push(str);
+for (let i = 0; i < 120; i++) {
+  let follower_id = Math.floor(Math.random() * 29) + 1;
+  let followed_id = Math.floor(Math.random() * 29) + 1;
+  if (follower_id !== followed_id) {
+    let str = `(${follower_id}, ${followed_id})`; //only add '' to values if you need it to be a string.
+    if (!follows.includes(str)) {
+      follows.push(str);
+      }
+    }
+
 }
 
 // users = users.join(", ");
 // subshreddits = subshreddits.join(", ");
 // posts = posts.join(", ");
 // comments = comments.join(", ");
-savedPosts = savedPosts.join(", ");
+follows = follows.join(", ");
 // votes = votes.join(", ");
 //
 // db.none(
@@ -64,8 +69,8 @@ savedPosts = savedPosts.join(", ");
 //     console.log(err);
 //   });
 db.none(
-  "INSERT INTO saved_posts(user_id, post_id) VALUES " +
-    savedPosts +
+  "INSERT INTO follows(follower_id, followed_id) VALUES " +
+    follows +
     ";"
 )
   .catch(err => {

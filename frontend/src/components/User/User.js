@@ -17,18 +17,13 @@ export default class User extends Component {
     this.props.fetchCommentCount()
   }
 
-  // async componentDidUpdate() {
-  //   await this.props.fetchUser(this.props.match.params.username)
-  //   this.props.fetchUserPosts(this.props.user.id)
-  //   this.props.fetchCommentCount()
-  // }
-
-//   componentDidUpdate(prevProps) {
-//   // Typical usage (don't forget to compare props):
-//   if (this.props.userID !== prevProps.userID) {
-//     this.fetchData(this.props.userID);
-//   }
-// }
+  async componentDidUpdate(prevProps) {
+  if (this.props.match.params.username !== prevProps.match.params.username) {
+    await this.props.fetchUser(this.props.match.params.username)
+    this.props.fetchUserPosts(this.props.user.id)
+    this.props.fetchCommentCount()
+  }
+}
 
   countPerPost = (id, count) => {
     if (count) {
@@ -37,6 +32,7 @@ export default class User extends Component {
     }
   }
   render() {
+
     let { posts, count, match, user } = this.props;
     let mapPosts;
     let currentPost;

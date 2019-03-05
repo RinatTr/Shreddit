@@ -124,9 +124,9 @@ by putting an if statement in the expand handler to determine correct origin of 
 - comment count does not update when adding a comment ✅
 - loggedUser.username undefined error ✅
 
-**03 04 19**
+**03 04 19 - 03 05 19**
 `current phase:`
-1. FE User Profile.
+1. FE User Profile. ✅
 2. BE + FE Following.
 3. BE + FE Create a post.
 
@@ -134,11 +134,12 @@ by putting an if statement in the expand handler to determine correct origin of 
 
 ### Issues ###
 - fix nested routing
-before mapping all posts.
+before mapping all posts. ✅
 - post/:id renders modal,
 BUT also all posts.
 - route post/:id separately,
-  to be appearing on top of current component. 
+  to be appearing on top of current component.
+- user profile does not mount when clicking on logged-in user in navbar. fixed using componentDidUpdate and a ternary. ✅
 
 ###GENERAL TASKS###
 - redesign post/modal architecture to nested routing.
