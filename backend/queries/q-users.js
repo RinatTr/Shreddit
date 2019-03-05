@@ -31,7 +31,8 @@ const getPostsPerUser = (req, res, next) => {
   db.any(`SELECT posts.id, posts.subshreddit_id, subshreddits.groupname, posts.created_at, posts.votes, posts.header
           FROM posts JOIN users ON posts.poster_id = users.id
           JOIN subshreddits ON posts.subshreddit_id = subshreddits.id
-          WHERE posts.poster_id=$1`, [userId])
+          WHERE posts.poster_id=$1
+          ORDER BY posts.votes DESC`, [userId])
           .then(data => {
             res.status(200).json({
               status: "success",

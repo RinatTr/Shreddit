@@ -5,6 +5,7 @@ import comment from '../../icons/comment.png'
 import hide from '../../icons/hide.png'
 import save from '../../icons/save.png'
 import TimeAgo from "react-timeago";
+import { Link } from 'react-router-dom';
 
 const Post = ({ id,
                 votes,
@@ -29,24 +30,24 @@ const Post = ({ id,
           <div className="post-text">
             <p className="info">
               <span>
-                <img alt={groupImgUrl} src={groupImgUrl} />
+                {groupImgUrl ? <img alt={groupImgUrl} src={groupImgUrl} /> : null}
                 <strong>/r/{groupname}</strong>
               </span>
               <span>
-               Posted by /u/{username}
+               Posted by <Link className="username" to={`/user/${username}`}>/u/{username}</Link>
               </span>
               <span>
                <TimeAgo date={timestamp}/>
               </span>
              </p>
             <h3>{header}</h3>
-            <p>{body.slice(0,100)}...</p>
+            <p>{body ? body.slice(0,100)+"..." : null}</p>
           </div>
           <div className="post-buttons">
             <img alt="comment" src={comment} />
             {commentCount} Comments
             <img alt="save" src={save} />
-            Save 
+            Save
             <img alt="hide" src={hide} />
             Hide
           </div>

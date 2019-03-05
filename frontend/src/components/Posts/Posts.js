@@ -9,8 +9,7 @@ export default class Posts extends Component {
   constructor() {
     super()
     this.state = {
-      currentPostId: "",
-      lastRoute: ""
+      currentPostId: ""
     }
     this.handleExpand = this.handleExpand.bind(this)
   }
@@ -40,16 +39,15 @@ export default class Posts extends Component {
   }
 
   async handleExpand(e) {
-    let dontToggle = ["upvote","downvote","close"]
+    let dontToggle = ["upvote","downvote","close","username"]
     if (!dontToggle.includes(e.target.className) && e.target.innerText !== "CLOSE") {
       let postId = e.currentTarget.id;
       this.props.fetchCommentsPerPost(postId).then(() => {
-        this.setState({ lastRoute: this.props.match.path })
         this.props.history.push('/post/' + postId);
       })
     }
     if (e.target.className === "close" || e.target.innerText === "CLOSE") {
-      this.props.history.push(this.state.lastRoute); //fix needed - only works if route before was not another post.
+      this.props.history.goBack();
     }
   }
 

@@ -15,7 +15,7 @@ class App extends Component {
         <Switch>
           <Route path="/all" component={PostsContainer} />
           <Route path="/popular" component={PostsContainer} />
-          <Route path="/user" component={UserContainer} />
+          <Route path="/user/:username" component={UserContainer} />
           <Route path="/post/:id" component={PostsContainer} />
           <Route path="/auth/login" component={AuthContainer} />
           <Route path="/auth/signup" component={AuthContainer} />

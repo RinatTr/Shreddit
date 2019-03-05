@@ -12,6 +12,7 @@ nav {
   font-size: 25px;
   font-weight: bold;
   position: fixed;
+  z-index: 5;
 }
 
 img {
@@ -24,10 +25,11 @@ a {
   flex-direction: row;
   align-items: center;
   text-decoration: none;
+  color: #393939;
 }
 
 a:visited {
-  color: black;
+  color: #393939;
   text-decoration: none;
 }
 

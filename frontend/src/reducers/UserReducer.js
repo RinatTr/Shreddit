@@ -1,4 +1,4 @@
-import { RECEIVE_USER_POSTS } from '../actions/UserActions';
+import { RECEIVE_USER_POSTS, RECEIVE_USER } from '../actions/UserActions';
 
 
 // const normalizeData = arr => {
@@ -14,6 +14,8 @@ const UserReducer = (oldState = {}, action) => {
   switch (action.type) {
     case RECEIVE_USER_POSTS:
       return {...oldState, posts: action.posts}
+    case RECEIVE_USER:
+      return {...oldState, user: action.user}
     default:
       return oldState
   }

@@ -16,7 +16,7 @@ class Navbar extends Component {
 
   componentDidMount() {
     this.props.checkAuthenticateStatus();
-    //add loading logged user redux function 
+    //add loading logged user redux function
   }
 
   handleLogout = () => {
@@ -51,7 +51,7 @@ class Navbar extends Component {
         <Link to="/popular"><img alt="all" src={popular}/></Link>
         <Link to="/all"><img alt="all" src={all}/></Link>
         {currentUser
-          ? <>{currentUser}<button onClick={this.handleLogout}>LOG OUT</button></>
+          ? <><Link to={`/user/${currentUser}`}>{currentUser}</Link><button onClick={this.handleLogout}>LOG OUT</button></>
           : <><Link to="/auth/login"><button>LOG IN</button></Link>
               <Link to="/auth/signup"><button>SIGN UP</button></Link>
               </>}
