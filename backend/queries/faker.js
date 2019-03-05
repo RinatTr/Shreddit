@@ -43,7 +43,7 @@ const faker = require("faker");
 // }
 let follows = [];
 
-for (let i = 0; i < 120; i++) {
+for (let i = 0; i < 150; i++) {
   let follower_id = Math.floor(Math.random() * 29) + 1;
   let followed_id = Math.floor(Math.random() * 29) + 1;
   if (follower_id !== followed_id) {

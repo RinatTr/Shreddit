@@ -25,7 +25,7 @@
   * Fetches all users followed by a single user
 * `POST /api/follows/`
   * adds a following
-* `DELETE /api/follows/`
+* `DELETE /api/follows/:id`
   * deletes a following (unfollow / unsubscribe)
 
 ### Subscriptions

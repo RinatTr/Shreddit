@@ -1,12 +1,5 @@
 const { db } = require("./q-index.js");
 
-// * `GET /api/follows/:userId`
-//   * Fetches all users followed by a single user
-// * `POST /api/follows/`
-//   * adds a following
-// * `DELETE /api/follows/`
-//   * deletes a following (unfollow / unsubscribe)
-
 const getFollowedByUser = (req, res, next) => {
   let userId = parseInt(req.params.userId);
   db.any(`SELECT follows.*, users.username AS followed_user FROM follows
@@ -21,23 +14,35 @@ const getFollowedByUser = (req, res, next) => {
     })
 }
 
-// //PATCH /comments/:id
-// const updateVote = (req, res, next) => {
-//   let comment_id = parseInt(req.params.id)
-//   let type = (req.body.type === "upvote") ? "+" : "-";
-//
-//   db.none(`UPDATE comments SET votes = votes ${type} 1 WHERE id = $1`, [comment_id])
-//     .then(() => {
-//       res.status(200).json({
-//         status: "success",
-//         message: "you've updated a comment vote"
-//       })
-//     })
-//     .catch(err => {
-//       return next(err)
-//     })
-// }
+//POST /follows/
+const addFollow = (req, res, next) => {
+  db.none('INSERT INTO follows VALUES (${follower_id}, ${followed_id})', req.body)
+    .then(() => {
+      res.status(200).json({
+        status: "success",
+        message: "you've added a following"
+      })
+    })
+    .catch(err => {
+      return next(err)
+    })
+}
 
+const deleteFollow = (req, res, next) => {
+  const followId = parseInt(req.params.followId)
+  db.none('DELETE FROM follows WHERE id=$1',[followId])
+    .then(() => {
+      res.status(200).json({
+        status: "success",
+        message: "you've deleted a following"
+      })
+    })
+    .catch(err => {
+      return next(err)
+    })
+}
 module.exports = {
-  getFollowedByUser
+  getFollowedByUser,
+  addFollow,
+  deleteFollow
 };
