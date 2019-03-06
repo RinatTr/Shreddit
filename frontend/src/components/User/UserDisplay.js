@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const UserInfo = ({username, avatar, handleFollow}) => {
+const UserInfo = ({username, avatar, handleFollow, handleUnfollow, isSubscribed}) => {
   return (
     <div className="user-info-container">
       <div className="user-blue"></div>
@@ -11,7 +11,9 @@ const UserInfo = ({username, avatar, handleFollow}) => {
             <img alt="avatar" src={avatar} id="avatar"/>
           </div>
           <span><Link to={`/user/${username}`}>/u/{username}</Link></span>
-          <button className="follow" onClick={handleFollow}>Follow</button>
+          {isSubscribed
+            ? <button className="follow" onClick={handleUnfollow}>UNSUBSCRIBE</button>
+            : <button className="follow" onClick={handleFollow}>FOLLOW</button>}
         </div>
       </div>
     </div>

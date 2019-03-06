@@ -9,24 +9,44 @@ import '../../css/User.css';
 export default class User extends Component {
   constructor() {
     super()
-
+    this.state = {
+      isSubscribed: false
+    }
     this.handleFollow = this.handleFollow.bind(this)
   }
 
+  validateSubscription = () => {
+    if (this.props.loggedUser) {
+      let loggedUserId = this.props.loggedUser.userData.id
+      let userPageId = this.props.user.id
+      this.props.fetchFollows(loggedUserId)
+                  .then(() => {
+                    //if identical id's then set subscribed true
+                    if (this.props.follows.find(follow => follow.followed_id === userPageId)) {
+                      this.setState({
+                        isSubscribed: true
+                      })
+                    }
+                  })
+    }
+  }
+
   async componentDidMount() {
-    await this.props.fetchUser(this.props.match.params.username)
-    this.props.fetchUserPosts(this.props.user.id)
-    this.props.fetchCommentCount()
+    let { fetchUser, fetchUserPosts, fetchCommentCount, match } = this.props;
+    await fetchUser(match.params.username)
+    await fetchUserPosts(this.props.user.id)
+    await fetchCommentCount()
+    this.validateSubscription()
   }
 
   async componentDidUpdate(prevProps) {
   if (this.props.match.params.username !== prevProps.match.params.username) {
     await this.props.fetchUser(this.props.match.params.username)
-    this.props.fetchUserPosts(this.props.user.id)
-    this.props.fetchCommentCount()
+    await this.props.fetchUserPosts(this.props.user.id)
+    await this.props.fetchCommentCount()
   }
 }
-
+  //handle data
   countPerPost = (id, count) => {
     if (count) {
       let post = count.find(post => post.post_id === +id)
@@ -34,7 +54,8 @@ export default class User extends Component {
     }
   }
 
-  async handleFollow()  {
+  //handle user input
+  async handleFollow() {
     if (!this.props.loggedUser) {
       this.props.history.push('/auth/login/')
     } else {
@@ -42,7 +63,8 @@ export default class User extends Component {
                         followed_id: this.props.user.id }
 
       await addFollow(followObj).catch((err)=> console.log(err))
-      // this.props.fetchFollows()
+      this.props.fetchFollows(followObj.follower_id)
+      this.validateSubscription()
     }
     /* follow plan :
     user hits follow button:
@@ -50,6 +72,10 @@ export default class User extends Component {
       - calls POST /api/follows and takes in a bodyObj {follower_id ,followed_id }
       - take id's from props: loggedInUser(need to add to state) and user.id
     */
+  }
+
+  async handleUnfollow() {
+
   }
 
   render() {
@@ -85,6 +111,7 @@ export default class User extends Component {
                     username={user.username}
                     avatar={user.avatar_url}
                     handleFollow={this.handleFollow}
+                    isSubscribed={this.state.isSubscribed}
                   /> : null}
         </div>
       </React.Fragment>
