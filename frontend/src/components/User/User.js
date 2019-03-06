@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Post from '../Posts/PostDisplay';
 import UserInfo from './UserDisplay';
+import { addFollow } from '../../util/util';
 import '../../css/User.css';
 
 export default class User extends Component {
   constructor() {
     super()
 
+    this.handleFollow = this.handleFollow.bind(this)
   }
 
   async componentDidMount() {
@@ -31,8 +33,27 @@ export default class User extends Component {
       return post ? post.comments_count : "0";
     }
   }
-  render() {
 
+  async handleFollow()  {
+    if (!this.props.loggedUser) {
+      this.props.history.push('/auth/login/')
+    } else {
+      let followObj = { follower_id: this.props.loggedUser.userData.id,
+                        followed_id: this.props.user.id }
+
+      await addFollow(followObj).catch((err)=> console.log(err))
+      // this.props.fetchFollows()
+    }
+    /* follow plan :
+    user hits follow button:
+    1. fires a mapped action dispatcher function :
+      - calls POST /api/follows and takes in a bodyObj {follower_id ,followed_id }
+      - take id's from props: loggedInUser(need to add to state) and user.id
+    */
+  }
+
+  render() {
+    console.log(this.props);
     let { posts, count, match, user } = this.props;
     let mapPosts;
     let currentPost;
@@ -63,6 +84,7 @@ export default class User extends Component {
           {user ? <UserInfo
                     username={user.username}
                     avatar={user.avatar_url}
+                    handleFollow={this.handleFollow}
                   /> : null}
         </div>
       </React.Fragment>
@@ -74,7 +96,7 @@ export default class User extends Component {
 //what does userprofile need from Redux store / db?
 // auth: loggedInUser
 // new reducer for user profile:
-//
+
 //new axios calls / routes:
 // get all posts per currently viewed user
 // get all comments per user

@@ -16,7 +16,7 @@ const getFollowedByUser = (req, res, next) => {
 
 //POST /follows/
 const addFollow = (req, res, next) => {
-  db.none('INSERT INTO follows VALUES (${follower_id}, ${followed_id})', req.body)
+  db.none('INSERT INTO follows(follower_id, followed_id) VALUES (${follower_id}, ${followed_id})', req.body)
     .then(() => {
       res.status(200).json({
         status: "success",

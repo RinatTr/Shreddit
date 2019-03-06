@@ -1,7 +1,3 @@
-// getUserPosts
-// getSavedPosts
-// getUserComments
-
 import * as Util from '../util/util.js';
 
 export const RECEIVE_USER_POSTS = "RECEIVE_USER_POSTS";

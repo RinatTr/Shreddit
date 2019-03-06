@@ -1,12 +1,19 @@
 import axios from 'axios';
+//Posts
 export const getPosts = () => axios.get("/api/posts")
 export const getCommentsPerPost = (id) => axios.get(`/api/posts/${id}/comments`)
 export const getCommentCount = () => axios.get("/api/comments/counts")
 export const postComment = (comment, id) => axios.post(`/api/posts/${id}/comments`, comment)
+
+//User
 export const getUser = (username) => axios.get(`/api/users/${username}`)
 export const getUserPosts = (id) => axios.get(`/api/users/${id}/posts/`)
 export const getSavedPosts = (id) => axios.get(`/api/users/${id}/posts/saved`)
 export const getUserComments = (id) => axios.get(`/api/users/${id}/comments`)
+
+//Follows
+export const getFollows = (userId) => axios.get(`/api/follows/${userId}`)
+export const addFollow = (followObj) => axios.post(`/api/follows/`, followObj)
 
 //Auth
 export const createUser = (bodyObj) => axios.post("/api/users/auth/new", bodyObj)

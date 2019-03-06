@@ -131,6 +131,7 @@ by putting an if statement in the expand handler to determine correct origin of 
 3. BE + FE Create a post.
 
 - protect BE routing for get all saved posts per user.✅
+- implement "post a following". 
 
 ### Issues ###
 - fix nested routing

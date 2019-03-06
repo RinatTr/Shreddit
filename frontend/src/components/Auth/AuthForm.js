@@ -21,14 +21,16 @@ class AuthForm extends Component {
     e.preventDefault()
     let { username, password, email } = this.state;
     let newUser = { username, password, email }
-    let userLogin = { username, password}
-    let isLogin = (this.props.match.path === "/auth/login")
+    let userLogin = { username, password }
+    let isLogin = ( this.props.match.path === "/auth/login" )
 
     if (isLogin) {
       this.props.loginUser(userLogin)
+      this.props.history.goBack();
     } else {
       this.props.signUpUser(newUser)
       this.props.loginUser(userLogin)
+      this.props.history.goBack();
     }
 
   }
