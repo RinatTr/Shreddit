@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <NavbarContainer />
+        <Route component={NavbarContainer} />
         <Switch>
           <Route path="/all" component={PostsContainer} />
           <Route path="/popular" component={PostsContainer} />

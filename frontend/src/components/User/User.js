@@ -10,7 +10,8 @@ export default class User extends Component {
   constructor() {
     super()
     this.state = {
-      isSubscribed: false
+      isSubscribed: false,
+      isLoggedUserPage: false
     }
     this.handleFollow = this.handleFollow.bind(this)
     this.handleUnfollow = this.handleUnfollow.bind(this)
@@ -41,6 +42,14 @@ export default class User extends Component {
     await fetchUser(match.params.username)
     await fetchUserPosts(this.props.user.id)
     await fetchCommentCount()
+    if (this.props.loggedUser) {
+      if (this.props.loggedUser.username === this.props.user.username) {
+        this.setState({
+          //"false" will remain default since logout refreshes the page.
+          isLoggedUserPage: true
+        })
+      }
+    }
     this.validateSubscription()
   }
 
@@ -86,7 +95,6 @@ export default class User extends Component {
     let { posts, count, match, user } = this.props;
     let mapPosts;
     let currentPost;
-
     if (Array.isArray(posts) && count) {
        mapPosts = posts.map((post) => {
         return <Link key={post.id} to={`/post/${post.id}`}><Post

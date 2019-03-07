@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import '../../css/Authform.css'
 
 class AuthForm extends Component {
   constructor() {
@@ -44,37 +45,38 @@ class AuthForm extends Component {
     return (
       isLoggedIn
       ? <Redirect to="/all" />
-      : <React.Fragment>
-         <h1>REMOVE THIS AFTER ADDING MARGIN</h1>
-         <h1>{isPathLogin ? "Login" : "Sign Up"}</h1>
-         <form onSubmit={this.handleSubmit}>
-           <input
-             type="username"
-             value={username}
-             name="username"
-             placeholder="username"
-             onChange={this.handleChange}
-             required
-            />
-           <input
-             type="password"
-             value={password}
-             name="password"
-             placeholder="password"
-             onChange={this.handleChange}
-             required
-            />
-          { isPathLogin ? "" : <input
-             type="email"
-             value={email}
-             name="email"
-             placeholder="email"
-             onChange={this.handleChange}
-             required
-            /> }
+      : <React.Fragment> 
+         <div className=".black">
+           <h1>{isPathLogin ? "Login" : "Sign Up"}</h1>
+           <form onSubmit={this.handleSubmit}>
+             <input
+               type="username"
+               value={username}
+               name="username"
+               placeholder="username"
+               onChange={this.handleChange}
+               required
+              />
+             <input
+               type="password"
+               value={password}
+               name="password"
+               placeholder="password"
+               onChange={this.handleChange}
+               required
+              />
+            { isPathLogin ? "" : <input
+               type="email"
+               value={email}
+               name="email"
+               placeholder="email"
+               onChange={this.handleChange}
+               required
+              /> }
 
-           <button type="submit">Submit</button>
-         </form>
+             <button type="submit">Submit</button>
+           </form>
+         </div>
          {/*add error handler*/}
          {/*<p>{isLoggedIn ? "Logged In!" : ""}</p>*/}
        </React.Fragment>

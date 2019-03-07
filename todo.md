@@ -158,7 +158,7 @@ BUT also all posts.
 
 
   // last tasks:
-  // 1. show and link follows at Navbar.
+  // 1. show and link follows at Navbar. V
   // 2. css Login / Signup page.
   // 3. handle Login / Signup errors .
   // 4. Css - buttons, navbar, addcomment .
@@ -166,4 +166,4 @@ BUT also all posts.
   // 6.   create post.
   // 7.   fix votes bug from users.
   // 8.   user page: nav bar + comments, saved posts.
-  // 9.   fix post Modal in users. 
+  // 9.   fix post Modal in users.

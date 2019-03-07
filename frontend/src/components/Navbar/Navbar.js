@@ -10,7 +10,8 @@ class Navbar extends Component {
     super();
     this.state = {
       searchInput: "",
-      select: ""
+      select: "",
+      defaultOpt: ""
     }
   }
   /* code spotlight moment... */
@@ -21,10 +22,20 @@ class Navbar extends Component {
         fetchFollows(loggedInUser.userData.id)
       }
     }
+    //update top menu option
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.setState({
+        defaultOpt: this.props.location.pathname
+      })
+    }
   }
+
 
   componentDidMount() {
     this.props.checkAuthenticateStatus();
+    this.setState({
+      defaultOpt: this.props.location.pathname
+    })
   }
 
   handleLogout = () => {
@@ -33,23 +44,32 @@ class Navbar extends Component {
   }
 
   handleChange = (e) => {
-    let username = e.target.selectedOptions[0].innerText
-    this.props.history.push(`/user/${username}`)
+    let path = e.target.selectedOptions[0].innerText
+    let optionId = e.target.selectedOptions[0].id
+    switch (optionId) {
+      case "username":
+      this.props.history.push(`/user/${path}`)
+      case "default":
+      break;
+      default:
+      this.props.history.push(`/${path}`)
+    }
   }
 
   render() {
-    let { searchInput, select } = this.state;
+    let { searchInput, select, defaultOpt } = this.state;
     let { loggedInUser, follows } = this.props;
     let currentUser = loggedInUser ? loggedInUser.username : ""
 
-    let mapMenu = follows ? follows.map((follow, i) => {return <option key={i}>{follow.followed_user}</option>}) : null;
-      console.log(mapMenu);
+    let mapMenu = follows ? follows.map((follow, i) => {return <option key={i} id="username">{follow.followed_user}</option>}) : null;
+
     return (
       <nav>
         <Link to="/popular"><img alt="icon" src={icon}/>shreddit</Link>
         <select name="select" onChange={(e) => {this.handleChange(e)}}>
-          <option>[ICON] POPULAR</option>
-          <option>[ICON] ALL</option>
+          <option id="default" defaultValue={defaultOpt}>{defaultOpt}</option>
+          <option id="popular">Popular</option>
+          <option id="all">All</option>
           {mapMenu}
         </select>
         <input
