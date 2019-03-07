@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Post from '../Posts/PostDisplay';
 import UserInfo from './UserDisplay';
-import { addFollow } from '../../util/util';
+import { addFollow, deleteFollow } from '../../util/util';
 import '../../css/User.css';
 
 export default class User extends Component {
@@ -13,6 +13,7 @@ export default class User extends Component {
       isSubscribed: false
     }
     this.handleFollow = this.handleFollow.bind(this)
+    this.handleUnfollow = this.handleUnfollow.bind(this)
   }
 
   validateSubscription = () => {
@@ -25,6 +26,10 @@ export default class User extends Component {
                     if (this.props.follows.find(follow => follow.followed_id === userPageId)) {
                       this.setState({
                         isSubscribed: true
+                      })
+                    } else {
+                      this.setState({
+                        isSubscribed: false
                       })
                     }
                   })
@@ -66,16 +71,16 @@ export default class User extends Component {
       this.props.fetchFollows(followObj.follower_id)
       this.validateSubscription()
     }
-    /* follow plan :
-    user hits follow button:
-    1. fires a mapped action dispatcher function :
-      - calls POST /api/follows and takes in a bodyObj {follower_id ,followed_id }
-      - take id's from props: loggedInUser(need to add to state) and user.id
-    */
   }
 
   async handleUnfollow() {
-
+    //user is definitely logged in
+      let userPageId = this.props.user.id
+      let followObj = this.props.follows.find(follow => follow.followed_id === userPageId)
+      debugger
+      await deleteFollow(followObj.id).catch((err)=> console.log(err))
+      await this.props.fetchFollows(followObj.follower_id)
+      this.validateSubscription()
   }
 
   render() {
@@ -111,6 +116,7 @@ export default class User extends Component {
                     username={user.username}
                     avatar={user.avatar_url}
                     handleFollow={this.handleFollow}
+                    handleUnfollow={this.handleUnfollow}
                     isSubscribed={this.state.isSubscribed}
                   /> : null}
         </div>

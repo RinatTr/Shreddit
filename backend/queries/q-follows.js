@@ -41,6 +41,7 @@ const deleteFollow = (req, res, next) => {
       return next(err)
     })
 }
+
 module.exports = {
   getFollowedByUser,
   addFollow,

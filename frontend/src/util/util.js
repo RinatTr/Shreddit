@@ -14,6 +14,7 @@ export const getUserComments = (id) => axios.get(`/api/users/${id}/comments`)
 //Follows
 export const getFollows = (userId) => axios.get(`/api/follows/${userId}`)
 export const addFollow = (followObj) => axios.post(`/api/follows/`, followObj)
+export const deleteFollow = (followId) => axios.delete(`/api/follows/${followId}`)
 
 //Auth
 export const createUser = (bodyObj) => axios.post("/api/users/auth/new", bodyObj)
