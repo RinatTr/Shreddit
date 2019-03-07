@@ -13,14 +13,29 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* add button section:
 button {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  background: rgb(0, 121, 211);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 3px 16px 3px 16px;
+  cursor: pointer;
+}
 
-
+button:hover {
+  background: rgb(0, 150, 290);
 }
 
 button .follow {
 
 }
 
- */
+
+
+input {
+  background-color: #f2f8fd;
+  border: 1px solid rgb(237, 239, 241);
+  border-radius: 4px;
+}

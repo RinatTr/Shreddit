@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Link, Route, Switch, Redirect } from "react-router-dom";
+import icon from '../../icons/iconfinder_Faint_2695614.png'
 import '../../css/Authform.css'
 
 class AuthForm extends Component {
@@ -45,37 +46,48 @@ class AuthForm extends Component {
     return (
       isLoggedIn
       ? <Redirect to="/all" />
-      : <React.Fragment> 
-         <div className=".black">
-           <h1>{isPathLogin ? "Login" : "Sign Up"}</h1>
-           <form onSubmit={this.handleSubmit}>
-             <input
-               type="username"
-               value={username}
-               name="username"
-               placeholder="username"
-               onChange={this.handleChange}
-               required
-              />
-             <input
-               type="password"
-               value={password}
-               name="password"
-               placeholder="password"
-               onChange={this.handleChange}
-               required
-              />
-            { isPathLogin ? "" : <input
-               type="email"
-               value={email}
-               name="email"
-               placeholder="email"
-               onChange={this.handleChange}
-               required
-              /> }
-
-             <button type="submit">Submit</button>
-           </form>
+      : <React.Fragment>
+         <div className="auth-black">
+           <div className="auth-wrapper">
+             <div className="art"></div>
+             <div className="auth-form-container">
+               <div className="auth-close-modal">
+                 <span className="auth-close">&times;</span>
+               </div>
+               <div className="auth-form-content">
+                 <img alt="icon" src={icon} />
+                 <h1>{isPathLogin ? "Sign In" : "Sign Up"}</h1>
+                 <form onSubmit={this.handleSubmit}>
+                   <input
+                     type="username"
+                     value={username}
+                     name="username"
+                     placeholder="username"
+                     onChange={this.handleChange}
+                     required
+                    />
+                   <input
+                     type="password"
+                     value={password}
+                     name="password"
+                     placeholder="password"
+                     onChange={this.handleChange}
+                     required
+                    />
+                  { isPathLogin ? "" : <input
+                     type="email"
+                     value={email}
+                     name="email"
+                     placeholder="email"
+                     onChange={this.handleChange}
+                     required
+                    /> }
+                   <button type="submit">{isPathLogin ? "SIGN IN" : "SIGN UP"}</button>
+                 </form>
+                 <span>New to Reddit? <Link to="/auth/signup">SIGN UP</Link></span>
+               </div>
+             </div>
+          </div>
          </div>
          {/*add error handler*/}
          {/*<p>{isLoggedIn ? "Logged In!" : ""}</p>*/}

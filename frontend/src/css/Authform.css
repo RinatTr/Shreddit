@@ -1,7 +1,8 @@
-.black {
+.auth-black {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
   margin-top: 50px;
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -9,56 +10,56 @@
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  /* overflow: scroll;  */
+  overflow: scroll; /* Enable scroll if needed */
   background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+
 }
 
-.close-modal {
-  background: black;
-  color: #909192;
+.auth-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  width: 90vw;
+  height: 460px;
+  justify-content: center;
   align-items: center;
-  height: 50px;
-  width: 84vw;
+  text-align: left;
+  margin-bottom: 50px;
+}
+
+.art {
+  background-image: url(https://www.redditstatic.com/accountmanager/bbb584033aa89e39bad69436c504c9bd.png);
+  width: 150px;
+  height: 100%;
+  z-index: 2;
 }
 
 .auth-form-container {
-  background: #fde392;
+  background: white;
   overflow: overlay;
   height: 100%;
-  width: 84vw;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-bottom: 10px;
 }
 
-.votes {
-  display: flex;
-  flex-direction: column;
-  width: 40px;
-  height: 100%;
-  align-items: center;
-  background: #fff2c6;
-  font-weight: 800;
-  color: #5a5c5d;
-}
-
-.close-modal .votes {
-  flex-direction: row;
-  background: none;
+.auth-close-modal {
+  background: white;
   color: #909192;
-  margin-left: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+  width: 100%;
 }
 
-.close-modal span {
+.auth-close-modal span {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-right: 20px;
-  font-size: 25px;
+  margin-right: 10px;
+  font-size: 35px;
   margin-bottom: 3px;
   cursor: pointer;
   height: 40%;
@@ -66,107 +67,37 @@
   padding: 5px;
 }
 
-.close-modal span:hover {
-  background: #90919278;
+.auth-form-content {
+  padding: 30px;
 }
 
-.close-modal span div {
-  font-size: 15px;
-  font-weight: bold;
-  margin-right: 5px;
-  margin-top: 1px;
+.auth-form-content img {
+  height: 50px;
+  width: 50px;
+  margin-left: -5px;
 }
 
-.votes img {
-  margin: 5px;
-  width: 16px;
-  height: 16px;
-}
-
-.votes img:hover {
-  cursor: pointer;
-}
-
-.post-content {
-  display: block;
-  margin-left: 5px;
-}
-
-.post-expanded .post-content {
-  display: block;
-  border-radius: 5px 5px 0px 0px;
-  min-height: 50%;
-  margin-top: 30px;
-  margin-left: 30px;
-  margin-right: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  background: white;
-}
-
-.post-content img {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  margin-right: 5px;
-}
-
-.post-text {
-  text-align: left;
-  max-height: 80%;
-}
-
-.post-text .info {
+.auth-form-content form {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: grey;
-  font-size: 12px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
 }
 
-.post-text .info strong {
-  color: #1C1C1C;
+.auth-form-content form input {
+  width: 392px;
+  height: 25px;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 700px;
 }
 
-.post-text .info > * {
-  margin-right: 5px;
+.auth-form-content h1 {
+  font-size: 18px;
 }
 
-.post-text .info span {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.post-buttons {
-  text-align: left;
-  max-height: 20%;
-  font-weight: bold;
-  display: flex;
-  color: #4C4C4C;
-}
-
-.post-collapsed:hover {
-  border: solid #e2b500 1px;
-}
-
-.post-collapsed a {
-  margin-left: 4px;
-}
-.post-collapsed a:hover {
-  text-decoration: underline;
-}
-
-p {
-  margin-block-start: 0.5em;
-  margin-block-end: 0.5em;
-}
-
-h3 {
-  margin-block-start: 0em;
-  text-align: left;
-}
-
-h4 {
-  text-align: left;
+.auth-form-content button {
+  font-weight: 800;
 }
