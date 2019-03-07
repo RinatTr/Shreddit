@@ -13,10 +13,18 @@ class Navbar extends Component {
       select: ""
     }
   }
+  /* code spotlight moment... */
+  componentDidUpdate(prevProps) {
+    let { loggedInUser, fetchFollows } = this.props;
+    if (loggedInUser) {
+      if (!prevProps.loggedInUser || loggedInUser.username !== prevProps.loggedInUser.username) {
+        fetchFollows(loggedInUser.userData.id)
+      }
+    }
+  }
 
   componentDidMount() {
     this.props.checkAuthenticateStatus();
-    //add loading logged user redux function
   }
 
   handleLogout = () => {
@@ -33,10 +41,11 @@ class Navbar extends Component {
   render() {
     let { searchInput, select } = this.state;
     let currentUser = this.props.loggedInUser ? this.props.loggedInUser.username : ""
-
+    console.log("follows => ",this.props.follows);
+    console.log("props => ",this.props);
     return (
       <nav>
-        <Link to="/"><img alt="icon" src={icon}/>shreddit</Link>
+        <Link to="/popular"><img alt="icon" src={icon}/>shreddit</Link>
         <select name="select" onChange={this.handleChange}>
           <option>[ICON] POPULAR</option>
           <option>[ICON] ALL</option>

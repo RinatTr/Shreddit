@@ -84,7 +84,6 @@ export default class User extends Component {
   }
 
   render() {
-    console.log(this.props);
     let { posts, count, match, user } = this.props;
     let mapPosts;
     let currentPost;
@@ -118,17 +117,13 @@ export default class User extends Component {
                     handleFollow={this.handleFollow}
                     handleUnfollow={this.handleUnfollow}
                     isSubscribed={this.state.isSubscribed}
+                    cakeDay={user.created_at}
                   /> : null}
         </div>
       </React.Fragment>
     )
   }
 }
-//get snapshot before update - lifecycle method
-
-//what does userprofile need from Redux store / db?
-// auth: loggedInUser
-// new reducer for user profile:
 
 //new axios calls / routes:
 // get all posts per currently viewed user
@@ -142,9 +137,6 @@ export default class User extends Component {
 // * `GET /api/users/:userId/comments`
 //    * Fetches all comments by user
 
-//no forms needed
-
-//route user Profile in app.js
 
 //display posts in same way as posts.js :
 //  import PostDisplay, and map user_posts. when mapping <Link> each post to its id.

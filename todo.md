@@ -124,14 +124,14 @@ by putting an if statement in the expand handler to determine correct origin of 
 - comment count does not update when adding a comment ✅
 - loggedUser.username undefined error ✅
 
-**03 04 19 - 03 05 19**
+**03 04 19 - 03 06 19**
 `current phase:`
 1. FE User Profile. ✅
-2. BE + FE Following.
+2. BE + FE Following. ✅
 3. BE + FE Create a post.
 
 - protect BE routing for get all saved posts per user.✅
-- implement "post a following". 
+- implement "post a following".
 
 ### Issues ###
 - fix nested routing
@@ -157,23 +157,13 @@ BUT also all posts.
  - adds/subtracts a vote in posts/columns table's votes column
 
 
-
-###NOTES###
-Stages for FE userAuth :
-1. Store the logged in / signed up  user info in state.
-  state = { session: { currentUser: null,
-                        errors }} //login or signup errors.
-    once the user has logged in, we want to replace the null with their information, ex { username: "sonso", id:5}
-
-  2. any connected component (any component that has a container), has access to any part of state they want.
-  in this case, we will need to connect them to the session part of state.
-    - Navbar (menu, buttons, avatar)
-    - userProfile
-    - posts (create post, add comment, voting)
-
-  3. in navbar / userprofile view, if there is a currentUser in the props, then display our username and replace the login / signup buttons in nav, in reddit's case.
-
-  4. use the user information to restrict access to specific routes and redirect back to login or allowed content page. with similar if / else statement in compDM: if currentUser,display form, else, redirect.
-
-  resource :
-  https://www.aaonline.io/full-stack-online-react/834f43e0-4973-4793-9357-2439270c9666
+  // last tasks:
+  // 1. show and link follows at Navbar.
+  // 2. css Login / Signup page.
+  // 3. handle Login / Signup errors .
+  // 4. Css - buttons, navbar, addcomment .
+  // 5. if there's time:
+  // 6.   create post.
+  // 7.   fix votes bug from users.
+  // 8.   user page: nav bar + comments, saved posts.
+  // 9.   fix post Modal in users. 
