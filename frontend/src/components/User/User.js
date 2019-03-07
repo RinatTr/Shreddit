@@ -77,7 +77,6 @@ export default class User extends Component {
     //user is definitely logged in
       let userPageId = this.props.user.id
       let followObj = this.props.follows.find(follow => follow.followed_id === userPageId)
-      debugger
       await deleteFollow(followObj.id).catch((err)=> console.log(err))
       await this.props.fetchFollows(followObj.follower_id)
       this.validateSubscription()

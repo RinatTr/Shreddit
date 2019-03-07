@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import icon from '../../icons/iconfinder_Faint_2695614.png'
 import all from '../../icons/iconfinder_ic_clear_all_48px_352269.png'
 import popular from '../../icons/iconfinder_ic_trending_up_48px_352184.png'
@@ -33,22 +33,24 @@ class Navbar extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+    let username = e.target.selectedOptions[0].innerText
+    this.props.history.push(`/user/${username}`)
   }
 
   render() {
     let { searchInput, select } = this.state;
-    let currentUser = this.props.loggedInUser ? this.props.loggedInUser.username : ""
-    console.log("follows => ",this.props.follows);
-    console.log("props => ",this.props);
+    let { loggedInUser, follows } = this.props;
+    let currentUser = loggedInUser ? loggedInUser.username : ""
+
+    let mapMenu = follows ? follows.map((follow, i) => {return <option key={i}>{follow.followed_user}</option>}) : null;
+      console.log(mapMenu);
     return (
       <nav>
         <Link to="/popular"><img alt="icon" src={icon}/>shreddit</Link>
-        <select name="select" onChange={this.handleChange}>
+        <select name="select" onChange={(e) => {this.handleChange(e)}}>
           <option>[ICON] POPULAR</option>
           <option>[ICON] ALL</option>
+          {mapMenu}
         </select>
         <input
           type="text"
@@ -70,4 +72,4 @@ class Navbar extends Component {
 }
 
 
-export default Navbar;
+export default withRouter(Navbar);
