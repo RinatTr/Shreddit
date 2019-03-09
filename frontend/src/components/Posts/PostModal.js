@@ -50,7 +50,7 @@ const PostModal = ({  id,
             <div className="post-text">
               <p className="info">
                 <span>
-                  <img alt={groupImgUrl} src={groupImgUrl} />
+                  {groupImgUrl ? <div className="center-cropped-icon"><img alt="subshr" src={groupImgUrl} /></div> : null }
                   <strong>/r/{groupname}</strong>
                 </span>
                 <span>

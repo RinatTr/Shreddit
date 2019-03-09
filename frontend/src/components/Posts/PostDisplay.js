@@ -18,9 +18,7 @@ const Post = ({ id,
                 groupImgUrl,
                 handleVote,
                 handleExpand }) => {
-    // const divStyle = {
-    //     backgroundImage: 'url(' + groupImgUrl + ')'
-    //   }
+
     return (
       <React.Fragment>
       <div className="post-collapsed" id={id} onClick={handleExpand}>
@@ -41,7 +39,7 @@ const Post = ({ id,
               <span>
                <TimeAgo date={timestamp}/>
               </span>
-             </p>
+            </p>
             <h3>{header}</h3>
             {body ? <p>{body.slice(0,100)+"..."}</p> : null}
             <div className="post-buttons">

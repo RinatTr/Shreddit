@@ -83,7 +83,7 @@ class Navbar extends Component {
         <Link to="/all"><img alt="all" src={all}/></Link>
         {currentUser
           ? <><Link to={`/user/${currentUser}`}>{currentUser}</Link><button onClick={this.handleLogout}>LOG OUT</button></>
-          : <><Link to="/auth/login"><button>LOG IN</button></Link>
+        : <><Link to="/auth/login"><button className="button-login">LOG IN</button></Link>
               <Link to="/auth/signup"><button>SIGN UP</button></Link>
               </>}
       </nav>

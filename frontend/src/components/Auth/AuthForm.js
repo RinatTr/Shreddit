@@ -52,11 +52,11 @@ class AuthForm extends Component {
              <div className="art"></div>
              <div className="auth-form-container">
                <div className="auth-close-modal">
-                 <span className="auth-close">&times;</span>
+                 <span className="auth-close" onClick={()=>{this.props.history.goBack()}}>&times;</span>
                </div>
                <div className="auth-form-content">
-                 <img alt="icon" src={icon} />
-                 <h1>{isPathLogin ? "Sign In" : "Sign Up"}</h1>
+                 {isPathLogin ? <img alt="icon" src={icon} /> : null }
+                 {isPathLogin ?<h1>Sign In</h1> : <><h3>Join the worldwide conversation. Create a Shreddit account today.</h3></>}
                  <form onSubmit={this.handleSubmit}>
                    <input
                      type="username"
