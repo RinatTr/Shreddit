@@ -18,6 +18,9 @@ const Post = ({ id,
                 groupImgUrl,
                 handleVote,
                 handleExpand }) => {
+    // const divStyle = {
+    //     backgroundImage: 'url(' + groupImgUrl + ')'
+    //   }
     return (
       <React.Fragment>
       <div className="post-collapsed" id={id} onClick={handleExpand}>
@@ -26,11 +29,10 @@ const Post = ({ id,
             {votes}
           <img alt="downvote" className="downvote" src={downvote} id={id} onClick={handleVote}/>
         </div>
-        <div className="post-content">
-          <div className="post-text">
+        <div className={body ? "post-content" : "post-content-user"}>
             <p className="info">
               <span>
-                {groupImgUrl ? <img alt={groupImgUrl} src={groupImgUrl} /> : null}
+                {groupImgUrl ? <div className="center-cropped-icon"><img alt="subshr" src={groupImgUrl} /></div> : null }
                 <strong>/r/{groupname}</strong>
               </span>
               <span>
@@ -41,16 +43,15 @@ const Post = ({ id,
               </span>
              </p>
             <h3>{header}</h3>
-            <p>{body ? body.slice(0,100)+"..." : null}</p>
-          </div>
-          <div className="post-buttons">
-            <img alt="comment" src={comment} />
-            {commentCount} Comments
-            <img alt="save" src={save} />
-            Save
-            <img alt="hide" src={hide} />
-            Hide
-          </div>
+            {body ? <p>{body.slice(0,100)+"..."}</p> : null}
+            <div className="post-buttons">
+              <img alt="comment" src={comment} />
+              {commentCount} Comments
+              <img alt="save" src={save} />
+              Save
+              <img alt="hide" src={hide} />
+              Hide
+            </div>
         </div>
       </div>
       </React.Fragment>
