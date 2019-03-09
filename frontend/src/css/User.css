@@ -25,30 +25,29 @@
 }
 
 .user-blue {
-  /* z-index: -1px; */
   background: #33A8FF;
-  height: 50px;
+  height: 80px;
   border-radius: 4px 4px 0px 0px;
 }
 
 
 .user-floater {
   text-align: left;
-  /* background: white; */
+}
+
+.user-floater > * {
+  margin-left: 12px;
 }
 
 .user-floater span a {
   margin-left: 12px;
+  margin-top: -20px;
   color: #393939;
 }
 
-.user-floater span a {
-
-}
-
 .avatar-wrapper {
-  margin-top: -30px;
-  margin-left: 10px;
+  margin-top: -60px;
+  /* margin-left: 10px; */
   height: 92px;
   width: 92px;
   background-color: white;

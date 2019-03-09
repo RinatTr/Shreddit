@@ -36,7 +36,7 @@ export default class AddComment extends Component {
     return (
       loggedUser
       ? <div className="comment-add">
-        Comment as {loggedUser.userData.username}
+        <span>Comment as <div className="comment-username">{loggedUser.userData.username}</div></span>
         <form onSubmit={this.handleSubmit}>
           <input type="textarea" name="body" placeholder="What are your thoughts?" value={this.state.body} onChange={this.handleChange}/>
           {this.state.body ? <button>Comment</button> : <button disabled>Comment</button>}

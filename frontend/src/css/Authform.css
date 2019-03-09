@@ -41,6 +41,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  border-radius: 0px 4px 4px 0px;
 }
 
 .auth-close-modal {
@@ -100,4 +101,22 @@
 
 .auth-form-content button {
   font-weight: 800;
+}
+
+.auth-form-content span > * {
+  margin-left: 7px;
+}
+
+.auth-form-content span {
+  display: flex;
+  flex-direction: row;
+}
+
+.auth-form-content span a {
+  font-weight: 800;
+  color: rgb(0, 121, 211);
+}
+
+.auth-form-content hr {
+  margin: 20px 0px 20px 0px ;
 }

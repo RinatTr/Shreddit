@@ -84,7 +84,10 @@ class AuthForm extends Component {
                     /> }
                    <button type="submit">{isPathLogin ? "SIGN IN" : "SIGN UP"}</button>
                  </form>
-                 <span>New to Reddit? <Link to="/auth/signup">SIGN UP</Link></span>
+                 <hr />
+                 {isPathLogin
+                    ? <span>New to Shreddit? <Link to="/auth/signup">SIGN UP</Link></span>
+                    : <span>Already a member? <Link to="/auth/login">LOG IN</Link></span>}
                </div>
              </div>
           </div>

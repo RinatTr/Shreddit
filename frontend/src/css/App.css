@@ -28,6 +28,11 @@ button:hover {
   background: rgb(0, 150, 290);
 }
 
+button:focus {
+  outline: 2px;
+
+}
+
 button .follow {
 
 }

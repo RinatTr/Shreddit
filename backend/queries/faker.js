@@ -1,16 +1,16 @@
 const { db } = require("./q-index.js");
 const faker = require("faker");
 
-// let users = [];
-//
-// for (let i = 0; i < 25; i++) {
-//   let username = faker.internet.userName();
-//   let password_digest = faker.internet.password();
-//   let avatar_url = 'https://api.adorable.io/avatars/285/'+username;
-//   let email = faker.internet.email();
-//   let str = `('${username}', '${password_digest}', '${avatar_url}', '${email}')`;
-//   users.push(str);
-// }
+let users = [];
+
+for (let i = 0; i < 25; i++) {
+  let username = faker.internet.userName();
+  let password_digest = faker.internet.password();
+  let avatar_url = 'https://api.adorable.io/avatars/285/'+username;
+  let email = faker.internet.email();
+  let str = `('${username}', '${password_digest}', '${avatar_url}', '${email}')`;
+  users.push(str);
+}
 
 // let subshreddits = [];
 // let names = ['Music','Trolitics','Shoes','Hiking','Coding','Philosophy','LifeIsGood','Random','Murica','Canada']
