@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ReactQuill from "react-quill";
-import 'react-quill/dist/quill.snow.css'
-
 
 export default class AddComment extends Component {
   constructor(props) {
