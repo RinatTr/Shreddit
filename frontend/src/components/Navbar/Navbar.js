@@ -76,7 +76,7 @@ class Navbar extends Component {
           type="text"
           id="search"
           name="searchInput"
-          placeholder="[ICON] SEARCH"
+          placeholder="SEARCH"
           value={searchInput}
           onChange={this.handleChange}
         />

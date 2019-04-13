@@ -49,7 +49,9 @@ select, input, button {
 }
 
 input#search {
-
+  background: url('https://www.iconfinder.com/icons/111124/download/png/16') no-repeat scroll 7px 7px;
+  background-color: #f2f8fd;
+  padding-left: 30px;
 }
 
 select#select {
