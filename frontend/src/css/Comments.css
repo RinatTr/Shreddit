@@ -44,10 +44,6 @@
   margin-right: 5px;
 }
 
-.comment-username {
-  color: #4cb8d2;
-}
-
 .comment-points, .comment-timeago {
   font-size: 12px;
 }
@@ -85,6 +81,15 @@
   height: 200px;
   font-size: 15px;
 }
+
+.comment-username a {
+  color: #4cb8d2;
+}
+
+.comment-username a:visited {
+  color: #ffd221;
+}
+
 /* QUILL PACKAGE */
 
 /*!

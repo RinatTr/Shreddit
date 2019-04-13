@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import upvote from '../../icons/up_arrow.png'
 import downvote from '../../icons/down_arrow.png'
 import TimeAgo from "react-timeago";
@@ -25,7 +26,7 @@ const Comment = ({  commentId,
           <div className="comment-text">
             <p className="info">
               <span className="comment-username">
-                {commenter}
+                <Link className="comment-username" to={`/user/${commenter}`}>{commenter}</Link>
               </span>
               <span className="comment-points">
                 {votes} Points ·
