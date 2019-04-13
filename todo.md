@@ -170,3 +170,8 @@ BUT also all posts.
   // 9.   user page: nav bar + comments, saved posts.
   // 10.   fix post Modal in users.
   // 11. search functionality
+
+  //saved posts:
+  // redux-fetch all saved posts per loggedin user
+  * `GET /api/users/:userId/posts/saved`
+    * Fetches all saved posts by a user

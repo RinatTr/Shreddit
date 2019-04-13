@@ -64,9 +64,7 @@ export default class Posts extends Component {
     let mapPosts;
     let currentPost;
 
-
     if (Array.isArray(posts) && count) {
-
        mapPosts = posts.map((post) => {
         return <Post
                   key={post.id}
@@ -83,7 +81,6 @@ export default class Posts extends Component {
                   handleExpand={this.handleExpand}
                 />
       })
-
       currentPost = match.params.id ? posts.find(post => post.id === + match.params.id) : null;
     }
 
