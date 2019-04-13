@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css'
+
 
 export default class AddComment extends Component {
   constructor(props) {
@@ -10,8 +13,9 @@ export default class AddComment extends Component {
   }
 
   handleChange = (e) => {
+    //Quill configuration:
     this.setState({
-      [e.target.name]: e.target.value
+      body: e
     })
   }
   handleSubmit = (e) => {
@@ -31,14 +35,34 @@ export default class AddComment extends Component {
     }
 
   }
+
+  modules = {
+   toolbar: [
+     [{ 'header': [1, 2, false] }],
+     ['bold', 'italic','strike', 'blockquote'],
+     [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+     ['link'],
+     ['clean']
+   ]
+ }
+
   render() {
     let { loggedUser } = this.props;
+    let { body } = this.state;
     return (
       loggedUser
       ? <div className="comment-add">
         <span>Comment as <div className="comment-username">{loggedUser.userData.username}</div></span>
         <form onSubmit={this.handleSubmit}>
-          <textarea name="body" placeholder="What are your thoughts?" value={this.state.body} onChange={this.handleChange}/>
+          {/*<textarea name="body" placeholder="What are your thoughts?" value={this.state.body} onChange={this.handleChange}/>*/}
+            <ReactQuill
+            className="newNoteQuill"
+            name="body"
+            value={body}
+            onChange={this.handleChange}
+            placeholder="What are your thoughts?"
+            modules={ this.modules }
+          />
           {this.state.body ? <button>Comment</button> : <button disabled>Comment</button>}
         </form>
         </div>

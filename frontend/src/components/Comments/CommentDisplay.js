@@ -2,6 +2,8 @@ import React from "react";
 import upvote from '../../icons/up_arrow.png'
 import downvote from '../../icons/down_arrow.png'
 import TimeAgo from "react-timeago";
+import ReactHtmlParser from 'react-html-parser';
+
 import '../../css/Comments.css';
 
 const Comment = ({  commentId,
@@ -32,7 +34,7 @@ const Comment = ({  commentId,
                <TimeAgo date={timestamp}/>
               </span>
             </p>
-            <p>{body}</p>
+            <p>{ReactHtmlParser(body)}</p>
             <hr/>
           </div>
         </div>
