@@ -160,10 +160,12 @@ BUT also all posts.
   // last tasks:
   // 1. show and link follows at Navbar. V
   // 2. css Login / Signup page. V
-  // 3. handle Login / Signup errors .
+  // 3. handle Login / Signup errors . V
   // 4. Css - buttons, navbar, addcomment .
+  // *. handle vote clicks from user profile.
   // 5. if there's time:
   // 6.   create post, subshreddit.
   // 7.   fix votes bug from users.
   // 8.   user page: nav bar + comments, saved posts.
   // 9.   fix post Modal in users.
+  // 10. search functionality
