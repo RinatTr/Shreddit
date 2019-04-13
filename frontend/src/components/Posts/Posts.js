@@ -59,12 +59,17 @@ export default class Posts extends Component {
     }
   }
 
+  isSaved = (postId) => {
+    return this.props.saved_posts.find(savedPost => savedPost.post_id === postId) ? true : false;
+  }
+
   render() {
-    let { posts, comments, count, match } = this.props;
+    let { posts, comments, count, match, saved_posts } = this.props;
     let mapPosts;
     let currentPost;
 
-    if (Array.isArray(posts) && count) {
+    if (Array.isArray(posts) && count && saved_posts) {
+      //collapsed posts rendering
        mapPosts = posts.map((post) => {
         return <Post
                   key={post.id}
@@ -79,12 +84,14 @@ export default class Posts extends Component {
                   groupImgUrl={post.img_url}
                   handleVote={this.handleVote}
                   handleExpand={this.handleExpand}
+                  isSaved={this.isSaved(post.id)}
                 />
       })
       currentPost = match.params.id ? posts.find(post => post.id === + match.params.id) : null;
     }
 
     return (
+      //single post (modal) rendering
       <div className="posts">
         <h4>{match.path}</h4>
         {match.params.id && currentPost && comments && count
@@ -103,6 +110,7 @@ export default class Posts extends Component {
               commentCount={this.countPerPost(currentPost.id, count)}
             />
           : null}
+          {/*collapsed posts rendering*/}
         {mapPosts ? mapPosts : null}
       </div>
     );

@@ -13,12 +13,14 @@ const Post = ({ id,
                 header,
                 body,
                 commentCount,
+                isSaved,
                 username,
                 groupname,
                 groupImgUrl,
                 handleVote,
                 handleExpand }) => {
 
+                  console.log("wooooo====>",isSaved)
     return (
       <React.Fragment>
       <div className="post-collapsed" id={id} onClick={handleExpand}>
@@ -46,7 +48,7 @@ const Post = ({ id,
               <img alt="comment" src={comment} />
               {commentCount} Comments
               <img alt="save" src={save} />
-              Save
+              Save {isSaved ? "yes" : "no"}
               <img alt="hide" src={hide} />
               Hide
             </div>
