@@ -74,6 +74,7 @@
 .comment-add .comment-username {
   margin-left: 5px;
   font-weight: 400;
+  color: #4cb8d2;
 }
 
 .comment-add form textarea {
