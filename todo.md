@@ -161,11 +161,12 @@ BUT also all posts.
   // 1. show and link follows at Navbar. V
   // 2. css Login / Signup page. V
   // 3. handle Login / Signup errors . V
-  // 4. Css - buttons, navbar, addcomment .
-  // *. handle vote clicks from user profile.
-  // 5. if there's time:
-  // 6.   create post, subshreddit.
-  // 7.   fix votes bug from users.
-  // 8.   user page: nav bar + comments, saved posts.
-  // 9.   fix post Modal in users.
-  // 10. search functionality
+  // 4. Css - buttons, navbar, addcomment . V
+  // 5. handle vote clicks from user profile.
+  // 6. save posts (like subscribe)
+  // if there's time:
+  // 7.   create post, subshreddit.
+  // 8.   fix votes bug from users.
+  // 9.   user page: nav bar + comments, saved posts.
+  // 10.   fix post Modal in users.
+  // 11. search functionality
