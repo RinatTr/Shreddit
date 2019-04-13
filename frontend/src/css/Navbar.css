@@ -28,12 +28,30 @@ a {
   color: #393939;
 }
 
+a#username {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #0097FF;
+}
+
 a:visited {
   color: #393939;
   text-decoration: none;
 }
 
+a#username:visited {
+   color: #0097FF;
+}
 
 select, input, button {
   height: 30px;
+}
+
+input#search {
+
+}
+
+select#select {
+  width: 90px;
 }

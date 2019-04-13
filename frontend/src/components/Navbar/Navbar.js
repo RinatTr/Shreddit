@@ -66,7 +66,7 @@ class Navbar extends Component {
     return (
       <nav>
         <Link to="/popular"><img alt="icon" src={icon}/>shreddit</Link>
-        <select name="select" onChange={(e) => {this.handleChange(e)}}>
+        <select id="select" name="select" onChange={(e) => {this.handleChange(e)}}>
           <option id="default" defaultValue={defaultOpt}>{defaultOpt}</option>
           <option id="popular">Popular</option>
           <option id="all">All</option>
@@ -74,6 +74,7 @@ class Navbar extends Component {
         </select>
         <input
           type="text"
+          id="search"
           name="searchInput"
           placeholder="[ICON] SEARCH"
           value={searchInput}
@@ -82,7 +83,7 @@ class Navbar extends Component {
         <Link to="/popular"><img alt="all" src={popular}/></Link>
         <Link to="/all"><img alt="all" src={all}/></Link>
         {currentUser
-          ? <><Link to={`/user/${currentUser}`}>{currentUser}</Link><button onClick={this.handleLogout}>LOG OUT</button></>
+          ? <><Link to={`/user/${currentUser}`} id="username">{currentUser}</Link><button onClick={this.handleLogout}>LOG OUT</button></>
         : <><Link to="/auth/login"><button className="button-login">LOG IN</button></Link>
               <Link to="/auth/signup"><button>SIGN UP</button></Link>
               </>}
