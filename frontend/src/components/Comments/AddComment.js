@@ -61,7 +61,7 @@ export default class AddComment extends Component {
             placeholder="What are your thoughts?"
             modules={ this.modules }
           />
-          {this.state.body ? <button>Comment</button> : <button disabled>Comment</button>}
+          {body ? <button>Comment</button> : <button disabled>Comment</button>}
         </form>
         </div>
       : <div className="comment-login">
