@@ -173,5 +173,4 @@ BUT also all posts.
 
   //saved posts:
   // redux-fetch all saved posts per loggedin user
-  * `GET /api/users/:userId/posts/saved`
-    * Fetches all saved posts by a user
+  // connect to posts

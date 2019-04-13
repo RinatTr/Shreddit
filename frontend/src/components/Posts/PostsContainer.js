@@ -7,7 +7,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     posts: state.posts.posts,
     comments: state.posts.comments,
-    count: state.posts.comment_count
+    count: state.posts.comment_count,
+    saved_posts: state.user_content.saved_posts
   };
 };
 

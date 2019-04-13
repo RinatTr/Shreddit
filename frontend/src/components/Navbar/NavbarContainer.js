@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import { connect } from "react-redux";
 import { logoutUser, checkAuthenticateStatus } from "../../actions/AuthActions";
 import { fetchFollows } from "../../actions/FollowActions";
+import { fetchUserSavedPosts } from "../../actions/UserActions";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -15,7 +16,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     logoutUser: () => dispatch(logoutUser()),
     checkAuthenticateStatus: () => dispatch(checkAuthenticateStatus()),
-    fetchFollows: (userId) => dispatch(fetchFollows(userId))
+    fetchFollows: (userId) => dispatch(fetchFollows(userId)),
+    fetchUserSavedPosts: (userId) => dispatch(fetchUserSavedPosts(userId)),
   };
 };
 

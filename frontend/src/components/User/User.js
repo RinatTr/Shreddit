@@ -49,7 +49,6 @@ export default class User extends Component {
           isLoggedUserPage: true
         })
       }
-      await this.props.fetchUserSavedPosts(this.props.loggedUser.userData.id)
     }
     this.validateSubscription()
   }

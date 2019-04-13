@@ -16,10 +16,11 @@ class Navbar extends Component {
   }
   /* code spotlight moment... */
   componentDidUpdate(prevProps) {
-    let { loggedInUser, fetchFollows } = this.props;
+    let { loggedInUser, fetchFollows, fetchUserSavedPosts } = this.props;
     if (loggedInUser) {
       if (!prevProps.loggedInUser || loggedInUser.username !== prevProps.loggedInUser.username) {
         fetchFollows(loggedInUser.userData.id)
+        fetchUserSavedPosts(loggedInUser.userData.id)
       }
     }
     //update top menu option
