@@ -8,7 +8,8 @@ const mapStateToProps = (state, ownProps) => {
     posts: state.posts.posts,
     comments: state.posts.comments,
     count: state.posts.comment_count,
-    saved_posts: state.user_content.saved_posts
+    saved_posts: state.user_content.saved_posts,
+    loggedUser: state.auth.loggedUser
   };
 };
 

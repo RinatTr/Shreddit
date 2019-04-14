@@ -39,7 +39,12 @@ export default class Posts extends Component {
   }
 
   handleSave = (e) => {
-    debugger
+    let { loggedUser } = this.props;
+    if (e.target.className === "save-container") {
+      axios.post(`/api/users/${loggedUser.userData.id}/save`, {postId : e.target.id})
+    } else {
+      axios.delete(`/api/users/${loggedUser.userData.id}/save`, {postId : e.target.id})
+    }
   }
 
   async handleExpand(e) {
@@ -71,7 +76,7 @@ export default class Posts extends Component {
     let { posts, comments, count, match, saved_posts } = this.props;
     let mapPosts;
     let currentPost;
-
+    console.log(this.props);
     if (Array.isArray(posts) && count && saved_posts) {
       //collapsed posts rendering
        mapPosts = posts.map((post) => {

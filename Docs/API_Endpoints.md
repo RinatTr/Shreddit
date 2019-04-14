@@ -45,6 +45,8 @@
   * Fetches all posts by user
 * `GET /api/users/:userId/posts/saved`
   * Fetches all saved posts by a user
+* `POST /api/users/:userId/save`
+  * Add saved post
 * `POST /api/posts/`
   * Add a new post
 * `GET /api/posts/:id`

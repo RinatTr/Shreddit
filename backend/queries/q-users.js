@@ -59,6 +59,19 @@ const getSavedPosts = (req, res, next) => {
     })
     .catch(err => next(err))
 }
+
+const addSavedPost = (req, res, next) => {
+  let userId = parseInt(req.params.userId)
+  console.log(req.body)
+  db.none(`INSERT INTO saved_posts(user_id, post_id) VALUES($1, $2)`,[userId, req.body.postId])
+    .then(data => {
+      res.status(200).json({
+        status:"success",
+        message: "saved a post for user_id "+userId
+      })
+    })
+    .catch(err => next(err))
+}
 const getCommentsPerUser = (req, res, next) => {
   let user_id = parseInt(req.params.userId)
   db.any(`SELECT comments.*, u1.username AS poster, u2.username AS commenter, posts.header AS post_header, posts.poster_id FROM comments
@@ -120,6 +133,7 @@ module.exports = {
   getOneUser,
   getPostsPerUser,
   getSavedPosts,
+  addSavedPost,
   getCommentsPerUser,
   createUser,
   logoutUser,
