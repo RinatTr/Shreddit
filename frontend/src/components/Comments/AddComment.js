@@ -66,9 +66,11 @@ export default class AddComment extends Component {
         </div>
       : <div className="comment-login">
           What are your thoughts? Login or Sign Up
-          <Link to="/auth/login"><button className="button-login">LOG IN</button></Link>
-          <Link to="/auth/signup"><button className="button-signup">SIGN UP</button></Link>
-        </div>
+          <span>
+            <Link to="/auth/login"><button className="button-login">LOG IN</button></Link>
+            <Link to="/auth/signup"><button className="button-signup">SIGN UP</button></Link>
+          </span>
+          </div>
           )
   }
 }
