@@ -175,3 +175,4 @@ BUT also all posts.
   // redux-fetch all saved posts per loggedin user
   // connect to posts
   // add css to user profile
+  //fix loggedout user saved posts bug 

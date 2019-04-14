@@ -72,11 +72,13 @@ export default class Posts extends Component {
   }
 
   isSaved = (postId) => {
-    return this.props.saved_posts.find(savedPost => savedPost.post_id === postId) ? true : false;
+    if (this.props.loggedUser) {
+      return this.props.saved_posts.find(savedPost => savedPost.post_id === postId) ? true : false;
+    }
   }
 
   render() {
-    let { posts, comments, count, match, saved_posts } = this.props;
+    let { posts, comments, count, match, saved_posts, loggedUser } = this.props;
     let mapPosts;
     let currentPost;
     console.log(this.props);
@@ -97,7 +99,7 @@ export default class Posts extends Component {
                   handleVote={this.handleVote}
                   handleExpand={this.handleExpand}
                   handleSave={this.handleSave}
-                  isSaved={this.isSaved(post.id)}
+                  isSaved={loggedUser ? this.isSaved(post.id) : false}
                 />
       })
       currentPost = match.params.id ? posts.find(post => post.id === + match.params.id) : null;

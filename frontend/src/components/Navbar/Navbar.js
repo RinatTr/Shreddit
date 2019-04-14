@@ -20,7 +20,6 @@ class Navbar extends Component {
     if (loggedInUser) {
       if (!prevProps.loggedInUser || loggedInUser.username !== prevProps.loggedInUser.username) {
         fetchFollows(loggedInUser.userData.id)
-        fetchUserSavedPosts(loggedInUser.userData.id)
       }
     }
     //update top menu option
