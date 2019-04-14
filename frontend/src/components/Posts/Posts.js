@@ -106,6 +106,7 @@ export default class Posts extends Component {
               groupImgUrl={currentPost.img_url}
               handleVote={this.handleVote}
               handleExpand={this.handleExpand}
+              isSaved={this.isSaved(currentPost.id)}
               comments={comments}
               commentCount={this.countPerPost(currentPost.id, count)}
             />

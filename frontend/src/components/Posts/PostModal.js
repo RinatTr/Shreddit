@@ -5,6 +5,7 @@ import downvote from '../../icons/down_arrow.png'
 import comment from '../../icons/comment.png'
 import hide from '../../icons/hide.png'
 import save from '../../icons/save.png'
+import saved from '../../icons/saved.png'
 import Comment from '../Comments/CommentDisplay'
 import AddCommentContainer from '../Comments/AddCommentContainer'
 
@@ -19,6 +20,7 @@ const PostModal = ({  id,
                       groupImgUrl,
                       handleVote,
                       handleExpand,
+                      isSaved,
                       comments }) => {
 
     let mapComments = comments.map(comment => {
@@ -66,8 +68,7 @@ const PostModal = ({  id,
             <div className="post-buttons">
               <img alt="comment" src={comment} />
               {commentCount} Comments
-              <img alt="save" src={save} />
-              Save
+              {isSaved ? <><img alt="save" src={saved} /><span className="saved-container">Saved</span></> : <><img alt="save" src={save} /><span className="save-container">Save</span></>}
               <img alt="hide" src={hide} />
               Hide
             </div>
