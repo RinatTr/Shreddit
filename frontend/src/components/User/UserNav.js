@@ -1,13 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-const UserNav = ({loggedUser}) => {
-  return(
-    <>
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+
+//plan :
+// 1. display only for loggedUser page
+// 2. fix css - if isLoggedUserPage - have a different class name with no margin.
+class UserNav extends Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    let { loggedUser } = this.props;
+    return(
+      <>
       <div className="user-nav">
-        <Link to={`/user/${loggedUser.username}/saved`}>saved</Link>
-        <Link to={`/user/${loggedUser.username}`}>all</Link>
+        <span><Link to={`/user/${loggedUser.username}`}>ALL</Link></span>
+        <span><Link to={`/user/${loggedUser.username}/saved`}>SAVED</Link></span>
       </div>
-    </>
+      </>
   )
+  }
 }
-export default UserNav;
+export default withRouter(UserNav);

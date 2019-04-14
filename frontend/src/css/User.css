@@ -6,6 +6,10 @@
   display: flex;
 }
 
+.logged-user-page {
+  margin-top: 90px;
+}
+
 .user-posts-container {
   margin-top: 8px;
 }
@@ -64,4 +68,45 @@ img#avatar {
   height: 86px;
   width: 86px;
   border-radius: 4px;
+}
+/* UserNav */
+.user-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  background: whitesmoke;
+  height: 40px;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  position: fixed;
+  z-index: 5;
+}
+
+.user-nav span {
+  margin-left: 12px;
+}
+
+
+
+/* a#username {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #0097FF;
+} */
+
+.user-nav a:visited {
+  color: #393939;
+  text-decoration: none;
+}
+
+/* a#username:visited {
+   color: #0097FF;
+} */
+
+button {
+  height: 30px;
 }
