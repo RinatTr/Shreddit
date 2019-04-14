@@ -68,6 +68,10 @@ export default class User extends Component {
     }
   }
 
+  isSaved = (postId) => {
+    return this.props.saved_posts.find(savedPost => savedPost.post_id === postId) ? true : false;
+  }
+
   //handle user input
   async handleFollow() {
     if (!this.props.loggedUser) {
@@ -92,7 +96,7 @@ export default class User extends Component {
   }
 
   render() {
-    let { posts, count, match, user } = this.props;
+    let { posts, count, match, user, saved_posts } = this.props;
     let mapPosts;
     let currentPost;
     if (Array.isArray(posts) && count) {
@@ -110,6 +114,7 @@ export default class User extends Component {
                   groupImgUrl={post.img_url}
                   handleVote={this.handleVote}
                   handleExpand={this.handleExpand}
+                  isSaved={this.isSaved(post.id)}
                 /></Link>
       })
       currentPost = match.params.id ? posts.find(post => post.id === + match.params.id) : null;

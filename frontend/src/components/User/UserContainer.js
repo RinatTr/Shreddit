@@ -10,7 +10,8 @@ const mapStateToProps = (state, ownProps) => {
     count: state.posts.comment_count,
     user: state.user_content.user,
     loggedUser: state.auth.loggedUser,
-    follows: state.follows.follows
+    follows: state.follows.follows,
+    saved_posts: state.user_content.saved_posts
   }
 }
 
