@@ -45,7 +45,7 @@ const getPostsPerUser = (req, res, next) => {
 
 const getSavedPosts = (req, res, next) => {
   let userId = parseInt(req.params.userId)
-  db.any(`SELECT users.username AS posted_by, saved_posts.id, posts.id AS post_id, posts.poster_id, posts.subshreddit_id, subshreddits.groupname, posts.created_at, posts.votes, posts.poster_id FROM posts
+  db.any(`SELECT users.username AS posted_by, saved_posts.id, posts.id AS post_id, posts.poster_id, posts.subshreddit_id, subshreddits.groupname, posts.created_at, posts.votes, posts.poster_id, posts.header FROM posts
           JOIN saved_posts ON posts.id = saved_posts.post_id
           JOIN users ON posts.poster_id = users.id
           JOIN subshreddits ON posts.subshreddit_id = subshreddits.id
