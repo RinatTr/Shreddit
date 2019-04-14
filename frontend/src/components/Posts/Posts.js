@@ -82,7 +82,7 @@ export default class Posts extends Component {
     let mapPosts;
     let currentPost;
     console.log(this.props);
-    if (Array.isArray(posts) && count && saved_posts) {
+    if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined)) ) {
       //collapsed posts rendering
        mapPosts = posts.map((post) => {
         return <Post
