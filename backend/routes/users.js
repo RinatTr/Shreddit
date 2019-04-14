@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllUsers, getOneUser, getPostsPerUser, getSavedPosts,addSavedPost, getCommentsPerUser } = require('../queries/q-users.js');
+const { getAllUsers, getOneUser, getPostsPerUser, getSavedPosts, addSavedPost, deleteSavedPost, getCommentsPerUser } = require('../queries/q-users.js');
 const db = require("../queries/q-users.js");
 const passport = require("../auth/local.js");
 const { loginRequired } = require("../auth/helpers");
@@ -17,6 +17,7 @@ router.get('/:username', getOneUser)
 router.get('/:userId/posts', getPostsPerUser)
 router.get('/:userId/posts/saved', loginRequired, getSavedPosts)
 router.post('/:userId/save', loginRequired, addSavedPost)
+router.delete('/:userId/save', loginRequired, deleteSavedPost)
 router.get('/:userId/comments', getCommentsPerUser)
 
 //add loginRequired to each protected route

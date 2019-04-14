@@ -21,8 +21,6 @@ const Post = ({ id,
                 handleVote,
                 handleExpand,
                 handleSave }) => {
-
-                  console.log("wooooo====>",isSaved)
     return (
       <React.Fragment>
       <div className="post-collapsed" id={id} onClick={handleExpand}>

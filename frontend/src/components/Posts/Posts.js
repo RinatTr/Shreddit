@@ -43,7 +43,7 @@ export default class Posts extends Component {
     if (e.target.className === "save-container") {
       axios.post(`/api/users/${loggedUser.userData.id}/save`, {postId : e.target.id})
     } else {
-      axios.delete(`/api/users/${loggedUser.userData.id}/save`, {postId : e.target.id})
+      axios.delete(`/api/users/${loggedUser.userData.id}/save`, { data: {postId : e.target.id} }) //delete requests use config.data to add req.body
     }
   }
 

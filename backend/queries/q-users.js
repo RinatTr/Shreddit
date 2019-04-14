@@ -72,6 +72,17 @@ const addSavedPost = (req, res, next) => {
     })
     .catch(err => next(err))
 }
+const deleteSavedPost = (req, res, next) => {
+  let userId = parseInt(req.params.userId)
+  db.none(`DELETE FROM saved_posts WHERE user_id=$1 AND post_id=$2`,[userId, req.body.postId])
+    .then(data => {
+      res.status(200).json({
+        status:"success",
+        message: "deleted a save for a post for user_id "+userId
+      })
+    })
+    .catch(err => next(err))
+}
 const getCommentsPerUser = (req, res, next) => {
   let user_id = parseInt(req.params.userId)
   db.any(`SELECT comments.*, u1.username AS poster, u2.username AS commenter, posts.header AS post_header, posts.poster_id FROM comments
@@ -134,6 +145,7 @@ module.exports = {
   getPostsPerUser,
   getSavedPosts,
   addSavedPost,
+  deleteSavedPost,
   getCommentsPerUser,
   createUser,
   logoutUser,
