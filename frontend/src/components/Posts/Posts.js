@@ -81,7 +81,6 @@ export default class Posts extends Component {
     let { posts, comments, count, match, saved_posts, loggedUser } = this.props;
     let mapPosts;
     let currentPost;
-    console.log(this.props);
     if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined)) ) {
       //collapsed posts rendering
        mapPosts = posts.map((post) => {
@@ -121,6 +120,7 @@ export default class Posts extends Component {
               groupImgUrl={currentPost.img_url}
               handleVote={this.handleVote}
               handleExpand={this.handleExpand}
+              handleSave={this.handleSave}
               isSaved={this.isSaved(currentPost.id)}
               comments={comments}
               commentCount={this.countPerPost(currentPost.id, count)}

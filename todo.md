@@ -163,16 +163,10 @@ BUT also all posts.
   // 3. handle Login / Signup errors . V
   // 4. Css - buttons, navbar, addcomment . V
   // 5. handle vote clicks from user profile.
-  // 6. save posts (like subscribe)
+  // 6. save posts (like subscribe) V
   // if there's time:
   // 7.   create post, subshreddit.
-  // 8.   fix votes bug from users.
+  // 8.   fix votes/saved bug from users.
   // 9.   user page: nav bar + comments, saved posts.
   // 10.   fix post Modal in users.
   // 11. search functionality
-
-  //saved posts:
-  // redux-fetch all saved posts per loggedin user
-  // connect to posts
-  // add css to user profile
-  //fix loggedout user saved posts bug 

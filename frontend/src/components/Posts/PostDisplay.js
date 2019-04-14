@@ -48,8 +48,8 @@ const Post = ({ id,
               <img alt="comment" src={comment} />
               {commentCount} Comments
               {isSaved ? <><span className="saved-container" id={id} onClick={handleSave}><img alt="save" src={saved} id={id} onClick={handleSave}/>Saved</span></> : <><span className="save-container" id={id} onClick={handleSave}><img alt="save" src={save} />Save</span></>}
-              <img alt="hide" src={hide} />
-              Hide
+              {/*<img alt="hide" src={hide} />
+            Hide*/}
             </div>
         </div>
       </div>

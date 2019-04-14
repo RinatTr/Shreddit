@@ -96,10 +96,10 @@ export default class User extends Component {
   }
 
   render() {
-    let { posts, count, match, user, saved_posts } = this.props;
+    let { posts, count, match, user, loggedUser, saved_posts } = this.props;
     let mapPosts;
     let currentPost;
-    if (Array.isArray(posts) && count) {
+    if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {
        mapPosts = posts.map((post) => {
         return <Link key={post.id} to={`/post/${post.id}`}><Post
                   key={post.id}
@@ -114,7 +114,7 @@ export default class User extends Component {
                   groupImgUrl={post.img_url}
                   handleVote={this.handleVote}
                   handleExpand={this.handleExpand}
-                  isSaved={this.isSaved(post.id)}
+                  isSaved={loggedUser ? this.isSaved(post.id) : false}
                 /></Link>
       })
       currentPost = match.params.id ? posts.find(post => post.id === + match.params.id) : null;
