@@ -4,6 +4,7 @@ import downvote from '../../icons/down_arrow.png'
 import comment from '../../icons/comment.png'
 import hide from '../../icons/hide.png'
 import save from '../../icons/save.png'
+import saved from '../../icons/saved.png'
 import TimeAgo from "react-timeago";
 import { Link } from 'react-router-dom';
 
@@ -47,8 +48,7 @@ const Post = ({ id,
             <div className="post-buttons">
               <img alt="comment" src={comment} />
               {commentCount} Comments
-              <img alt="save" src={save} />
-              Save {isSaved ? "yes" : "no"}
+              {isSaved ? <><img alt="save" src={saved} /><span className="saved-container">Saved</span></> : <><img alt="save" src={save} /><span className="save-container">Save</span></>}
               <img alt="hide" src={hide} />
               Hide
             </div>

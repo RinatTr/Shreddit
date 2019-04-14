@@ -193,6 +193,9 @@
   text-decoration: underline;
 }
 
+.saved-container {
+  color: #0079d3;
+}
 p {
   margin-block-start: 0.5em;
   margin-block-end: 0.5em;
