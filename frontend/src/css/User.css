@@ -8,6 +8,7 @@
 
 .logged-user-page {
   margin-top: 80px;
+  display: flex;
 }
 
 .user-posts-container {

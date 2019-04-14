@@ -115,7 +115,7 @@ export default class User extends Component {
                   timestamp={post.created_at}
                   header={post.header}
                   body={post.body}
-                  username={this.props.match.params.username}
+                  username={isSavedPath ? post.posted_by : this.props.match.params.username}
                   groupname={post.groupname}
                   groupImgUrl={post.img_url}
                   handleVote={this.handleVote}
