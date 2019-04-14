@@ -7,7 +7,7 @@
 }
 
 .logged-user-page {
-  margin-top: 90px;
+  margin-top: 80px;
 }
 
 .user-posts-container {
@@ -54,7 +54,6 @@
 
 .avatar-wrapper {
   margin-top: -60px;
-  /* margin-left: 10px; */
   height: 92px;
   width: 92px;
   background-color: white;
@@ -76,36 +75,36 @@ img#avatar {
   align-items: center;
   justify-content: flex-start;
   background: whitesmoke;
-  height: 40px;
+  height: 30px;
   width: 100%;
   font-family: 'Open Sans', sans-serif;
   font-size: 15px;
-  font-weight: bold;
+  /* font-weight: bold; */
   position: fixed;
   z-index: 5;
 }
 
 .user-nav span {
-  margin-left: 12px;
+  width: 90px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0px 8px 0px 0px;
 }
 
+.user-nav span:hover {
+  background: #bde6fb;
+}
 
-
-/* a#username {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: #0097FF;
-} */
+.selected {
+  background: #ffe9af;
+}
 
 .user-nav a:visited {
   color: #393939;
   text-decoration: none;
 }
-
-/* a#username:visited {
-   color: #0097FF;
-} */
 
 button {
   height: 30px;

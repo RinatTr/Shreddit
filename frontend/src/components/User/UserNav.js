@@ -4,17 +4,20 @@ import { Link, withRouter } from 'react-router-dom';
 //plan :
 // 1. display only for loggedUser page
 // 2. fix css - if isLoggedUserPage - have a different class name with no margin.
+// 3. selected span.
 class UserNav extends Component {
   constructor(props) {
     super(props)
   }
   render() {
-    let { loggedUser } = this.props;
+    let { loggedUser, location } = this.props;
+    let isSavedPath = location.pathname.slice(-5) === "saved"
+    console.log(this.props, isSavedPath);
     return(
       <>
       <div className="user-nav">
-        <span><Link to={`/user/${loggedUser.username}`}>ALL</Link></span>
-        <span><Link to={`/user/${loggedUser.username}/saved`}>SAVED</Link></span>
+        <span className={!isSavedPath ? "selected" : null}><Link to={`/user/${loggedUser.username}`}>POSTED</Link></span>
+        <span className={isSavedPath ? "selected" : null}><Link to={`/user/${loggedUser.username}/saved`}>SAVED</Link></span>
       </div>
       </>
   )
