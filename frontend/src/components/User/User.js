@@ -59,15 +59,10 @@ export default class User extends Component {
     await this.props.fetchUserPosts(this.props.user.id)
     await this.props.fetchCommentCount()
     if (this.props.loggedUser) {
-      if (this.props.loggedUser.username === this.props.user.username) {
+      let boolean = this.props.loggedUser.username === this.props.user.username
         this.setState({
-          isLoggedUserPage: true
+          isLoggedUserPage: boolean
         })
-      } else {
-        this.setState({
-          isLoggedUserPage: false
-        })
-      }
     }
   }
 }
