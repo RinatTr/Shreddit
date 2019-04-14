@@ -132,6 +132,7 @@ export default class User extends Component {
                     handleFollow={this.handleFollow}
                     handleUnfollow={this.handleUnfollow}
                     isSubscribed={this.state.isSubscribed}
+                    isLoggedUserPage={isLoggedUserPage}
                     cakeDay={user.created_at}
                   /> : null}
         </div>

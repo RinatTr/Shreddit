@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const UserInfo = ({username, avatar, cakeDay, handleFollow, handleUnfollow, isSubscribed}) => {
+const UserInfo = ({username, avatar, cakeDay, handleFollow, handleUnfollow, isSubscribed, isLoggedUserPage}) => {
   let date = new Date(cakeDay)
   return (
     <div className="user-info-container">
@@ -14,9 +14,9 @@ const UserInfo = ({username, avatar, cakeDay, handleFollow, handleUnfollow, isSu
           <span><Link to={`/user/${username}`}>/u/{username}</Link></span>
           <span>Cake Day:</span>
           <span>{date.toDateString()}</span>
-          {isSubscribed
+          {!isLoggedUserPage ? (isSubscribed
             ? <button className="follow" onClick={handleUnfollow}>UNSUBSCRIBE</button>
-            : <button className="follow" onClick={handleFollow}>FOLLOW</button>}
+            : <button className="follow" onClick={handleFollow}>FOLLOW</button>) : null}
         </div>
       </div>
     </div>
