@@ -38,8 +38,12 @@ export default class Posts extends Component {
     }
   }
 
+  handleSave = (e) => {
+    debugger
+  }
+
   async handleExpand(e) {
-    let dontToggle = ["upvote","downvote","close","username"]
+    let dontToggle = ["upvote","downvote","close","username","saved-container","save-container"]
     if (!dontToggle.includes(e.target.className) && e.target.innerText !== "CLOSE") {
       let postId = e.currentTarget.id;
       this.props.fetchCommentsPerPost(postId).then(() => {
@@ -84,6 +88,7 @@ export default class Posts extends Component {
                   groupImgUrl={post.img_url}
                   handleVote={this.handleVote}
                   handleExpand={this.handleExpand}
+                  handleSave={this.handleSave}
                   isSaved={this.isSaved(post.id)}
                 />
       })

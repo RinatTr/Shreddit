@@ -19,7 +19,8 @@ const Post = ({ id,
                 groupname,
                 groupImgUrl,
                 handleVote,
-                handleExpand }) => {
+                handleExpand,
+                handleSave }) => {
 
                   console.log("wooooo====>",isSaved)
     return (
@@ -48,7 +49,7 @@ const Post = ({ id,
             <div className="post-buttons">
               <img alt="comment" src={comment} />
               {commentCount} Comments
-              {isSaved ? <><img alt="save" src={saved} /><span className="saved-container">Saved</span></> : <><img alt="save" src={save} /><span className="save-container">Save</span></>}
+              {isSaved ? <><span className="saved-container" id={id} onClick={handleSave}><img alt="save" src={saved} id={id} onClick={handleSave}/>Saved</span></> : <><span className="save-container"><img alt="save" src={save} />Save</span></>}
               <img alt="hide" src={hide} />
               Hide
             </div>
