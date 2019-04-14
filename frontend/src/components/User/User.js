@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Post from '../Posts/PostDisplay';
 import UserInfo from './UserDisplay';
+import UserNav from './UserNav';
 import { addFollow, deleteFollow } from '../../util/util';
 import '../../css/User.css';
 
@@ -97,6 +98,7 @@ export default class User extends Component {
 
   render() {
     let { posts, count, match, user, loggedUser, saved_posts } = this.props;
+    let { isLoggedUserPage} = this.state;
     let mapPosts;
     let currentPost;
     if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {
@@ -121,6 +123,7 @@ export default class User extends Component {
     }
     return (
       <React.Fragment>
+        {/*isLoggedUserPage ? <UserNav loggedUser={loggedUser}/> : null*/}
         <div className="user-page">
           {mapPosts ? <div className="user-posts-container">{mapPosts}</div> : ""}
           {user ? <UserInfo
@@ -136,19 +139,6 @@ export default class User extends Component {
     )
   }
 }
-
-//new axios calls / routes:
-// get all posts per currently viewed user
-// get all comments per user
-// get all saved posts per user
-
-// * `GET /api/users/:userId/posts/`
-//   * Fetches all posts by user
-// * `GET /api/users/:userId/posts/saved`
-//   * Fetches all saved posts by a user
-// * `GET /api/users/:userId/comments`
-//    * Fetches all comments by user
-
 
 //display posts in same way as posts.js :
 //  import PostDisplay, and map user_posts. when mapping <Link> each post to its id.
