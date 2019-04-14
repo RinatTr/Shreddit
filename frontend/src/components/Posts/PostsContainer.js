@@ -1,6 +1,7 @@
 import Posts from "./Posts";
 import { connect } from "react-redux";
 import { fetchPosts } from "../../actions/PostActions";
+import { fetchUserSavedPosts } from "../../actions/UserActions";
 import { fetchCommentsPerPost, fetchCommentCount } from "../../actions/CommentActions";
 
 const mapStateToProps = (state, ownProps) => {
@@ -15,6 +16,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    fetchUserSavedPosts: (id) => dispatch(fetchUserSavedPosts(id)),
     fetchPosts: () => dispatch(fetchPosts()),
     fetchCommentsPerPost: (id) => dispatch(fetchCommentsPerPost(id)),
     fetchCommentCount: () => dispatch(fetchCommentCount())
