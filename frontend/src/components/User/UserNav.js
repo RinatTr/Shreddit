@@ -12,7 +12,6 @@ class UserNav extends Component {
   render() {
     let { loggedUser, location } = this.props;
     let isSavedPath = location.pathname.slice(-5) === "saved"
-    console.log(this.props, isSavedPath);
     return(
       <>
       <div className="user-nav">

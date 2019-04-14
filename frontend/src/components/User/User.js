@@ -97,16 +97,20 @@ export default class User extends Component {
   }
 
   render() {
-    let { posts, count, match, user, loggedUser, saved_posts } = this.props;
+    let { posts, count, match, user, loggedUser, saved_posts, location } = this.props;
     let { isLoggedUserPage} = this.state;
     let mapPosts;
     let currentPost;
+    console.log(saved_posts);
+    //saved feature for loggedUser page only
+    let isSavedPath = location.pathname.slice(-5) === "saved";
+
     if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {
-       mapPosts = posts.map((post) => {
-        return <Link key={post.id} to={`/post/${post.id}`}><Post
-                  key={post.id}
-                  id={post.id}
-                  commentCount={this.countPerPost(post.id, count)}
+       mapPosts = (saved_posts && isSavedPath ? saved_posts : posts).map((post) => {
+        return <Link key={isSavedPath ? post.post_id : post.id} to={`/post/${isSavedPath ? post.post_id : post.id}`}><Post
+                  key={isSavedPath ? post.post_id : post.id}
+                  id={isSavedPath ? post.post_id : post.id}
+                  commentCount={this.countPerPost(isSavedPath ? post.post_id : post.id, count)}
                   votes={post.votes}
                   timestamp={post.created_at}
                   header={post.header}
@@ -116,7 +120,7 @@ export default class User extends Component {
                   groupImgUrl={post.img_url}
                   handleVote={this.handleVote}
                   handleExpand={this.handleExpand}
-                  isSaved={loggedUser ? this.isSaved(post.id) : false}
+                  isSaved={loggedUser ? this.isSaved(isSavedPath ? post.post_id : post.id) : false}
                 /></Link>
       })
       currentPost = match.params.id ? posts.find(post => post.id === + match.params.id) : null;
