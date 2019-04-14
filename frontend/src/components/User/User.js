@@ -46,7 +46,6 @@ export default class User extends Component {
     if (this.props.loggedUser) {
       if (this.props.loggedUser.username === this.props.user.username) {
         this.setState({
-          //"false" will remain default since logout refreshes the page.
           isLoggedUserPage: true
         })
       }
@@ -59,6 +58,17 @@ export default class User extends Component {
     await this.props.fetchUser(this.props.match.params.username)
     await this.props.fetchUserPosts(this.props.user.id)
     await this.props.fetchCommentCount()
+    if (this.props.loggedUser) {
+      if (this.props.loggedUser.username === this.props.user.username) {
+        this.setState({
+          isLoggedUserPage: true
+        })
+      } else {
+        this.setState({
+          isLoggedUserPage: false
+        })
+      }
+    }
   }
 }
   //handle data
@@ -98,10 +108,9 @@ export default class User extends Component {
 
   render() {
     let { posts, count, match, user, loggedUser, saved_posts, location } = this.props;
-    let { isLoggedUserPage} = this.state;
+    let { isLoggedUserPage } = this.state;
     let mapPosts;
     let currentPost;
-    console.log(saved_posts);
     //saved feature for loggedUser page only
     let isSavedPath = location.pathname.slice(-5) === "saved";
 
