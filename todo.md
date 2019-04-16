@@ -164,7 +164,7 @@ BUT also all posts.
   // 5. handle vote clicks from user profile.
   // 6. save posts (like subscribe) V
   // if there's time:
-  // 7.   create post, subshreddit.
+  // 7.   create postV (todo - add HTMLparser to posts, redirect to posted posts, fix css, add subscribed communities select menu), subshreddit.
   // 8.   fix votes/saved bug from users.
   // 9.   user page: nav bar + comments, saved posts.
   // 10.   fix post Modal in users.
