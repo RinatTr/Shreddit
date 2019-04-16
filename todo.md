@@ -156,7 +156,6 @@ BUT also all posts.
  - adds/deletes a row in votes table
  - adds/subtracts a vote in posts/columns table's votes column
 
-
   // last tasks:
   // 1. show and link follows at Navbar. V
   // 2. css Login / Signup page. V

@@ -4,6 +4,7 @@ export const getPosts = () => axios.get("/api/posts")
 export const getCommentsPerPost = (id) => axios.get(`/api/posts/${id}/comments`)
 export const getCommentCount = () => axios.get("/api/comments/counts")
 export const postComment = (comment, id) => axios.post(`/api/posts/${id}/comments`, comment)
+export const createPost = (post) => axios.post(`/api/posts/add`, post)
 
 //User
 export const getUser = (username) => axios.get(`/api/users/${username}`)

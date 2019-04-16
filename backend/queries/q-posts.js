@@ -43,6 +43,17 @@ const addComment = (req, res, next) => {
     .catch(err => next(err))
 }
 
+const addPost = (req, res, next) => {
+  db.none("INSERT INTO posts(poster_id, subshreddit_id, votes, header, body) VALUES(${poster_id}, ${subshreddit_id}, ${votes}, ${header}, ${body})", req.body)
+    .then(() => {
+      res.status(200).json({
+        status: "success",
+        message: "added a post"
+      })
+    })
+    .catch(err => next(err))
+}
+
 const updateVote = (req, res, next) => {
   let post_id = parseInt(req.params.id)
   let type = (req.body.type === "upvote") ? "+" : "-";
@@ -62,6 +73,7 @@ const updateVote = (req, res, next) => {
 module.exports = {
   getAllPosts,
   addComment,
+  addPost,
   getAllCommentsPerPost,
   updateVote
 };

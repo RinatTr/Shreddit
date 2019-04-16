@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import './css/App.css';
 
 import PostsContainer from './components/Posts/PostsContainer'
+import CreatePostContainer from "./components/Posts/CreatePost/CreatePostContainer";
 import UserContainer from './components/User/UserContainer'
 import AuthContainer from './components/Auth/AuthContainer'
 import NavbarContainer from './components/Navbar/NavbarContainer'
@@ -17,6 +18,7 @@ class App extends Component {
           <Route path="/popular" component={PostsContainer} />
           <Route path="/user/:username" component={UserContainer} />
           <Route path="/post/:id" component={PostsContainer} />
+          <Route path="/submit" component={CreatePostContainer} />
           <Route path="/auth/login" component={AuthContainer} />
           <Route path="/auth/signup" component={AuthContainer} />
         </Switch>
