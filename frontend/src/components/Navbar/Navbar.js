@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import icon from '../../icons/iconfinder_Faint_2695614.png'
 import all from '../../icons/iconfinder_ic_clear_all_48px_352269.png'
 import popular from '../../icons/iconfinder_ic_trending_up_48px_352184.png'
+import createPost from '../../icons/createPostTeal.png'
 import '../../css/Navbar.css';
 
 class Navbar extends Component {
@@ -84,7 +85,7 @@ class Navbar extends Component {
         <Link to="/popular"><img alt="all" src={popular}/></Link>
         <Link to="/all"><img alt="all" src={all}/></Link>
         {currentUser
-          ? <><Link to={`/user/${currentUser}`} id="username">{currentUser}</Link><button onClick={this.handleLogout}>LOG OUT</button></>
+          ? <><Link to="/submit"><img alt="createPost" src={createPost}/></Link><Link to={`/user/${currentUser}`} id="username">{currentUser}</Link><button onClick={this.handleLogout}>LOG OUT</button></>
         : <><Link to="/auth/login"><button className="button-login">LOG IN</button></Link>
               <Link to="/auth/signup"><button>SIGN UP</button></Link>
               </>}
