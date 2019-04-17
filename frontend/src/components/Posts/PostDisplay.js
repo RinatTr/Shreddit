@@ -7,6 +7,7 @@ import save from '../../icons/save.png'
 import saved from '../../icons/saved.png'
 import TimeAgo from "react-timeago";
 import { Link } from 'react-router-dom';
+import ReactHtmlParser from 'react-html-parser';
 
 const Post = ({ id,
                 votes,
@@ -43,7 +44,7 @@ const Post = ({ id,
               </span>
             </p>
             <h3>{header}</h3>
-            {body ? <p>{body.slice(0,100)+"..."}</p> : null}
+            {body ? <p>{ReactHtmlParser(body.slice(0,100)+"...")}</p> : null}
             <div className="post-buttons">
               <img alt="comment" src={comment} />
               {commentCount} Comments

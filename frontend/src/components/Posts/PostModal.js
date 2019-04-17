@@ -8,6 +8,7 @@ import save from '../../icons/save.png'
 import saved from '../../icons/saved.png'
 import Comment from '../Comments/CommentDisplay'
 import AddCommentContainer from '../Comments/AddCommentContainer'
+import ReactHtmlParser from 'react-html-parser';
 
 const PostModal = ({  id,
                       votes,
@@ -64,7 +65,7 @@ const PostModal = ({  id,
                 </span>
                </p>
               <h3>{header}</h3>
-              <p>{body}</p>
+              <p>{ReactHtmlParser(body)}</p>
             </div>
             <div className="post-buttons">
               <img alt="comment" src={comment} />
