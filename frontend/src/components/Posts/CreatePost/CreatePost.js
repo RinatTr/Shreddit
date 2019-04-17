@@ -16,7 +16,7 @@ export default class CreatePost extends Component {
   //needs : GET communities loggedUser is subscribed to, POST a post.
   // loggedUser - need container.
   handleSelect = (e) => {
-
+    //for subscribed communities.
   }
 
   handleTitle = (e) => {
@@ -41,7 +41,9 @@ export default class CreatePost extends Component {
                               votes: 0,
                               header: title,
                               body})
-                          //redirect to user page / posted.
+                  .then(() => {
+                    this.props.history.push(`/user/${loggedUser.userData.username}`)
+                  })
                   .catch((err) => console.log(err))
     }
   }
