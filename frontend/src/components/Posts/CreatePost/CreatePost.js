@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ReactQuill from "react-quill";
-import { createPost } from '../../../util/util.js';
+import { createPost, getAllSubshredditsPerUser } from '../../../util/util.js';
 
 export default class CreatePost extends Component {
   constructor(props) {
@@ -11,6 +11,11 @@ export default class CreatePost extends Component {
       title: "",
       communityId: 24
     }
+  }
+
+  componentDidMount() {
+    let { loggedUser} = this.props;
+    loggedUser ? getAllSubshredditsPerUser(loggedUser.userData.id) : null
   }
 
   //needs : GET communities loggedUser is subscribed to, POST a post.
@@ -67,6 +72,8 @@ export default class CreatePost extends Component {
       <h1>push</h1>
         <span>Create a Post as <div className="comment-username">{loggedUser.userData.username}</div></span>
         <form onSubmit={this.handleSubmit}>
+            <select name="communityId" onChange={this.handleSelect}>
+            </select>
             <input name="title" placeholder="Title" value={title} onChange={this.handleTitle}/>
             <ReactQuill
               className="new-post"

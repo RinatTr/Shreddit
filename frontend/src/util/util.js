@@ -11,6 +11,7 @@ export const getUser = (username) => axios.get(`/api/users/${username}`)
 export const getUserPosts = (id) => axios.get(`/api/users/${id}/posts/`)
 export const getSavedPosts = (id) => axios.get(`/api/users/${id}/posts/saved`)
 export const getUserComments = (id) => axios.get(`/api/users/${id}/comments`)
+export const getAllSubshredditsPerUser = (id) => axios.get(`/api/subshreddits/${id}`)
 
 //Follows
 export const getFollows = (userId) => axios.get(`/api/follows/${userId}`)
