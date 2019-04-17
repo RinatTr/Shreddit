@@ -25,11 +25,12 @@ export default class CreatePost extends Component {
           })
     }
   }
-
   //needs : GET communities loggedUser is subscribed to, POST a post.
   // loggedUser - need container.
   handleSelect = (e) => {
-    //for subscribed communities.
+    this.setState({
+      communityId: e.target.value
+    })
   }
 
   handleTitle = (e) => {
