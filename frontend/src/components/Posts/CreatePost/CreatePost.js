@@ -9,13 +9,21 @@ export default class CreatePost extends Component {
     this.state = {
       body: "",
       title: "",
-      communityId: 24
+      communityId: 24,
+      subshreddits: []
     }
   }
 
-  componentDidMount() {
-    let { loggedUser} = this.props;
-    loggedUser ? getAllSubshredditsPerUser(loggedUser.userData.id) : null
+  componentDidUpdate(prevProps) {
+    let { loggedUser } = this.props;
+    if (loggedUser !== prevProps.loggedUser) {
+      getAllSubshredditsPerUser(loggedUser.userData.id)
+          .then((res) => {
+            this.setState({
+              subshreddits: res.data.subshreddits
+            })
+          })
+    }
   }
 
   //needs : GET communities loggedUser is subscribed to, POST a post.
@@ -65,14 +73,19 @@ export default class CreatePost extends Component {
 
   render() {
     let { loggedUser } = this.props;
-    let { body, title } = this.state;
+    let { body, title, communityId, subshreddits } = this.state;
+    let mapGroups = subshreddits
+      ? subshreddits.map((el,i) => <option key={i} value={el.subshreddit_id}>{el.groupname}</option>)
+      : null
     return (
       loggedUser
       ? <div className="comment-add">
       <h1>push</h1>
         <span>Create a Post as <div className="comment-username">{loggedUser.userData.username}</div></span>
         <form onSubmit={this.handleSubmit}>
-            <select name="communityId" onChange={this.handleSelect}>
+            <select name="communityId" defaultValue="1" onChange={this.handleSelect}>
+              <option disabled value="1">select subshreddit</option>
+              {mapGroups}
             </select>
             <input name="title" placeholder="Title" value={title} onChange={this.handleTitle}/>
             <ReactQuill
