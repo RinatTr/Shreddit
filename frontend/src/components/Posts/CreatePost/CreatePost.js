@@ -9,7 +9,7 @@ export default class CreatePost extends Component {
     this.state = {
       body: "",
       title: "",
-      communityId: 24,
+      communityId: "",
       subshreddits: []
     }
   }
