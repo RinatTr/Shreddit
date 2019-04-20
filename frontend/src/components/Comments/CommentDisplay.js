@@ -25,8 +25,8 @@ const Comment = ({  commentId,
         <div className="comment-content">
           <div className="comment-text">
             <p className="info">
-              <span className="comment-username">
-                <Link className="comment-username" to={`/user/${commenter}`}>{commenter}</Link>
+              <span className="commenter-username">
+                <Link className="commenter-username" to={`/user/${commenter}`}>{commenter}</Link>
               </span>
               <span className="comment-points">
                 {votes} Points ·

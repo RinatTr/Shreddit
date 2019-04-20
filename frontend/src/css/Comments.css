@@ -40,6 +40,10 @@
   margin-left: 5px;
 }
 
+.comment-text .info {
+  display: flex;
+}
+
 .comment-text .info > * {
   margin-right: 5px;
 }
@@ -68,22 +72,22 @@
   margin-top: 10px;
 }
 
-.comment-add span, .post-add span {
+.comment-add span {
   display: flex;
   flex-direction: row;
 }
 
-.comment-username, .post-add {
+div .comment-username, .post-add {
   margin-left: 5px;
   font-weight: 400;
   color: #4cb8d2;
 }
 
-.comment-username a, .post-username {
+.comment-username a, .commenter-username a, .post-username {
   color: #4cb8d2;
 }
 
-.comment-username a:visited {
+.comment-username a:visited, .commenter-username a:visited {
   color: #ffd221;
 }
 
@@ -952,6 +956,7 @@
   box-sizing: border-box;
   font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   padding: 8px;
+  background: whitesmoke;
 }
 .ql-toolbar.ql-snow .ql-formats {
   margin-right: 15px;

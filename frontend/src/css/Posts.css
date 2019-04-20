@@ -197,6 +197,10 @@
   color: #0079d3;
 }
 
+.post-add-container {
+  margin-top: 70px;
+}
+
 p {
   margin-block-start: 0.5em;
   margin-block-end: 0.5em;

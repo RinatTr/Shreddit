@@ -80,14 +80,19 @@ export default class CreatePost extends Component {
       : null
     return (
       loggedUser
-      ? <div className="post-add">
-      <h1>push</h1>
-        <span>Create a Post</span>
-        <form onSubmit={this.handleSubmit}>
+      ? <div className="post-add-container">
+          <div className="post-add-header">
+              <h3>Create a Post</h3>
+          </div> 
+          <hr />
+          <div className="post-community">
             <select name="communityId" defaultValue="1" onChange={this.handleSelect}>
               <option disabled value="1">select subshreddit</option>
               {mapGroups}
             </select>
+          </div>
+          <div className="post-add">
+          <form onSubmit={this.handleSubmit}>
             <input name="title" placeholder="Title" value={title} onChange={this.handleTitle}/>
             <ReactQuill
               className="new-post"
@@ -97,8 +102,9 @@ export default class CreatePost extends Component {
               placeholder="Text (optional)"
               modules={ this.modules }
             />
-          { title ? <button>Post</button> : <button disabled>Post</button>}
-        </form>
+            { title ? <button>Post</button> : <button disabled>Post</button>}
+          </form>
+          </div>
         </div>
       : <div className="post-login">
           What are your thoughts? Login or Sign Up to Create Post
