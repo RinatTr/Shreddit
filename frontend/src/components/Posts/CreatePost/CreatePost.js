@@ -80,9 +80,9 @@ export default class CreatePost extends Component {
       : null
     return (
       loggedUser
-      ? <div className="comment-add">
+      ? <div className="post-add">
       <h1>push</h1>
-        <span>Create a Post as <div className="comment-username">{loggedUser.userData.username}</div></span>
+        <span>Create a Post</span>
         <form onSubmit={this.handleSubmit}>
             <select name="communityId" defaultValue="1" onChange={this.handleSelect}>
               <option disabled value="1">select subshreddit</option>
@@ -100,7 +100,7 @@ export default class CreatePost extends Component {
           { title ? <button>Post</button> : <button disabled>Post</button>}
         </form>
         </div>
-      : <div className="comment-login">
+      : <div className="post-login">
           What are your thoughts? Login or Sign Up to Create Post
           <span>
             <Link to="/auth/login"><button className="button-login">LOG IN</button></Link>

@@ -169,3 +169,5 @@ BUT also all posts.
   // 9.   user page: nav bar + comments, saved posts.
   // 10.   fix post Modal in users.
   // 11. search functionality
+  // 12. clean up console.
+  // 13. clean up code. 
