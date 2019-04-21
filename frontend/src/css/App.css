@@ -31,7 +31,11 @@ button:hover {
 
 button:focus {
   outline: 2px;
+}
 
+button:disabled {
+  background: #d1eaff;
+  cursor: not-allowed;
 }
 
 .button-login {
