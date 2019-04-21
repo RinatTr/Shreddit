@@ -60,6 +60,7 @@
   padding-right: 10px;
   padding-bottom: 20px;
   background: white;
+  text-align: left;
 }
 
 .comment-login span, .post-login span {
@@ -75,6 +76,7 @@
 .comment-add span {
   display: flex;
   flex-direction: row;
+  margin-bottom: 5px;
 }
 
 div .comment-username {
@@ -89,6 +91,10 @@ div .comment-username {
 
 .comment-username a:visited, .commenter-username a:visited {
   color: #ffd221;
+}
+
+.quill-new-comment {
+  margin-bottom: 15px;
 }
 
 /* QUILL PACKAGE */

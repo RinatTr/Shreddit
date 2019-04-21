@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,800');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800');
 
 .App {
   text-align: center;
@@ -50,7 +50,9 @@ select {
   background: white;
   font-size: 14px;
   font-family: 'Open sans', sans-serif;
-  color: rgb(0, 150, 290);
-  font-weight: 800;
   border: 1px solid #ccc;
+}
+
+input:hover {
+  border: 1px solid rgb(0, 150, 290);
 }

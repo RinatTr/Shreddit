@@ -207,16 +207,23 @@
   margin-bottom: 15px;
 }
 
-.post-add-container hr {
+/* .post-add-container hr {
   height: 2px;
   color: white;
   background-color: white;
   border: none;
   width: 90vw;
+} */
+
+
+.post-add-header {
+  height: 28px;
+  width: 88vw;
+  border-bottom: 1px solid white;
 }
 
 .post-add-header h3 {
-  height: 15px;
+  font-weight: 600;
 }
 
 .post-add {

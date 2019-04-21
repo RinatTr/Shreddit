@@ -54,7 +54,7 @@ export default class AddComment extends Component {
         <form onSubmit={this.handleSubmit}>
           {/*<textarea name="body" placeholder="What are your thoughts?" value={this.state.body} onChange={this.handleChange}/>*/}
             <ReactQuill
-            className="newNoteQuill"
+            className="quill-new-comment"
             name="body"
             value={body}
             onChange={this.handleChange}

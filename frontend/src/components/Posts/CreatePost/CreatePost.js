@@ -83,8 +83,7 @@ export default class CreatePost extends Component {
       ? <div className="post-add-container">
           <div className="post-add-header">
               <h3>Create a Post</h3>
-          </div> 
-          <hr />
+          </div>
           <div className="post-community">
             <select name="communityId" defaultValue="1" onChange={this.handleSelect}>
               <option disabled value="1">select subshreddit</option>
