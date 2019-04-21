@@ -14,9 +14,23 @@ export default class CreatePost extends Component {
     }
   }
 
+  componentDidMount() {
+    let { loggedUser, match } = this.props;
+    console.log(match.path);
+    if (loggedUser ) {
+      getAllSubshredditsPerUser(loggedUser.userData.id)
+          .then((res) => {
+            this.setState({
+              subshreddits: res.data.subshreddits
+            })
+          })
+    }
+  }
+
   componentDidUpdate(prevProps) {
-    let { loggedUser } = this.props;
-    if (loggedUser !== prevProps.loggedUser) {
+    let { loggedUser, match } = this.props;
+    console.log(match.path);
+    if (loggedUser !== prevProps.loggedUser || match.path !== prevProps.match.path ) {
       getAllSubshredditsPerUser(loggedUser.userData.id)
           .then((res) => {
             this.setState({
