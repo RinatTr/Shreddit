@@ -40,10 +40,17 @@ button:focus {
   border: 1px solid rgb(0, 150, 290);
 }
 
-
-
 input {
   background-color: #f2f8fd;
   border: 1px solid rgb(237, 239, 241);
   border-radius: 4px;
+}
+
+select {
+  background: white;
+  font-size: 14px;
+  font-family: 'Open sans', sans-serif;
+  color: rgb(0, 150, 290);
+  font-weight: 800;
+  border: 1px solid #ccc;
 }
