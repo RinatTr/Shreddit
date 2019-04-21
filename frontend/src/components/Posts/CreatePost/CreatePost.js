@@ -16,28 +16,25 @@ export default class CreatePost extends Component {
 
   componentDidMount() {
     let { loggedUser, match } = this.props;
-    console.log(match.path);
-    if (loggedUser ) {
-      getAllSubshredditsPerUser(loggedUser.userData.id)
-          .then((res) => {
-            this.setState({
-              subshreddits: res.data.subshreddits
-            })
-          })
+    if ( loggedUser ) {
+      this.refreshSubshreddits(loggedUser.userData.id)
     }
   }
 
   componentDidUpdate(prevProps) {
     let { loggedUser, match } = this.props;
-    console.log(match.path);
-    if (loggedUser !== prevProps.loggedUser || match.path !== prevProps.match.path ) {
-      getAllSubshredditsPerUser(loggedUser.userData.id)
-          .then((res) => {
-            this.setState({
-              subshreddits: res.data.subshreddits
-            })
-          })
+    if ( loggedUser !== prevProps.loggedUser || match.path !== prevProps.match.path ) {
+      this.refreshSubshreddits(loggedUser.userData.id)
     }
+  }
+
+  refreshSubshreddits = (userId) => {
+    getAllSubshredditsPerUser(userId)
+        .then((res) => {
+          this.setState({
+            subshreddits: res.data.subshreddits
+          })
+        })
   }
   //needs : GET communities loggedUser is subscribed to, POST a post.
   // loggedUser - need container.
