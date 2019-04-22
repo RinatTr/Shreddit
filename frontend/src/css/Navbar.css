@@ -65,4 +65,20 @@ select#select {
   width: 160px;
   text-align: left;
   background: #F2F8FD;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.search-dropdown-container ul {
+  list-style-type: none;
+  text-align: left;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  padding-inline-start: 5px;
+}
+
+ul li {
+  border-bottom: 1px solid white;
+  padding: 2px;
 }
