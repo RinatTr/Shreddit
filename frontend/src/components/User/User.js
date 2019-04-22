@@ -122,8 +122,6 @@ export default class User extends Component {
                   username={isSavedPath ? post.posted_by : this.props.match.params.username}
                   groupname={post.groupname}
                   groupImgUrl={post.img_url}
-                  handleVote={this.handleVote}
-                  handleExpand={this.handleExpand}
                   isSaved={loggedUser ? this.isSaved(isSavedPath ? post.post_id : post.id) : false}
                 /></Link>
       })

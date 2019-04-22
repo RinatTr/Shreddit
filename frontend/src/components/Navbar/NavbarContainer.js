@@ -5,10 +5,12 @@ import { fetchFollows } from "../../actions/FollowActions";
 import { fetchUserSavedPosts } from "../../actions/UserActions";
 
 const mapStateToProps = (state, ownProps) => {
+  console.log("state==>",state);
   return {
     loggedInUser: state.auth.loggedUser,
     authError: state.auth.error,
-    follows: state.follows.follows
+    follows: state.follows.follows,
+    posts: state.posts.posts
   };
 };
 
