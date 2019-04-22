@@ -5,6 +5,7 @@ import all from '../../icons/iconfinder_ic_clear_all_48px_352269.png'
 import popular from '../../icons/iconfinder_ic_trending_up_48px_352184.png'
 import createPost from '../../icons/createPostTeal.png'
 import '../../css/Navbar.css';
+import Search from './Search'
 
 class Navbar extends Component {
   constructor() {
@@ -58,9 +59,15 @@ class Navbar extends Component {
     }
   }
 
+  handleSearch = (e) => {
+    this.setState({
+      searchInput: e.target.value
+    })
+  }
+
   render() {
     let { searchInput, select, defaultOpt } = this.state;
-    let { loggedInUser, follows } = this.props;
+    let { loggedInUser, follows, posts } = this.props;
     let currentUser = loggedInUser ? loggedInUser.username : ""
 
     let mapMenu = follows ? follows.map((follow, i) => {return <option key={i} id="username">{follow.followed_user}</option>}) : null;
@@ -80,8 +87,9 @@ class Navbar extends Component {
           name="searchInput"
           placeholder="SEARCH"
           value={searchInput}
-          onChange={this.handleChange}
+          onChange={this.handleSearch}
         />
+        <Search searchInput={searchInput} posts={posts} />
         <Link to="/popular"><img alt="all" src={popular}/></Link>
         <Link to="/all"><img alt="all" src={all}/></Link>
         {currentUser
