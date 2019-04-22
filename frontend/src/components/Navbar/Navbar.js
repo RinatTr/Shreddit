@@ -33,7 +33,6 @@ class Navbar extends Component {
     }
   }
 
-
   componentDidMount() {
     this.props.checkAuthenticateStatus();
     this.setState({
@@ -81,15 +80,17 @@ class Navbar extends Component {
           <option id="all">All</option>
           {mapMenu}
         </select>
-        <input
-          type="text"
-          id="search"
-          name="searchInput"
-          placeholder="SEARCH"
-          value={searchInput}
-          onChange={this.handleSearch}
-        />
-        <Search searchInput={searchInput} posts={posts} />
+        <div className="search-bar">
+          <input
+            type="text"
+            id="search"
+            name="searchInput"
+            placeholder="SEARCH"
+            value={searchInput}
+            onChange={this.handleSearch}
+          />
+          <Search searchInput={searchInput} posts={posts} />
+        </div>
         <Link to="/popular"><img alt="all" src={popular}/></Link>
         <Link to="/all"><img alt="all" src={all}/></Link>
         {currentUser

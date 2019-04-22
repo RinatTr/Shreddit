@@ -57,3 +57,12 @@ input#search {
 select#select {
   width: 90px;
 }
+
+.search-dropdown-container {
+  z-index: 6;
+  position: absolute;
+  top: 50px;
+  width: 160px;
+  text-align: left;
+  background: #F2F8FD;
+}
