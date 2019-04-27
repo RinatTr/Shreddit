@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Post from '../Posts/PostDisplay';
-import UserInfo from './UserDisplay';
-import UserNav from './UserNav';
-import { addFollow, deleteFollow } from '../../util/util';
-import '../../css/User.css';
+import SubInfo from './SubDisplay';
+import { addFollow, deleteFollow, getASubshreddit } from '../../util/util';
+import '../../css/Subshreddit.css';
 
-export default class User extends Component {
+export default class Subshreddit extends Component {
   constructor() {
     super()
     this.state = {
       isSubscribed: false,
-      isLoggedUserPage: false
+      isLoggedUserPage: false,
+      data: ""
     }
     this.handleFollow = this.handleFollow.bind(this)
     this.handleUnfollow = this.handleUnfollow.bind(this)
@@ -38,24 +38,20 @@ export default class User extends Component {
   }
 
   async componentDidMount() {
-    let { fetchUser, fetchUserPosts, fetchCommentCount, match } = this.props;
-    await fetchUser(match.params.username)
-    await fetchUserPosts(this.props.user.id)
+    let { fetchSubshredditPosts, fetchUserPosts, fetchCommentCount, match } = this.props;
+    await fetchSubshredditPosts(match.params.subId)
     await fetchCommentCount()
-    if (this.props.loggedUser) {
-      if (this.props.loggedUser.username === this.props.user.username) {
-        this.setState({
-          isLoggedUserPage: true
-        })
-      }
-    }
+    const res = await getASubshreddit(match.params.subId)
+    this.setState({
+      data: res.data.subshreddit
+    })
     this.validateSubscription()
   }
 
   async componentDidUpdate(prevProps) {
-  if (this.props.match.params.username !== prevProps.match.params.username) {
+  if (this.props.match.params.subname !== prevProps.match.params.subname) {
     await this.props.fetchUser(this.props.match.params.username)
-    await this.props.fetchUserPosts(this.props.user.id)
+    await this.props.fetchSubshredditPosts(this.props.match.params.subname)
     await this.props.fetchCommentCount()
     if (this.props.loggedUser) {
       let boolean = this.props.loggedUser.username === this.props.user.username
@@ -102,51 +98,47 @@ export default class User extends Component {
 
   render() {
     let { posts, count, match, user, loggedUser, saved_posts, location } = this.props;
-    let { isLoggedUserPage } = this.state;
+    let { isLoggedUserPage, data } = this.state;
     let mapPosts;
     //saved feature for loggedUser page only
-    let isSavedPath = location.pathname.slice(-5) === "saved";
 
     if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {
-       mapPosts = (saved_posts && isSavedPath ? saved_posts : posts).map((post) => {
-        return <Link key={isSavedPath ? post.post_id : post.id} to={`/post/${isSavedPath ? post.post_id : post.id}`}>
+       mapPosts = posts.map((post) => {
+        return <Link key={post.id} to={`/post/${post.id}`}>
                 <Post
-                  key={isSavedPath ? post.post_id : post.id}
-                  id={isSavedPath ? post.post_id : post.id}
-                  commentCount={this.countPerPost(isSavedPath ? post.post_id : post.id, count)}
+                  key={post.id}
+                  id={post.id}
+                  commentCount={this.countPerPost(post.id, count)}
                   votes={post.votes}
                   timestamp={post.created_at}
                   header={post.header}
                   body={post.body}
-                  username={isSavedPath ? post.posted_by : match.params.username}
+                  username={post.username}
                   groupname={post.groupname}
                   groupId={post.subshreddit_id}
                   groupImgUrl={post.img_url}
-                  isSaved={loggedUser ? this.isSaved(isSavedPath ? post.post_id : post.id) : false}
+                  isSaved={loggedUser ? this.isSaved(post.id) : false}
                 /></Link>
       })
     }
     return (
       <React.Fragment>
-        {isLoggedUserPage && loggedUser ? <UserNav loggedUser={loggedUser}/> : null}
-        <div className={isLoggedUserPage ? "logged-user-page":"user-page"}>
-          {mapPosts ? <div className="user-posts-container">{mapPosts}</div> : ""}
-          {user ? <UserInfo
-                    username={user.username}
-                    avatar={user.avatar_url}
+        <div className="sub-page">
+          {mapPosts ? <div className="sub-posts-container">{mapPosts}</div> : ""}
+          {data ? <SubInfo
+                    subname={data.groupname}
+                    avatar={data.img_url}
                     handleFollow={this.handleFollow}
                     handleUnfollow={this.handleUnfollow}
                     isSubscribed={this.state.isSubscribed}
                     isLoggedUserPage={isLoggedUserPage}
-                    cakeDay={user.created_at}
-                  /> : null}
+                  /> : null }
         </div>
       </React.Fragment>
     )
   }
 }
 
-//display posts in same way as posts.js :
-//  import PostDisplay, and map user_posts. when mapping <Link> each post to its id.
-// correct the post Modal display (posts.js) to be using nested routing.
-// have the posts/:id route in the main app.
+// display group info
+// handle subscribe
+// populate menu with user subscriptions

@@ -50,7 +50,7 @@ export default class Posts extends Component {
   }
 
   async handleExpand(e) {
-    let dontToggle = ["upvote","downvote","close","username","saved-container","save-container"]
+    let dontToggle = ["upvote","downvote","close","username","groupname","saved-container","save-container"]
     if (!dontToggle.includes(e.target.className) && e.target.innerText !== "CLOSE") {
       let postId = e.currentTarget.id;
       this.props.fetchCommentsPerPost(postId).then(() => {
@@ -93,6 +93,7 @@ export default class Posts extends Component {
                   body={post.body}
                   username={post.username}
                   groupname={post.groupname}
+                  groupId={post.subshreddit_id}
                   groupImgUrl={post.img_url}
                   handleVote={this.handleVote}
                   handleExpand={this.handleExpand}
@@ -117,6 +118,7 @@ export default class Posts extends Component {
               username={currentPost.username}
               groupname={currentPost.groupname}
               groupImgUrl={currentPost.img_url}
+              groupId={currentPost.subshreddit_id}
               handleVote={this.handleVote}
               handleExpand={this.handleExpand}
               handleSave={this.handleSave}

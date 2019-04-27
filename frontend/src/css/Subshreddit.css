@@ -1,0 +1,66 @@
+.sub-page {
+  margin-top: 50px;
+  display: flex;
+}
+
+.sub-posts-container {
+  margin-top: 8px;
+}
+.sub-posts-container .post-collapsed {
+  width: 65vw;
+  height: 100px;
+  margin-bottom: 0px;
+  margin-top: 2px;
+  border-radius: 0px;
+  color: #393939;
+}
+
+.sub-info-container {
+  margin-left: 5px;
+  margin-top: 10px;
+  width: 250px;
+  height: 270px;
+  background: white;
+  border-radius: 4px;
+}
+
+.sub-blue {
+  background: #33A8FF;
+  height: 80px;
+  border-radius: 4px 4px 0px 0px;
+}
+
+.sub-floater {
+  text-align: left;
+}
+
+.sub-floater > * {
+  margin-left: 12px;
+}
+
+.sub-floater span a {
+  margin-left: 12px;
+  margin-top: -20px;
+  color: #393939;
+}
+
+.avatar-wrapper {
+  margin-top: -60px;
+  height: 92px;
+  width: 92px;
+  background-color: white;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img#avatar {
+  height: 86px;
+  width: 86px;
+  border-radius: 4px;
+}
+
+button {
+  height: 30px;
+}

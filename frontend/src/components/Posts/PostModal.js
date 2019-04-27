@@ -1,5 +1,6 @@
 import React from "react";
 import TimeAgo from "react-timeago";
+import { Link } from 'react-router-dom';
 import upvote from '../../icons/up_arrow.png'
 import downvote from '../../icons/down_arrow.png'
 import comment from '../../icons/comment.png'
@@ -19,6 +20,7 @@ const PostModal = ({  id,
                       username,
                       groupname,
                       groupImgUrl,
+                      groupId,
                       handleVote,
                       handleExpand,
                       handleSave,
@@ -55,7 +57,7 @@ const PostModal = ({  id,
               <p className="info">
                 <span>
                   {groupImgUrl ? <span className="center-cropped-icon"><img alt="subshr" src={groupImgUrl} /></span> : null }
-                  <strong>/r/{groupname}</strong>
+                    <strong><Link className="groupname" to={`/subshreddit/${groupId}`}>/s/{groupname}</Link></strong>
                 </span>
                 <span>
                  Posted by {username}

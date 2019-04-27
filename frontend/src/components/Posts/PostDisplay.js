@@ -19,6 +19,7 @@ const Post = ({ id,
                 username,
                 groupname,
                 groupImgUrl,
+                groupId,
                 handleVote,
                 handleExpand,
                 handleSave }) => {
@@ -34,7 +35,7 @@ const Post = ({ id,
             <p className="info">
               <span>
                 {groupImgUrl ? <span className="center-cropped-icon"><img alt="subshr" src={groupImgUrl} /></span> : null }
-                <strong>/r/{groupname}</strong>
+                <strong><Link className="groupname" to={`/subshreddit/${groupId}`}>/s/{groupname}</Link></strong>
               </span>
               <span>
                Posted by <Link className="username" to={`/user/${username}`}>/u/{username}</Link>
