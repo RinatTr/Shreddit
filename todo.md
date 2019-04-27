@@ -166,10 +166,10 @@ BUT also all posts.
   // if there's time:
   // 7.   create postV (todo - add HTMLparser to postsV, redirect to posted postsV, add subscribed communities select menuV, add navbar buttonV, populate navbar (after subshreddit), fix cssV, fix populate subshreddits from navbar linkV), subshreddit.
   // 8.   fix votes/saved bug from users.
-  // 9.   user page: nav bar + comments, saved posts.
+  // 9.   user page: nav bar + comments, saved posts. V
   // 10.   fix post Modal in users.
-  // 11. search functionality
-  // 12. clean up console.
+  // 11. search functionality V
+  // 12. clean up console. V
   // 13. clean up code.
 
   search:
