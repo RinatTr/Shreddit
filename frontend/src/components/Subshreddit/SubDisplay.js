@@ -10,7 +10,7 @@ const SubInfo = ({subname, avatar, cakeDay, handleFollow, handleUnfollow, isSubs
           <div className="avatar-wrapper">
             <img alt="avatar" src={avatar} id="avatar"/>
           </div>
-          <span><Link to={`/subshreddit/${subname}`}>/s/{subname}</Link></span>
+          <span><strong><Link to={`/subshreddit/${subname}`}>/s/{subname}</Link></strong></span>
           {!isLoggedUserPage ? (isSubscribed
             ? <button className="follow" onClick={handleUnfollow}>UNSUBSCRIBE</button>
             : <button className="follow" onClick={handleFollow}>SUBSCRIBE</button>) : null}

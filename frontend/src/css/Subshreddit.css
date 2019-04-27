@@ -1,11 +1,22 @@
 .sub-page {
   margin-top: 50px;
   display: flex;
+  flex-direction: column;
+}
+
+.sub-page h4 {
+  margin-block-start:0.8em;
+  margin-block-end:0em;
+}
+
+.sub-content {
+  display: flex;
 }
 
 .sub-posts-container {
   margin-top: 8px;
 }
+
 .sub-posts-container .post-collapsed {
   width: 65vw;
   height: 100px;
@@ -25,7 +36,7 @@
 }
 
 .sub-blue {
-  background: #33A8FF;
+  background: #b8f1d2;
   height: 80px;
   border-radius: 4px 4px 0px 0px;
 }

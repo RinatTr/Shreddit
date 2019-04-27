@@ -124,15 +124,18 @@ export default class Subshreddit extends Component {
     return (
       <React.Fragment>
         <div className="sub-page">
-          {mapPosts ? <div className="sub-posts-container">{mapPosts}</div> : ""}
-          {data ? <SubInfo
-                    subname={data.groupname}
-                    avatar={data.img_url}
-                    handleFollow={this.handleFollow}
-                    handleUnfollow={this.handleUnfollow}
-                    isSubscribed={this.state.isSubscribed}
-                    isLoggedUserPage={isLoggedUserPage}
-                  /> : null }
+        <h4>/s/{data.groupname}</h4>
+          <div className="sub-content">
+            {mapPosts ? <div className="sub-posts-container">{mapPosts}</div> : ""}
+            {data ? <SubInfo
+                      subname={data.groupname}
+                      avatar={data.img_url}
+                      handleFollow={this.handleFollow}
+                      handleUnfollow={this.handleUnfollow}
+                      isSubscribed={this.state.isSubscribed}
+                      isLoggedUserPage={isLoggedUserPage}
+                    /> : null }
+          </div>
         </div>
       </React.Fragment>
     )
