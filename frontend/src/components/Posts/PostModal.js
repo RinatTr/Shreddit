@@ -3,7 +3,7 @@ import TimeAgo from "react-timeago";
 import upvote from '../../icons/up_arrow.png'
 import downvote from '../../icons/down_arrow.png'
 import comment from '../../icons/comment.png'
-import hide from '../../icons/hide.png'
+// import hide from '../../icons/hide.png'
 import save from '../../icons/save.png'
 import saved from '../../icons/saved.png'
 import Comment from '../Comments/CommentDisplay'
@@ -54,7 +54,7 @@ const PostModal = ({  id,
             <div className="post-text">
               <p className="info">
                 <span>
-                  {groupImgUrl ? <div className="center-cropped-icon"><img alt="subshr" src={groupImgUrl} /></div> : null }
+                  {groupImgUrl ? <span className="center-cropped-icon"><img alt="subshr" src={groupImgUrl} /></span> : null }
                   <strong>/r/{groupname}</strong>
                 </span>
                 <span>

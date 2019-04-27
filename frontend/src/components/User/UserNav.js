@@ -6,9 +6,6 @@ import { Link, withRouter } from 'react-router-dom';
 // 2. fix css - if isLoggedUserPage - have a different class name with no margin.
 // 3. selected span.
 class UserNav extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     let { loggedUser, location } = this.props;
     let isSavedPath = location.pathname.slice(-5) === "saved"

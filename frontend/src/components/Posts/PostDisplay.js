@@ -2,7 +2,7 @@ import React from "react";
 import upvote from '../../icons/up_arrow.png'
 import downvote from '../../icons/down_arrow.png'
 import comment from '../../icons/comment.png'
-import hide from '../../icons/hide.png'
+// import hide from '../../icons/hide.png'
 import save from '../../icons/save.png'
 import saved from '../../icons/saved.png'
 import TimeAgo from "react-timeago";
@@ -33,7 +33,7 @@ const Post = ({ id,
         <div className={body ? "post-content" : "post-content-user"}>
             <p className="info">
               <span>
-                {groupImgUrl ? <div className="center-cropped-icon"><img alt="subshr" src={groupImgUrl} /></div> : null }
+                {groupImgUrl ? <span className="center-cropped-icon"><img alt="subshr" src={groupImgUrl} /></span> : null }
                 <strong>/r/{groupname}</strong>
               </span>
               <span>
@@ -44,7 +44,7 @@ const Post = ({ id,
               </span>
             </p>
             <h3>{header}</h3>
-            {body ? <p>{ReactHtmlParser(body.slice(0,100)+"...")}</p> : null}
+            {body ? <span>{ReactHtmlParser(body.slice(0,100)+"...")}</span> : null}
             <div className="post-buttons">
               <img alt="comment" src={comment} />
               {commentCount} Comments

@@ -51,6 +51,7 @@ class Navbar extends Component {
     switch (optionId) {
       case "username":
       this.props.history.push(`/user/${path}`)
+      break;
       case "default":
       break;
       default:

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import Post from '../Posts/PostDisplay';
 import UserInfo from './UserDisplay';
 import UserNav from './UserNav';
@@ -105,13 +104,13 @@ export default class User extends Component {
     let { posts, count, match, user, loggedUser, saved_posts, location } = this.props;
     let { isLoggedUserPage } = this.state;
     let mapPosts;
-    let currentPost;
     //saved feature for loggedUser page only
     let isSavedPath = location.pathname.slice(-5) === "saved";
 
     if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {
        mapPosts = (saved_posts && isSavedPath ? saved_posts : posts).map((post) => {
-        return <Link key={isSavedPath ? post.post_id : post.id} to={`/post/${isSavedPath ? post.post_id : post.id}`}><Post
+        return <Link key={isSavedPath ? post.post_id : post.id} to={`/post/${isSavedPath ? post.post_id : post.id}`}>
+                <Post
                   key={isSavedPath ? post.post_id : post.id}
                   id={isSavedPath ? post.post_id : post.id}
                   commentCount={this.countPerPost(isSavedPath ? post.post_id : post.id, count)}
@@ -119,13 +118,12 @@ export default class User extends Component {
                   timestamp={post.created_at}
                   header={post.header}
                   body={post.body}
-                  username={isSavedPath ? post.posted_by : this.props.match.params.username}
+                  username={isSavedPath ? post.posted_by : match.params.username}
                   groupname={post.groupname}
                   groupImgUrl={post.img_url}
                   isSaved={loggedUser ? this.isSaved(isSavedPath ? post.post_id : post.id) : false}
                 /></Link>
       })
-      currentPost = match.params.id ? posts.find(post => post.id === + match.params.id) : null;
     }
     return (
       <React.Fragment>

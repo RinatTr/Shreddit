@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from 'axios';
 import Post from './PostDisplay'
 import PostModal from './PostModal'
-import { Link } from 'react-router-dom'
 import '../../css/Posts.css'
 
 export default class Posts extends Component {
@@ -16,10 +15,10 @@ export default class Posts extends Component {
 
   async componentDidMount() {
     let { fetchPosts, fetchCommentCount, fetchCommentsPerPost, match } = this.props;
-    const posts = await fetchPosts();
-    const count = await fetchCommentCount();
+    await fetchPosts();
+    await fetchCommentCount();
     if (match.params.id) {
-        const comments = await fetchCommentsPerPost(match.params.id);
+        await fetchCommentsPerPost(match.params.id);
       }
   }
   //handle UI

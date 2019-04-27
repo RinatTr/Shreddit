@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Route, Switch, Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import icon from '../../icons/iconfinder_Faint_2695614.png'
 import '../../css/Authform.css'
 

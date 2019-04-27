@@ -35,7 +35,7 @@ const Comment = ({  commentId,
                <TimeAgo date={timestamp}/>
               </span>
             </p>
-            <p>{ReactHtmlParser(body)}</p>
+            <span>{ReactHtmlParser(body)}</span>
             <hr/>
           </div>
         </div>

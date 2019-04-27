@@ -15,7 +15,7 @@ export default class CreatePost extends Component {
   }
 
   componentDidMount() {
-    let { loggedUser, match } = this.props;
+    let { loggedUser } = this.props;
     if ( loggedUser ) {
       this.refreshSubshreddits(loggedUser.userData.id)
     }
@@ -60,7 +60,7 @@ export default class CreatePost extends Component {
     let { loggedUser} = this.props;
     let { body, title, communityId } = this.state;
     //conditional to prevent empty "enter" submit
-    if (body && title && loggedUser, communityId) {
+    if (body && title && loggedUser && communityId) {
       createPost({ poster_id: loggedUser.userData.id,
                               subshreddit_id: communityId,
                               votes: 0,
@@ -85,7 +85,7 @@ export default class CreatePost extends Component {
 
   render() {
     let { loggedUser } = this.props;
-    let { body, title, communityId, subshreddits } = this.state;
+    let { body, title, subshreddits } = this.state;
     let mapGroups = subshreddits
       ? subshreddits.map((el,i) => <option key={i} value={el.subshreddit_id}>{el.groupname}</option>)
       : null
