@@ -65,6 +65,12 @@ class Navbar extends Component {
     })
   }
 
+  handleClick = () => {
+    this.setState({
+      searchInput: ""
+    })
+  }
+
   render() {
     let { searchInput, select, defaultOpt } = this.state;
     let { loggedInUser, follows, posts } = this.props;
@@ -90,7 +96,7 @@ class Navbar extends Component {
             value={searchInput}
             onChange={this.handleSearch}
           />
-          <Search searchInput={searchInput} posts={posts} />
+        <Search searchInput={searchInput} posts={posts} handleClick={this.handleClick}/>
         </div>
         <Link to="/popular"><img alt="all" src={popular}/></Link>
         <Link to="/all"><img alt="all" src={all}/></Link>

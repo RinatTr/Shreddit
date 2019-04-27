@@ -52,6 +52,8 @@ input#search {
   background: url('https://www.iconfinder.com/icons/111124/download/png/16') no-repeat scroll 7px 7px;
   background-color: #f2f8fd;
   padding-left: 30px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
 }
 
 select#select {
@@ -62,12 +64,16 @@ select#select {
   z-index: 6;
   position: absolute;
   top: 50px;
-  width: 160px;
+  width: 158px;
   text-align: left;
   background: #F2F8FD;
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 13px;
+  font-weight: 500;
+  /* border-bottom: 4px solid #fff;
+  border-left: 4px solid #fff;
+  border-right: 4px solid #fff; */
+  border-radius: 0px 0px 4px 4px;
 }
 
 .search-dropdown-container ul {
@@ -75,10 +81,16 @@ select#select {
   text-align: left;
   margin-block-start: 0em;
   margin-block-end: 0em;
-  padding-inline-start: 5px;
+  padding-inline-start: 0px;
 }
 
 ul li {
   border-bottom: 1px solid white;
-  padding: 2px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 7px;
+}
+
+ul li:hover {
+  background: #fff8b8;
 }
