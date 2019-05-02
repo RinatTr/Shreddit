@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Post from '../Posts/PostDisplay';
 import SubInfo from './SubDisplay';
-import { addFollow, deleteFollow, getASubshreddit } from '../../util/util';
+import { addFollow, deleteFollow, getASubshreddit, getAllSubshredditsPerUser } from '../../util/util';
 import '../../css/Subshreddit.css';
 
 export default class Subshreddit extends Component {
@@ -11,7 +11,8 @@ export default class Subshreddit extends Component {
     this.state = {
       isSubscribed: false,
       isLoggedUserPage: false,
-      data: ""
+      data: "",
+      userSubshreddits: []
     }
     this.handleFollow = this.handleFollow.bind(this)
     this.handleUnfollow = this.handleUnfollow.bind(this)
@@ -19,26 +20,27 @@ export default class Subshreddit extends Component {
 
   validateSubscription = () => {
     if (this.props.loggedUser) {
+      // let { userSubshreddits } = this.state;
       let loggedUserId = this.props.loggedUser.userData.id
-      let userPageId = this.props.user.id
-      this.props.fetchFollows(loggedUserId)
-                  .then(() => {
-                    //if identical id's then set subscribed true
-                    if (this.props.follows.find(follow => follow.followed_id === userPageId)) {
-                      this.setState({
-                        isSubscribed: true
-                      })
-                    } else {
-                      this.setState({
-                        isSubscribed: false
-                      })
-                    }
+      let { subId } = this.props.match.params
+      getAllSubshredditsPerUser(loggedUserId)
+          .then((res) => {
+            let userSubshreddits = res.data.subshreddits
+                if (userSubshreddits.find(sub => +sub.subshreddit_id === +subId)) {
+                  this.setState({
+                    isSubscribed: true
                   })
+                } else {
+                  this.setState({
+                    isSubscribed: false
+                  })
+                }
+              })
     }
   }
 
   async componentDidMount() {
-    let { fetchSubshredditPosts, fetchUserPosts, fetchCommentCount, match } = this.props;
+    let { fetchSubshredditPosts, fetchUserPosts, fetchCommentCount, match, loggedUser } = this.props;
     await fetchSubshredditPosts(match.params.subId)
     await fetchCommentCount()
     const res = await getASubshreddit(match.params.subId)
@@ -96,12 +98,21 @@ export default class Subshreddit extends Component {
       this.validateSubscription()
   }
 
+  refreshSubshreddits = (userId) => {
+    console.log("refresh subshreddits");
+    getAllSubshredditsPerUser(userId)
+        .then((res) => {
+          this.setState({
+            userSubshreddits: res.data.subshreddits
+          })
+        })
+  }
+
   render() {
     let { posts, count, match, user, loggedUser, saved_posts, location } = this.props;
-    let { isLoggedUserPage, data } = this.state;
+    let { isLoggedUserPage, data, userSubshreddits } = this.state;
+    console.log(this.state.isSubscribed);
     let mapPosts;
-    //saved feature for loggedUser page only
-
     if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {
        mapPosts = posts.map((post) => {
         return <Link key={post.id} to={`/post/${post.id}`}>

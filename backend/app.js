@@ -7,6 +7,7 @@ const users = require('./routes/users.js')
 const posts = require('./routes/posts.js')
 const comments = require('./routes/comments.js')
 const follows = require('./routes/follows.js')
+const subscriptions = require('./routes/subscriptions.js')
 const subshreddits = require('./routes/subshreddits.js')
 const app = express()
 
@@ -31,6 +32,7 @@ app.use('/api/posts', posts)
 app.use('/api/comments', comments)
 app.use('/api/subshreddits', subshreddits)
 app.use('/api/follows', follows)
+app.use('/api/subscriptions', subscriptions)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,28 +57,3 @@ app.use(function(err, req, res, next) {
 app.listen(3100, () => {
   console.log('Shreddit: listening to 3100');
 })
-
-/*
-* `GET /api/posts/` ✅
-  * Fetches all posts
-* `GET /api/posts/:userId`
-  * Fetches all posts by user
-* `GET /api/posts/:userId/saved`
-  * Fetches all saved posts by a user
-* `POST /api/posts/`
-  * Add a new post
-* `GET /api/posts/:id`
-  * Get a single post
-* `GET /api/posts/:id/comments` ✅
-  * Get all comments for a single post
-* `DELETE /api/posts/:id`
-  * Delete a post
-* `POST /api/posts/:id/comments`
-  * Add a comment for a single post
-* `DELETE /api/posts/:id/comments`
-  * Delete a comment for a single post
-* `GET /api/comments/:userId` ✅
-  * Fetches all comments by user
-* `GET /api/comments/counts` ✅
-  * Fetches all comment counts
-*/

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SubInfo = ({subname, avatar, cakeDay, handleFollow, handleUnfollow, isSubscribed, isLoggedUserPage}) => {
+const SubInfo = ({subname, avatar, cakeDay, handleSubscribe, handleUnsubscribe, isSubscribed, isLoggedUserPage}) => {
   return (
     <div className="sub-info-container">
       <div className="sub-blue"></div>
@@ -12,8 +12,8 @@ const SubInfo = ({subname, avatar, cakeDay, handleFollow, handleUnfollow, isSubs
           </div>
           <span><strong><Link to={`/subshreddit/${subname}`}>/s/{subname}</Link></strong></span>
           {!isLoggedUserPage ? (isSubscribed
-            ? <button className="follow" onClick={handleUnfollow}>UNSUBSCRIBE</button>
-            : <button className="follow" onClick={handleFollow}>SUBSCRIBE</button>) : null}
+            ? <button className="follow" onClick={handleSubscribe}>UNSUBSCRIBE</button>
+            : <button className="follow" onClick={handleUnsubscribe}>SUBSCRIBE</button>) : null}
         </div>
       </div>
     </div>

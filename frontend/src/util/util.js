@@ -22,6 +22,9 @@ export const getFollows = (userId) => axios.get(`/api/follows/${userId}`)
 export const addFollow = (followObj) => axios.post(`/api/follows/`, followObj)
 export const deleteFollow = (followId) => axios.delete(`/api/follows/${followId}`)
 
+//Subscriptions
+export const addSubscription = (subObj) => axios.post(`/api/subscriptions`, subObj)
+export const deleteSubscription = (subId) => axios.delete(`/api/subscriptions/${subId}`)
 
 //Auth
 export const createUser = (bodyObj) => axios.post("/api/users/auth/new", bodyObj)
