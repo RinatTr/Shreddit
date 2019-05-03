@@ -41,7 +41,7 @@ export default class Subshreddit extends Component {
   }
 
   async componentDidMount() {
-    let { fetchSubshredditPosts, fetchUserPosts, fetchCommentCount, match, loggedUser } = this.props;
+    let { fetchSubshredditPosts, fetchCommentCount, match } = this.props;
     await fetchSubshredditPosts(match.params.subId)
     await fetchCommentCount()
     const res = await getASubshreddit(match.params.subId)
@@ -98,7 +98,7 @@ export default class Subshreddit extends Component {
   }
 
   render() {
-    let { posts, count, match, user, loggedUser, saved_posts, location } = this.props;
+    let { posts, count, loggedUser, saved_posts } = this.props;
     let { isLoggedUserPage, data, userSubshreddits } = this.state;
     let mapPosts;
     if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {

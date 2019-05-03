@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Subshreddit from './Subshreddit'
+import Subshreddit from './Subshreddit';
 import { fetchSubshredditPosts } from '../../actions/SubshredditActions';
 import { fetchUserSavedPosts, fetchUser } from '../../actions/UserActions';
 import { fetchCommentCount } from '../../actions/CommentActions';
