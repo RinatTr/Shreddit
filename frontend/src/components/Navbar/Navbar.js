@@ -18,15 +18,19 @@ class Navbar extends Component {
   }
   /* code spotlight moment... */
   componentDidUpdate(prevProps) {
-    let { loggedInUser, fetchFollows, fetchUserSavedPosts } = this.props;
+    let { loggedInUser, fetchFollows, fetchUserSavedPosts, fetchUserSubshreddits } = this.props;
     if (loggedInUser) {
       if (!prevProps.loggedInUser || loggedInUser.username !== prevProps.loggedInUser.username) {
         fetchFollows(loggedInUser.userData.id)
         fetchUserSavedPosts(loggedInUser.userData.id)
+        fetchUserSubshreddits(loggedInUser.userData.id)
       }
     }
     //update top menu option
     if (prevProps.location.pathname !== this.props.location.pathname) {
+      if (loggedInUser) {
+        fetchUserSubshreddits(loggedInUser.userData.id)
+      }
       this.setState({
         defaultOpt: this.props.location.pathname
       })
@@ -48,9 +52,12 @@ class Navbar extends Component {
   handleChange = (e) => {
     let path = e.target.selectedOptions[0].innerText
     let optionId = e.target.selectedOptions[0].id
-    switch (optionId) {
-      case "username":
+    switch (optionId.slice(0,4)) {
+      case "user":
       this.props.history.push(`/user/${path}`)
+      break;
+      case "subs":
+      this.props.history.push(`/subshreddit/${optionId.slice(4, optionId.length)}`)
       break;
       case "default":
       break;
@@ -73,11 +80,10 @@ class Navbar extends Component {
 
   render() {
     let { searchInput, select, defaultOpt } = this.state;
-    let { loggedInUser, follows, posts } = this.props;
-    let currentUser = loggedInUser ? loggedInUser.username : ""
-
-    let mapMenu = follows ? follows.map((follow, i) => {return <option key={i} id="username">{follow.followed_user}</option>}) : null;
-
+    let { loggedInUser, follows, posts, subshreddits } = this.props;
+    let currentUser = loggedInUser ? loggedInUser.username : "";
+    let mapSubs = subshreddits ? subshreddits.map((sub, i) => {return <option key={i+"subs"} id={"subs"+sub.subshreddit_id}>{sub.groupname}</option>}) : null;
+    let mapUsers = follows ? follows.map((follow, i) => {return <option key={i+"user"} id="user">{follow.followed_user}</option>}) : null;
     return (
       <nav>
         <Link to="/popular"><img alt="icon" src={icon}/>shreddit</Link>
@@ -85,7 +91,10 @@ class Navbar extends Component {
           <option id="default" defaultValue={defaultOpt}>{defaultOpt}</option>
           <option id="popular">Popular</option>
           <option id="all">All</option>
-          {mapMenu}
+          <option disabled>Users</option>
+          {mapUsers}
+          <option disabled>Subshreddits</option>
+          {mapSubs}
         </select>
         <div className="search-bar">
           <input
