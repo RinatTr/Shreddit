@@ -28,12 +28,16 @@ export default class Posts extends Component {
       let comment_id = e.target.id;
       let type = e.target.alt;
       axios.patch(`/api/comments/${comment_id}`, { type: type })
-      this.props.fetchCommentsPerPost(postId)
+        .then(() => {
+          this.props.fetchCommentsPerPost(postId)  
+        })
     } else {
       let post_id = e.target.id;
       let type = e.target.alt;
       axios.patch(`/api/posts/${post_id}`, { type: type })
-      this.props.fetchPosts()
+        .then(() => {
+          this.props.fetchPosts()
+        })
     }
   }
 
