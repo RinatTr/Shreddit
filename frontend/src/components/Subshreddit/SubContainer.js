@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Subshreddit from './Subshreddit';
 import { fetchSubshredditPosts } from '../../actions/SubshredditActions';
-import { fetchUserSavedPosts, fetchUser } from '../../actions/UserActions';
+import { fetchUserSavedPosts, fetchUser, fetchUserSubshreddits } from '../../actions/UserActions';
 import { fetchCommentCount } from '../../actions/CommentActions';
 import { fetchFollows } from '../../actions/FollowActions';
 
@@ -11,8 +11,8 @@ const mapStateToProps = (state, ownProps) => {
     count: state.posts.comment_count,
     user: state.user_content.user,
     loggedUser: state.auth.loggedUser,
-    follows: state.follows.follows,
-    saved_posts: state.user_content.saved_posts
+    saved_posts: state.user_content.saved_posts,
+    subshreddits: state.user_content.userSubshreddits
   }
 }
 
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     fetchSubshredditPosts: (id) => dispatch(fetchSubshredditPosts(id)),
     fetchCommentCount: () => dispatch(fetchCommentCount()),
     fetchUser: (username) => dispatch(fetchUser(username)),
-    fetchFollows: (userId) => dispatch(fetchFollows(userId))
+    fetchUserSubshreddits: (userId) => dispatch(fetchUserSubshreddits(userId))
   }
 }
 

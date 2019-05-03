@@ -3,6 +3,7 @@ import * as Util from '../util/util.js';
 export const RECEIVE_USER_POSTS = "RECEIVE_USER_POSTS";
 export const RECEIVE_USER_SAVED_POSTS = "RECEIVE_USER_SAVED_POSTS";
 export const RECEIVE_USER = "RECEIVE_USER";
+export const RECEIVE_USER_SUBSHREDDITS = "RECEIVE_USER_SUBSHREDDITS";
 
 export const receiveUserPosts = (posts) => {
   return {
@@ -14,6 +15,12 @@ export const receiveUserSavedPosts = (savedPosts) => {
   return {
     type: RECEIVE_USER_SAVED_POSTS,
     savedPosts
+  }
+}
+export const receiveUserSubshreddits = (userSubs) => {
+  return {
+    type: RECEIVE_USER_SUBSHREDDITS,
+    userSubs
   }
 }
 
@@ -51,5 +58,12 @@ export const fetchUserSavedPosts = (id) => dispatch => {
                 })
                 .catch(err => {
                   console.log(err);
+                })
+}
+
+export const fetchUserSubshreddits = (id) => dispatch => {
+  return Util.getAllSubshredditsPerUser(id)
+                .then(res => {
+                  return dispatch(receiveUserSubshreddits(res.data.subshreddits))
                 })
 }

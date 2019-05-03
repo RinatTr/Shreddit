@@ -16,34 +16,36 @@ export default class Subshreddit extends Component {
     }
     this.handleSubscribe = this.handleSubscribe.bind(this)
     this.handleUnsubscribe = this.handleUnsubscribe.bind(this)
+    this.validateSubscription = this.validateSubscription.bind(this)
   }
 
-  validateSubscription = () => {
+  async validateSubscription() {
     if (this.props.loggedUser) {
-      let loggedUserId = this.props.loggedUser.userData.id
-      let { subId } = this.props.match.params
-      getAllSubshredditsPerUser(loggedUserId)
-          .then((res) => {
-            let userSubshreddits = res.data.subshreddits
-                if (userSubshreddits.find(sub => +sub.subshreddit_id === +subId)) {
-                  this.setState({
-                    isSubscribed: true,
-                    userSubshreddits: res.data.subshreddits
+      let loggedUserId = this.props.loggedUser.userData.id;
+      let { subId } = this.props.match.params;
+      this.props.fetchUserSubshreddits(loggedUserId)
+                  .then(() => {
+                    if (this.props.subshreddits.find(sub => +sub.subshreddit_id === +subId)) {
+                      this.setState({
+                        isSubscribed: true
+                      })
+                    } else {
+                      this.setState({
+                        isSubscribed: false
+                      })
+                    }
                   })
-                } else {
-                  this.setState({
-                    isSubscribed: false,
-                    userSubshreddits: res.data.subshreddits
-                  })
-                }
-              })
     }
   }
 
   async componentDidMount() {
-    let { fetchSubshredditPosts, fetchCommentCount, match } = this.props;
+    let { fetchSubshredditPosts, fetchCommentCount, match, loggedUser } = this.props;
     await fetchSubshredditPosts(match.params.subId)
     await fetchCommentCount()
+    if (loggedUser) {
+      let loggedUserId = loggedUser.userData.id;
+      await this.props.fetchUserSubshreddits(loggedUserId)
+    }
     const res = await getASubshreddit(match.params.subId)
     this.setState({
       data: res.data.subshreddit
@@ -52,10 +54,11 @@ export default class Subshreddit extends Component {
   }
 
   async componentDidUpdate(prevProps) {
-  if (this.props.match.params.subname !== prevProps.match.params.subname) {
+  if (this.props.match.path !== prevProps.match.path) {
     await this.props.fetchUser(this.props.match.params.username)
     await this.props.fetchSubshredditPosts(this.props.match.params.subname)
     await this.props.fetchCommentCount()
+    this.validateSubscription()
     if (this.props.loggedUser) {
       let boolean = this.props.loggedUser.username === this.props.user.username
         this.setState({
@@ -81,25 +84,27 @@ export default class Subshreddit extends Component {
     if (!this.props.loggedUser) {
       this.props.history.push('/auth/login/')
     } else {
-      let subObj = {  subscriber_id: this.props.loggedUser.userData.id,
-                      subshreddit_id: this.props.match.params.subId }
-
+      let { match, loggedUser } = this.props;
+      let subObj = {  subscriber_id: loggedUser.userData.id,
+                      subshreddit_id: match.params.subId }
       await addSubscription(subObj).catch((err)=> console.log(err))
+      this.props.fetchUserSubshreddits(loggedUser.userData.id)
       this.validateSubscription()
     }
   }
 
   async handleUnsubscribe() {
-    let { userSubshreddits } = this.state;
+    let { subshreddits, loggedUser } = this.props;
     let { subId } = this.props.match.params
-    let subscriptionId = userSubshreddits.find(sub => +sub.subshreddit_id === +subId).subscription_id
+    let subscriptionId = subshreddits.find(sub => +sub.subshreddit_id === +subId).subscription_id
     await deleteSubscription(subscriptionId).catch((err)=> console.log(err))
+    this.props.fetchUserSubshreddits(loggedUser.userData.id)
     this.validateSubscription()
   }
 
   render() {
     let { posts, count, loggedUser, saved_posts } = this.props;
-    let { isLoggedUserPage, data, userSubshreddits } = this.state;
+    let { isLoggedUserPage, data } = this.state;
     let mapPosts;
     if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {
        mapPosts = posts.map((post) => {

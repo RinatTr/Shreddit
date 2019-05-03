@@ -1,13 +1,4 @@
-import { RECEIVE_USER_POSTS, RECEIVE_USER, RECEIVE_USER_SAVED_POSTS } from '../actions/UserActions';
-
-
-// const normalizeData = arr => {
-//   let obj = {};
-//   arr.forEach(item => {
-//     obj[item.id] = item;
-//   });
-//   return obj
-// }
+import { RECEIVE_USER_POSTS, RECEIVE_USER, RECEIVE_USER_SAVED_POSTS, RECEIVE_USER_SUBSHREDDITS } from '../actions/UserActions';
 
 const UserReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
@@ -18,6 +9,8 @@ const UserReducer = (oldState = {}, action) => {
       return {...oldState, user: action.user}
     case RECEIVE_USER_SAVED_POSTS:
       return {...oldState, saved_posts: action.savedPosts}
+    case RECEIVE_USER_SUBSHREDDITS:
+      return {...oldState, userSubshreddits: action.userSubs}
     default:
       return oldState
   }
