@@ -15,7 +15,7 @@ const addSubscription = (req, res, next) => {
 
 const deleteSubscription = (req, res, next) => {
   const subscriptionId = parseInt(req.params.subscriptionId)
-  db.none('DELETE FROM follows WHERE id=$1',[subscriptionId])
+  db.none('DELETE FROM subscriptions WHERE id=$1',[subscriptionId])
     .then(() => {
       res.status(200).json({
         status: "success",

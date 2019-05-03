@@ -14,8 +14,8 @@ export default class Subshreddit extends Component {
       data: "",
       userSubshreddits: []
     }
-    this.handleFollow = this.handleFollow.bind(this)
-    this.handleUnfollow = this.handleUnfollow.bind(this)
+    this.handleSubscribe = this.handleSubscribe.bind(this)
+    this.handleUnsubscribe = this.handleUnsubscribe.bind(this)
   }
 
   validateSubscription = () => {
@@ -27,11 +27,13 @@ export default class Subshreddit extends Component {
             let userSubshreddits = res.data.subshreddits
                 if (userSubshreddits.find(sub => +sub.subshreddit_id === +subId)) {
                   this.setState({
-                    isSubscribed: true
+                    isSubscribed: true,
+                    userSubshreddits: res.data.subshreddits
                   })
                 } else {
                   this.setState({
-                    isSubscribed: false
+                    isSubscribed: false,
+                    userSubshreddits: res.data.subshreddits
                   })
                 }
               })
@@ -75,41 +77,29 @@ export default class Subshreddit extends Component {
   }
 
   //handle user input
-  async handleFollow() {
-    // if (!this.props.loggedUser) {
-    //   this.props.history.push('/auth/login/')
-    // } else {
-    //   let followObj = { follower_id: this.props.loggedUser.userData.id,
-    //                     followed_id: this.props.user.id }
-    //
-    //   await addFollow(followObj).catch((err)=> console.log(err))
-    //   this.props.fetchFollows(followObj.follower_id)
-    //   this.validateSubscription()
-    // }
+  async handleSubscribe() {
+    if (!this.props.loggedUser) {
+      this.props.history.push('/auth/login/')
+    } else {
+      let subObj = {  subscriber_id: this.props.loggedUser.userData.id,
+                      subshreddit_id: this.props.match.params.subId }
+
+      await addSubscription(subObj).catch((err)=> console.log(err))
+      this.validateSubscription()
+    }
   }
 
-  async handleUnfollow() {
-    //user is definitely logged in
-      // let userPageId = this.props.user.id
-      // let followObj = this.props.follows.find(follow => follow.followed_id === userPageId)
-      // await deleteFollow(followObj.id).catch((err)=> console.log(err))
-      // await this.props.fetchFollows(followObj.follower_id)
-      // this.validateSubscription()
-  }
-
-  refreshSubshreddits = (userId) => {
-    getAllSubshredditsPerUser(userId)
-        .then((res) => {
-          this.setState({
-            userSubshreddits: res.data.subshreddits
-          })
-        })
+  async handleUnsubscribe() {
+    let { userSubshreddits } = this.state;
+    let { subId } = this.props.match.params
+    let subscriptionId = userSubshreddits.find(sub => +sub.subshreddit_id === +subId).subscription_id
+    await deleteSubscription(subscriptionId).catch((err)=> console.log(err))
+    this.validateSubscription()
   }
 
   render() {
     let { posts, count, match, user, loggedUser, saved_posts, location } = this.props;
     let { isLoggedUserPage, data, userSubshreddits } = this.state;
-    console.log(this.state.isSubscribed);
     let mapPosts;
     if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {
        mapPosts = posts.map((post) => {
@@ -139,8 +129,8 @@ export default class Subshreddit extends Component {
             {data ? <SubInfo
                       subname={data.groupname}
                       avatar={data.img_url}
-                      handleFollow={this.handleFollow}
-                      handleUnfollow={this.handleUnfollow}
+                      handleSubscribe={this.handleSubscribe}
+                      handleUnsubscribe={this.handleUnsubscribe}
                       isSubscribed={this.state.isSubscribed}
                       isLoggedUserPage={isLoggedUserPage}
                     /> : null }

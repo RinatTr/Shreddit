@@ -12,8 +12,8 @@ const SubInfo = ({subname, avatar, cakeDay, handleSubscribe, handleUnsubscribe, 
           </div>
           <span><strong><Link to={`/subshreddit/${subname}`}>/s/{subname}</Link></strong></span>
           {!isLoggedUserPage ? (isSubscribed
-            ? <button className="follow" onClick={handleSubscribe}>UNSUBSCRIBE</button>
-            : <button className="follow" onClick={handleUnsubscribe}>SUBSCRIBE</button>) : null}
+            ? <button className="follow" onClick={handleUnsubscribe}>UNSUBSCRIBE</button>
+            : <button className="follow" onClick={handleSubscribe}>SUBSCRIBE</button>) : null}
         </div>
       </div>
     </div>
