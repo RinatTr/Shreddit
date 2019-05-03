@@ -42,10 +42,6 @@ export default class Subshreddit extends Component {
     let { fetchSubshredditPosts, fetchCommentCount, match, loggedUser } = this.props;
     await fetchSubshredditPosts(match.params.subId)
     await fetchCommentCount()
-    if (loggedUser) {
-      let loggedUserId = loggedUser.userData.id;
-      await this.props.fetchUserSubshreddits(loggedUserId)
-    }
     const res = await getASubshreddit(match.params.subId)
     this.setState({
       data: res.data.subshreddit
@@ -88,7 +84,6 @@ export default class Subshreddit extends Component {
       let subObj = {  subscriber_id: loggedUser.userData.id,
                       subshreddit_id: match.params.subId }
       await addSubscription(subObj).catch((err)=> console.log(err))
-      this.props.fetchUserSubshreddits(loggedUser.userData.id)
       this.validateSubscription()
     }
   }
@@ -98,7 +93,6 @@ export default class Subshreddit extends Component {
     let { subId } = this.props.match.params
     let subscriptionId = subshreddits.find(sub => +sub.subshreddit_id === +subId).subscription_id
     await deleteSubscription(subscriptionId).catch((err)=> console.log(err))
-    this.props.fetchUserSubshreddits(loggedUser.userData.id)
     this.validateSubscription()
   }
 
