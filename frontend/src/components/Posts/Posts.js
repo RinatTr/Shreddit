@@ -29,7 +29,7 @@ export default class Posts extends Component {
       let type = e.target.alt;
       axios.patch(`/api/comments/${comment_id}`, { type: type })
         .then(() => {
-          this.props.fetchCommentsPerPost(postId)  
+          this.props.fetchCommentsPerPost(postId)
         })
     } else {
       let post_id = e.target.id;
@@ -46,10 +46,15 @@ export default class Posts extends Component {
     if (loggedUser) {
       if (e.target.className === "save-container") {
         axios.post(`/api/users/${loggedUser.userData.id}/save`, {postId : e.target.id})
+        .then(() => {
+          fetchUserSavedPosts(loggedUser.userData.id)
+        })
       } else {
         axios.delete(`/api/users/${loggedUser.userData.id}/save`, { data: {postId : e.target.id} }) //delete requests use config.data to add req.body
+        .then(() => {
+          fetchUserSavedPosts(loggedUser.userData.id)
+        })
       }
-      fetchUserSavedPosts(loggedUser.userData.id)
     }
   }
 
