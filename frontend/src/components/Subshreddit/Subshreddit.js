@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Post from '../Posts/PostDisplay';
 import SubInfo from './SubDisplay';
-import { addFollow, deleteFollow, getASubshreddit, getAllSubshredditsPerUser } from '../../util/util';
+import { addSubscription, deleteSubscription, getASubshreddit, getAllSubshredditsPerUser } from '../../util/util';
 import '../../css/Subshreddit.css';
 
 export default class Subshreddit extends Component {
@@ -20,7 +20,6 @@ export default class Subshreddit extends Component {
 
   validateSubscription = () => {
     if (this.props.loggedUser) {
-      // let { userSubshreddits } = this.state;
       let loggedUserId = this.props.loggedUser.userData.id
       let { subId } = this.props.match.params
       getAllSubshredditsPerUser(loggedUserId)
@@ -77,29 +76,28 @@ export default class Subshreddit extends Component {
 
   //handle user input
   async handleFollow() {
-    if (!this.props.loggedUser) {
-      this.props.history.push('/auth/login/')
-    } else {
-      let followObj = { follower_id: this.props.loggedUser.userData.id,
-                        followed_id: this.props.user.id }
-
-      await addFollow(followObj).catch((err)=> console.log(err))
-      this.props.fetchFollows(followObj.follower_id)
-      this.validateSubscription()
-    }
+    // if (!this.props.loggedUser) {
+    //   this.props.history.push('/auth/login/')
+    // } else {
+    //   let followObj = { follower_id: this.props.loggedUser.userData.id,
+    //                     followed_id: this.props.user.id }
+    //
+    //   await addFollow(followObj).catch((err)=> console.log(err))
+    //   this.props.fetchFollows(followObj.follower_id)
+    //   this.validateSubscription()
+    // }
   }
 
   async handleUnfollow() {
     //user is definitely logged in
-      let userPageId = this.props.user.id
-      let followObj = this.props.follows.find(follow => follow.followed_id === userPageId)
-      await deleteFollow(followObj.id).catch((err)=> console.log(err))
-      await this.props.fetchFollows(followObj.follower_id)
-      this.validateSubscription()
+      // let userPageId = this.props.user.id
+      // let followObj = this.props.follows.find(follow => follow.followed_id === userPageId)
+      // await deleteFollow(followObj.id).catch((err)=> console.log(err))
+      // await this.props.fetchFollows(followObj.follower_id)
+      // this.validateSubscription()
   }
 
   refreshSubshreddits = (userId) => {
-    console.log("refresh subshreddits");
     getAllSubshredditsPerUser(userId)
         .then((res) => {
           this.setState({
