@@ -10,7 +10,6 @@ export default class Subshreddit extends Component {
     super()
     this.state = {
       isSubscribed: false,
-      isLoggedUserPage: false,
       data: "",
       userSubshreddits: []
     }
@@ -50,17 +49,14 @@ export default class Subshreddit extends Component {
   }
 
   async componentDidUpdate(prevProps) {
-  if (this.props.match.path !== prevProps.match.path) {
-    await this.props.fetchUser(this.props.match.params.username)
-    await this.props.fetchSubshredditPosts(this.props.match.params.subname)
+  if (this.props.match.params.subId !== prevProps.match.params.subId) {
+    await this.props.fetchSubshredditPosts(this.props.match.params.subId)
     await this.props.fetchCommentCount()
+    const res = await getASubshreddit(this.props.match.params.subId)
+    this.setState({
+      data: res.data.subshreddit
+    })
     this.validateSubscription()
-    if (this.props.loggedUser) {
-      let boolean = this.props.loggedUser.username === this.props.user.username
-        this.setState({
-          isLoggedUserPage: boolean
-        })
-    }
   }
 }
   //handle data
@@ -98,7 +94,8 @@ export default class Subshreddit extends Component {
 
   render() {
     let { posts, count, loggedUser, saved_posts } = this.props;
-    let { isLoggedUserPage, data } = this.state;
+    let { data } = this.state;
+    console.log(this.props.match.params);
     let mapPosts;
     if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {
        mapPosts = posts.map((post) => {
@@ -131,7 +128,6 @@ export default class Subshreddit extends Component {
                       handleSubscribe={this.handleSubscribe}
                       handleUnsubscribe={this.handleUnsubscribe}
                       isSubscribed={this.state.isSubscribed}
-                      isLoggedUserPage={isLoggedUserPage}
                     /> : null }
           </div>
         </div>
