@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /src/components/Posts/PostNINJA.js
+/src/reducers/rootReducerNINJA.js
 
 # testing
 /coverage
