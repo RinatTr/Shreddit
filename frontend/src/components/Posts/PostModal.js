@@ -7,8 +7,8 @@ import comment from '../../icons/comment.png'
 // import hide from '../../icons/hide.png'
 import save from '../../icons/save.png'
 import saved from '../../icons/saved.png'
-import Comment from '../Comments/CommentDisplay'
-import AddCommentContainer from '../Comments/AddCommentContainer'
+import Comment from '../Comments/CommentDisplay.js'
+import AddCommentContainer from '../Comments/AddCommentContainer.js'
 import ReactHtmlParser from 'react-html-parser';
 
 const PostModal = ({  id,

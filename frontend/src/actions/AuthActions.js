@@ -1,5 +1,5 @@
 import * as Util from '../util/util.js';
-import Auth from '../util/Auth'
+import Auth from '../util/Auth.js'
 
 export const SIGN_UP = "SIGN_UP";
 export const LOGIN = "LOGIN";

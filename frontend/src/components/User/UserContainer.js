@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import User from './User'
-import { fetchUserPosts, fetchUserSavedPosts, fetchUser } from '../../actions/UserActions';
-import { fetchCommentCount } from '../../actions/CommentActions';
-import { fetchFollows } from '../../actions/FollowActions';
+import { fetchUserPosts, fetchUserSavedPosts, fetchUser } from '../../actions/UserActions.js';
+import { fetchCommentCount } from '../../actions/CommentActions.js';
+import { fetchFollows } from '../../actions/FollowActions.js';
 
 const mapStateToProps = (state, ownProps) => {
   return {

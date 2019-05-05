@@ -1,6 +1,6 @@
-import AddComment from "./AddComment";
+import AddComment from "./AddComment.js";
 import { connect } from "react-redux";
-import { postComment, fetchCommentsPerPost } from "../../actions/CommentActions";
+import { postComment, fetchCommentsPerPost } from "../../actions/CommentActions.js";
 
 const mapStateToProps = (state, ownProps) => {
   return {

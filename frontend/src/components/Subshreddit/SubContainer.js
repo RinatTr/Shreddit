@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import Subshreddit from './Subshreddit';
-import { fetchSubshredditPosts } from '../../actions/SubshredditActions';
-import { fetchUserSavedPosts, fetchUser, fetchUserSubshreddits } from '../../actions/UserActions';
-import { fetchCommentCount } from '../../actions/CommentActions';
-import { fetchFollows } from '../../actions/FollowActions';
+import { fetchSubshredditPosts } from '../../actions/SubshredditActions.js';
+import { fetchUserSavedPosts, fetchUser, fetchUserSubshreddits } from '../../actions/UserActions.js';
+import { fetchCommentCount } from '../../actions/CommentActions.js';
+import { fetchFollows } from '../../actions/FollowActions.js';
 
 const mapStateToProps = (state, ownProps) => {
   return {

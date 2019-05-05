@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import Post from './PostDisplay'
-import PostModal from './PostModal'
+import Post from './PostDisplay.js'
+import PostModal from './PostModal.js'
 import '../../css/Posts.css'
 
 export default class Posts extends Component {

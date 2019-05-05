@@ -1,4 +1,4 @@
-import { RECEIVE_FOLLOWS } from '../actions/FollowActions';
+import { RECEIVE_FOLLOWS } from '../actions/FollowActions.js';
 
 
 // const normalizeData = arr => {

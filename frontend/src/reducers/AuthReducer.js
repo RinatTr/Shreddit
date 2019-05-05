@@ -1,4 +1,4 @@
-import { SIGN_UP, LOGIN, RECEIVE_ERROR } from '../actions/AuthActions';
+import { SIGN_UP, LOGIN, RECEIVE_ERROR } from '../actions/AuthActions.js';
 
 const AuthReducer = (oldState = {}, action) => {
   Object.freeze(oldState);

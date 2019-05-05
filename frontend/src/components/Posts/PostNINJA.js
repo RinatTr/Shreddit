@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deletePost } from '../actions/postActions'
+import { deletePost } from '../actions/postActions.js'
 
 const Post = (props) => {
   const { post } = props;

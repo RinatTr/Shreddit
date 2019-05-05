@@ -5,7 +5,7 @@ import all from '../../icons/iconfinder_ic_clear_all_48px_352269.png'
 import popular from '../../icons/iconfinder_ic_trending_up_48px_352184.png'
 import createPost from '../../icons/createPostTeal.png'
 import '../../css/Navbar.css';
-import Search from './Search'
+import Search from './Search.js'
 
 class Navbar extends Component {
   constructor() {

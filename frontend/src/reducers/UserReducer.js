@@ -1,4 +1,4 @@
-import { RECEIVE_USER_POSTS, RECEIVE_USER, RECEIVE_USER_SAVED_POSTS, RECEIVE_USER_SUBSHREDDITS } from '../actions/UserActions';
+import { RECEIVE_USER_POSTS, RECEIVE_USER, RECEIVE_USER_SAVED_POSTS, RECEIVE_USER_SUBSHREDDITS } from '../actions/UserActions.js';
 
 const UserReducer = (oldState = {}, action) => {
   Object.freeze(oldState);

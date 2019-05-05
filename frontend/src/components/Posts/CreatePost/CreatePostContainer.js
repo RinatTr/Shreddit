@@ -1,4 +1,4 @@
-import CreatePost from "./CreatePost";
+import CreatePost from "./CreatePost.js";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state, ownProps) => {

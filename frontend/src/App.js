@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './css/App.css';
 
-import PostsContainer from './components/Posts/PostsContainer'
-import CreatePostContainer from "./components/Posts/CreatePost/CreatePostContainer";
-import UserContainer from './components/User/UserContainer'
-import SubContainer from './components/Subshreddit/SubContainer'
-import AuthContainer from './components/Auth/AuthContainer'
-import NavbarContainer from './components/Navbar/NavbarContainer'
+import PostsContainer from './components/Posts/PostsContainer.js'
+import CreatePostContainer from "./components/Posts/CreatePost/CreatePostContainer.js";
+import UserContainer from './components/User/UserContainer.js'
+import SubContainer from './components/Subshreddit/SubContainer.js'
+import AuthContainer from './components/Auth/AuthContainer.js'
+import NavbarContainer from './components/Navbar/NavbarContainer.js'
 
 class App extends Component {
   render() {

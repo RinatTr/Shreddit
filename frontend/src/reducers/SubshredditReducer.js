@@ -1,4 +1,4 @@
-import { RECEIVE_SUBSHREDDIT_POSTS } from '../actions/SubshredditActions';
+import { RECEIVE_SUBSHREDDIT_POSTS } from '../actions/SubshredditActions.js';
 
 const SubshredditReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
