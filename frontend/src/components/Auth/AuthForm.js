@@ -7,8 +7,8 @@ class AuthForm extends Component {
   constructor() {
     super();
     this.state = {
-        username: "Lauren28",
-        password: "12345",
+        username: "",
+        password: "",
         email: ""
     };
   }
@@ -34,7 +34,11 @@ class AuthForm extends Component {
       this.props.loginUser(userLogin)
       this.props.history.goBack();
     }
+  }
 
+  handleDemo = () => {
+    this.props.loginUser({ username: "Lauren28", password: "12345"})
+    this.props.history.goBack();
   }
   render() {
     let { username, password, email } = this.state;
@@ -84,6 +88,7 @@ class AuthForm extends Component {
                     /> }
                    <button type="submit">{isPathLogin ? "SIGN IN" : "SIGN UP"}</button>
                  </form>
+                 <button onClick={this.handleDemo} id="demo-login">DEMO LOGIN</button>
                  <hr />
                  {isPathLogin
                     ? <span>New to Shreddit? <Link to="/auth/signup">SIGN UP</Link></span>

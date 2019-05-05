@@ -45,6 +45,14 @@ button:disabled {
   border: 1px solid rgb(0, 150, 290);
 }
 
+button#demo-login {
+  font-size: 12px;
+  font-weight:600;
+  color: black;
+  background: white;
+  margin-top: 2px;
+}
+
 input {
   background-color: #f2f8fd;
   border: 1px solid rgb(237, 239, 241);
