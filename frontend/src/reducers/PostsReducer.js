@@ -1,13 +1,8 @@
 import { RECEIVE_POSTS } from '../actions/PostActions.js';
 import { RECEIVE_COMMENTS, RECEIVE_COMMENT_COUNT, ADD_COMMENT } from '../actions/CommentActions.js';
 
-// const normalizeData = arr => {
-//   let obj = {};
-//   arr.forEach(item => {
-//     obj[item.id] = item;
-//   });
-//   return obj
-// }
+//  ./src/reducers/PostsReducer.js
+// Cannot find file '../actions/PostActions.js' in './src/reducers'.
 
 const PostsReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
