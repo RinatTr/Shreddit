@@ -12,13 +12,14 @@ for (let i = 0; i < 25; i++) {
   users.push(str);
 }
 
-// let subshreddits = [];
-// let names = ['Music','Trolitics','Shoes','Hiking','Coding','Philosophy','LifeIsGood','Random','Murica','Canada']
-// for (let i = 0; i < 10; i++) {
-//   let groupname = names[i];
-//   let str = `('${groupname}')`;
-//   subshreddits.push(str);
-// }
+let subshreddits = [];
+let names = ['Music','Trolitics','Shoes','Hiking','Coding','Philosophy','LifeIsGood','Random','Murica','Canada']
+for (let i = 0; i < 10; i++) {
+  let groupname = names[i];
+  let img_url = "URL"
+  let str = `('${groupname}', '${img_url}')`
+  subshreddits.push(str);
+}
 
 // let posts = [];
 //
@@ -56,10 +57,11 @@ for (let i = 0; i < 150; i++) {
 }
 
 // users = users.join(", ");
-// subshreddits = subshreddits.join(", ");
+subshreddits = subshreddits.join(", ")
+console.log(subshreddits);
 // posts = posts.join(", ");
 // comments = comments.join(", ");
-follows = follows.join(", ");
+// follows = follows.join(", ");
 // votes = votes.join(", ");
 //
 // db.none(
@@ -68,11 +70,11 @@ follows = follows.join(", ");
 //   .catch(err => {
 //     console.log(err);
 //   });
-db.none(
-  "INSERT INTO follows(follower_id, followed_id) VALUES " +
-    follows +
-    ";"
-)
-  .catch(err => {
-    console.log(err);
-  });
+// db.none(
+//   "INSERT INTO follows(follower_id, followed_id) VALUES " +
+//     follows +
+//     ";"
+// )
+//   .catch(err => {
+//     console.log(err);
+//   });
