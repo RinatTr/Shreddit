@@ -1,5 +1,5 @@
-import { RECEIVE_POSTS } from '../actions/PostActions';
-import { RECEIVE_COMMENTS, RECEIVE_COMMENT_COUNT, ADD_COMMENT } from '../actions/CommentActions';
+import { RECEIVE_POSTS } from '../actions/PostActions.js';
+import { RECEIVE_COMMENTS, RECEIVE_COMMENT_COUNT, ADD_COMMENT } from '../actions/CommentActions.js';
 
 // const normalizeData = arr => {
 //   let obj = {};
