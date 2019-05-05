@@ -62,7 +62,6 @@ const getSavedPosts = (req, res, next) => {
 
 const addSavedPost = (req, res, next) => {
   let userId = parseInt(req.params.userId)
-  console.log(req.body)
   db.none(`INSERT INTO saved_posts(user_id, post_id) VALUES($1, $2)`,[userId, req.body.postId])
     .then(data => {
       res.status(200).json({
