@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS shreddit;
-CREATE DATABASE shreddit;
+-- DROP DATABASE IF EXISTS shreddit;
+-- CREATE DATABASE shreddit;
 
-\c shreddit;
+-- \c shreddit;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -51,7 +51,8 @@ CREATE TABLE comments (
   commenter_id INT REFERENCES users(id),
   post_id INT REFERENCES posts(id),
   votes INT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  body VARCHAR
 );
 
 INSERT INTO users (username, password_digest, avatar_url, email) VALUES
