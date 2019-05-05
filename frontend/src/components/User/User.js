@@ -130,7 +130,14 @@ export default class User extends Component {
       <React.Fragment>
         {isLoggedUserPage && loggedUser ? <UserNav loggedUser={loggedUser}/> : null}
         <div className={isLoggedUserPage ? "logged-user-page":"user-page"}>
-          {mapPosts ? <div className="user-posts-container">{mapPosts}</div> : ""}
+          {mapPosts
+            ? (mapPosts.length
+                ? <div className="user-posts-container">{mapPosts}</div>
+                : <div className="user-posts-container">
+                    <div className="post-collapsed" style={{cursor:'default'}}>&nbsp;<strong>No posts to display yet...</strong>
+                    </div>
+                  </div>)
+            : null}
           {user ? <UserInfo
                     username={user.username}
                     avatar={user.avatar_url}
