@@ -4,7 +4,9 @@
   "description": "Shreddit is a simplified, shredded-down clone of reddit, built using React and express.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd backend && node app.js",
+    "heroku-postbuild": "cd backend && npm install && cd ../frontend && npm install --only=prod && npm run build"
   },
   "repository": {
     "type": "git",
