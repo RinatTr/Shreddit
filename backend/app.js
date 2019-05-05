@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const bodyParser = require('body-parser')
@@ -14,6 +15,7 @@ const app = express()
 app.use(cookieParser("shreddit passport"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(path.join(__dirname, "../frontend/build")))
 
 app.use(
   session({
@@ -34,6 +36,11 @@ app.use('/api/subshreddits', subshreddits)
 app.use('/api/follows', follows)
 app.use('/api/subscriptions', subscriptions)
 
+app.use('*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error("Not Found");
@@ -53,7 +60,7 @@ app.use(function(err, req, res, next) {
               error: err
               })
 });
-
+// app.use(express.static(path.join(__dirname, "frontend/build")))
 app.listen(3100, () => {
   console.log('Shreddit: listening to 3100');
 })
