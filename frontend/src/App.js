@@ -15,6 +15,7 @@ class App extends Component {
       <div className="App">
         <Route component={NavbarContainer} />
         <Switch>
+          <Route exact path="/" component={PostsContainer} />
           <Route path="/all" component={PostsContainer} />
           <Route path="/popular" component={PostsContainer} />
           <Route path="/user/:username" component={UserContainer} />

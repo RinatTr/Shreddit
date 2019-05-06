@@ -116,7 +116,7 @@ export default class Posts extends Component {
     return (
       //single post (modal) rendering
       <div className="posts">
-        <h4>{match.path}</h4>
+        <h4>{(match.path === "/") ? match.path+"home" : match.path}</h4>
         {match.params.id && currentPost && comments && count
           ? <PostModal
               id={currentPost.id}
