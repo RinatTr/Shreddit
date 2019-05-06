@@ -61,6 +61,6 @@ app.use(function(err, req, res, next) {
               })
 });
 // app.use(express.static(path.join(__dirname, "frontend/build")))
-app.listen(3100, () => {
+app.listen(process.env.PORT || 3100, () => {
   console.log('Shreddit: listening to 3100');
 })
