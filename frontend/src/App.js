@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './css/App.css';
 
@@ -9,8 +9,7 @@ import SubContainer from './components/Subshreddit/SubContainer.js'
 import AuthContainer from './components/Auth/AuthContainer.js'
 import NavbarContainer from './components/Navbar/NavbarContainer.js'
 
-class App extends Component {
-  render() {
+function App () {
     return (
       <div className="App">
         <Route component={NavbarContainer} />
@@ -27,7 +26,6 @@ class App extends Component {
         </Switch>
     </div>
     );
-  }
 }
 
 export default App;

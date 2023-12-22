@@ -1,139 +1,138 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Post from '../Posts/PostDisplay';
 import SubInfo from './SubDisplay';
 import { addSubscription, deleteSubscription, getASubshreddit, getAllSubshredditsPerUser } from '../../util/util';
 import '../../css/Subshreddit.css';
 
-export default class Subshreddit extends Component {
-  constructor() {
-    super()
-    this.state = {
-      isSubscribed: false,
-      data: "",
-      userSubshreddits: []
-    }
-    this.handleSubscribe = this.handleSubscribe.bind(this)
-    this.handleUnsubscribe = this.handleUnsubscribe.bind(this)
-    this.validateSubscription = this.validateSubscription.bind(this)
-  }
+export default function Subshreddit (props) {
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [data, setData] = useState('');
+  const [userSubshreddits, setUserSubshreddits] = useState([]);
+  const prevSubIdRef = useRef(props.match.params.subId);
 
-  async validateSubscription() {
-    if (this.props.loggedUser) {
-      let loggedUserId = this.props.loggedUser.userData.id;
-      let { subId } = this.props.match.params;
-      this.props.fetchUserSubshreddits(loggedUserId)
+  const validateSubscription = () => {
+    if (props.loggedUser) {
+      let loggedUserId = props.loggedUser.userData.id;
+      let { subId } = props.match.params;
+      props.fetchUserSubshreddits(loggedUserId)
                   .then(() => {
-                    if (this.props.subshreddits.find(sub => +sub.subshreddit_id === +subId)) {
-                      this.setState({
-                        isSubscribed: true
-                      })
+                    if (props.subshreddits.find(sub => +sub.subshreddit_id === +subId)) {
+                      setIsSubscribed(true);
                     } else {
-                      this.setState({
-                        isSubscribed: false
-                      })
+                      setIsSubscribed(false);
                     }
                   })
     }
   }
 
-  async componentDidMount() {
-    let { fetchSubshredditPosts, fetchCommentCount, match, loggedUser } = this.props;
-    await fetchSubshredditPosts(match.params.subId)
-    await fetchCommentCount()
-    const res = await getASubshreddit(match.params.subId)
-    this.setState({
-      data: res.data.subshreddit
-    })
-    this.validateSubscription()
+   //handle user input
+   const handleSubscribe = async () => {
+    if (!props.loggedUser) {
+      props.history.push('/auth/login/')
+    } else {
+      let { match, loggedUser } = props;
+      let subObj = {  subscriber_id: loggedUser.userData.id,
+                      subshreddit_id: match.params.subId }
+      await addSubscription(subObj).catch((err)=> console.log(err))
+      validateSubscription()
+    }
   }
 
-  async componentDidUpdate(prevProps) {
-  if (this.props.match.params.subId !== prevProps.match.params.subId) {
-    await this.props.fetchSubshredditPosts(this.props.match.params.subId)
-    await this.props.fetchCommentCount()
-    const res = await getASubshreddit(this.props.match.params.subId)
-    this.setState({
-      data: res.data.subshreddit
-    })
-    this.validateSubscription()
+  const handleUnsubscribe = async () => {
+    let { subshreddits } = props;
+    let { subId } = props.match.params
+    let subscriptionId = subshreddits.find(sub => +sub.subshreddit_id === +subId).subscription_id
+    await deleteSubscription(subscriptionId).catch((err)=> console.log(err))
+    validateSubscription()
   }
-}
+
   //handle data
-  countPerPost = (id, count) => {
+  const countPerPost = (id, count) => {
     if (count) {
       let post = count.find(post => post.post_id === +id)
       return post ? post.comments_count : "0";
     }
   }
 
-  isSaved = (postId) => {
-    return this.props.saved_posts.find(savedPost => savedPost.post_id === postId) ? true : false;
+  const isSaved = (postId) => {
+    return props.saved_posts.find(savedPost => savedPost.post_id === postId) ? true : false;
   }
 
-  //handle user input
-  async handleSubscribe() {
-    if (!this.props.loggedUser) {
-      this.props.history.push('/auth/login/')
-    } else {
-      let { match, loggedUser } = this.props;
-      let subObj = {  subscriber_id: loggedUser.userData.id,
-                      subshreddit_id: match.params.subId }
-      await addSubscription(subObj).catch((err)=> console.log(err))
-      this.validateSubscription()
-    }
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      const { fetchSubshredditPosts, fetchCommentCount, match } = props;
+      await fetchSubshredditPosts(match.params.subId);
+      await fetchCommentCount();
+      const res = await getASubshreddit(match.params.subId);
+      setData(res.data.subshreddit);
+      validateSubscription();
+    };
 
-  async handleUnsubscribe() {
-    let { subshreddits, loggedUser } = this.props;
-    let { subId } = this.props.match.params
-    let subscriptionId = subshreddits.find(sub => +sub.subshreddit_id === +subId).subscription_id
-    await deleteSubscription(subscriptionId).catch((err)=> console.log(err))
-    this.validateSubscription()
-  }
+    fetchData();
+  }, []);
 
-  render() {
-    let { posts, count, loggedUser, saved_posts } = this.props;
-    let { data } = this.state;
-    console.log(this.props.match.params);
-    let mapPosts;
-    if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {
-       mapPosts = posts.map((post) => {
-        return <Link key={post.id} to={`/post/${post.id}`}>
-                <Post
-                  key={post.id}
-                  id={post.id}
-                  commentCount={this.countPerPost(post.id, count)}
-                  votes={post.votes}
-                  timestamp={post.created_at}
-                  header={post.header}
-                  body={post.body}
-                  username={post.username}
-                  groupname={post.groupname}
-                  groupId={post.subshreddit_id}
-                  groupImgUrl={post.img_url}
-                  isSaved={loggedUser ? this.isSaved(post.id) : false}
-                /></Link>
-      })
-    }
-    return (
-      <React.Fragment>
-        <div className="sub-page">
-        <h4>/s/{data.groupname}</h4>
-          <div className="sub-content">
-            {mapPosts ? <div className="sub-posts-container">{mapPosts}</div> : ""}
-            {data ? <SubInfo
-                      subname={data.groupname}
-                      avatar={data.img_url}
-                      handleSubscribe={this.handleSubscribe}
-                      handleUnsubscribe={this.handleUnsubscribe}
-                      isSubscribed={this.state.isSubscribed}
-                    /> : null }
-          </div>
+  useEffect(() => {
+    const fetchDataOnUpdate = async () => {
+      const { fetchSubshredditPosts, fetchCommentCount, match } = props;
+      await fetchSubshredditPosts(match.params.subId);
+      await fetchCommentCount();
+      const res = await getASubshreddit(match.params.subId);
+      setData(res.data.subshreddit);
+
+      // Access the previous subId using prevSubIdRef.current
+      const previousSubId = prevSubIdRef.current;
+      console.log('Previous subId:', previousSubId);
+      validateSubscription();
+    };
+
+    fetchDataOnUpdate();
+
+    // Update prevSubIdRef.current whenever props.match.params.subId changes
+    prevSubIdRef.current = props.match.params.subId;
+
+    // This effect will run whenever props.match.params.subId changes
+  }, [props.match.params.subId]);
+
+  let { posts, count, loggedUser, saved_posts } = props;
+
+  let mapPosts;
+  if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {
+      mapPosts = posts.map((post) => {
+      return <Link key={post.id} to={`/post/${post.id}`}>
+              <Post
+                key={post.id}
+                id={post.id}
+                commentCount={countPerPost(post.id, count)}
+                votes={post.votes}
+                timestamp={post.created_at}
+                header={post.header}
+                body={post.body}
+                username={post.username}
+                groupname={post.groupname}
+                groupId={post.subshreddit_id}
+                groupImgUrl={post.img_url}
+                isSaved={loggedUser ? isSaved(post.id) : false}
+              /></Link>
+    })
+  }
+  return (
+    <React.Fragment>
+      <div className="sub-page">
+      <h4>/s/{data.groupname}</h4>
+        <div className="sub-content">
+          {mapPosts ? <div className="sub-posts-container">{mapPosts}</div> : ""}
+          {data ? <SubInfo
+                    subname={data.groupname}
+                    avatar={data.img_url}
+                    handleSubscribe={handleSubscribe}
+                    handleUnsubscribe={handleUnsubscribe}
+                    isSubscribed={isSubscribed}
+                  /> : null }
         </div>
-      </React.Fragment>
-    )
-  }
+      </div>
+    </React.Fragment>
+  )
 }
 
 // display group info
