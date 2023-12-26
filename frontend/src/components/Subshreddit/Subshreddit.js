@@ -2,13 +2,12 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Post from '../Posts/PostDisplay';
 import SubInfo from './SubDisplay';
-import { addSubscription, deleteSubscription, getASubshreddit, getAllSubshredditsPerUser } from '../../util/util';
+import { addSubscription, deleteSubscription, getASubshreddit } from '../../util/util';
 import '../../css/Subshreddit.css';
 
 export default function Subshreddit (props) {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [data, setData] = useState('');
-  const [userSubshreddits, setUserSubshreddits] = useState([]);
   const prevSubIdRef = useRef(props.match.params.subId);
 
   const validateSubscription = () => {
@@ -134,7 +133,3 @@ export default function Subshreddit (props) {
     </React.Fragment>
   )
 }
-
-// display group info
-// handle subscribe
-// populate menu with user subscriptions

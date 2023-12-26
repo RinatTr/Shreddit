@@ -4,11 +4,14 @@ import icon from '../../icons/iconfinder_Faint_2695614.png'
 import '../../css/Authform.css'
 
 function AuthForm (props) {
+ 
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     email: '',
   });
+
+  let isPathLogin = (props.match.path === "/auth/login");
 
   const handleChange = (e) => {
     setFormData({
@@ -16,15 +19,15 @@ function AuthForm (props) {
       [e.target.name]: e.target.value,
     });
   };
+
 //ERRORS: 401 - wrong username or password. 500 - no such user (login) user already exists (signup).
   const handleSubmit = (e) => {
     e.preventDefault()
     let { username, password, email } = formData;
     let newUser = { username, password, email };
     let userLogin = { username, password }
-    let isLogin = ( props.match.path === "/auth/login" )
 
-    if (isLogin) {
+    if (isPathLogin) {
       props.loginUser(userLogin)
       props.history.goBack();
     } else {
@@ -38,11 +41,12 @@ function AuthForm (props) {
     props.loginUser({ username: "Lauren28", password: "12345"})
     props.history.goBack();
   }
+
   let { username, password, email } = formData;
   let userState = props.loggedInUser;
   let isLoggedIn = userState ? userState.isLoggedIn : "";
-
-  let isPathLogin = (this.props.match.path === "/auth/login");
+  
+  
 
   return (
     isLoggedIn
