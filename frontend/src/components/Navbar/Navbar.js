@@ -81,7 +81,7 @@ function Navbar (props) {
       <nav>
         <Link to="/popular"><img alt="icon" src={icon}/>shreddit</Link>
         <select id="select" name="select" onChange={(e) => {handleChange(e)}}>
-          <option id="default" defaultValue={defaultOpt}>{defaultOpt}</option>
+          <option id="default" disabled defaultValue={defaultOpt}>{defaultOpt}</option>
           <option id="popular">Popular</option>
           <option id="all">All</option>
           <option disabled>Users</option>

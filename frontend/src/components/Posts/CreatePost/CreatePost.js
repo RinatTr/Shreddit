@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import ReactQuill from "react-quill";
+import Quill from "../../../util/Quill.js";
 import { createPost, getAllSubshredditsPerUser } from '../../../util/util.js';
 
 export default function CreatePost (props) {
@@ -8,7 +8,7 @@ export default function CreatePost (props) {
 
   const [body, setBody] = useState("");
   const [title, setTitle] = useState("");
-  const [communityId, setCommunityId] = useState("");
+  const [subshreddit_id, setsubshreddit_id] = useState("");
   const [subshreddits, setSubshreddits] = useState([]);
 
   const prevLoggedUser = useRef(loggedUser);
@@ -37,7 +37,7 @@ export default function CreatePost (props) {
   //needs : GET communities loggedUser is subscribed to, POST a post.
   // loggedUser - need container.
   const handleSelect = (e) => {
-    setCommunityId(e.target.value)
+    setsubshreddit_id(e.target.value)
   }
 
   const handleTitle = (e) => {
@@ -47,12 +47,14 @@ export default function CreatePost (props) {
     //Special Quill configuration:
       setBody(e)
   }
+   //to prevent empty "enter" submit
+  const isFormValid = () => body && title && loggedUser && subshreddit_id
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    //conditional to prevent empty "enter" submit
-    if (body && title && loggedUser && communityId) {
+    if (isFormValid()) {
       createPost({ poster_id: loggedUser.userData.id,
-                              subshreddit_id: communityId,
+                              subshreddit_id,
                               votes: 0,
                               header: title,
                               body})
@@ -62,16 +64,6 @@ export default function CreatePost (props) {
                   .catch((err) => console.log(err))
     }
   }
-
-  const modules = {
-   toolbar: [
-     [{ 'header': [1, 2, false] }],
-     ['bold', 'italic','strike', 'blockquote'],
-     [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-     ['link'],
-     ['clean']
-   ]
- }
 
   let mapGroups = subshreddits
     ? subshreddits.map((el,i) => <option key={i} value={el.subshreddit_id}>{el.groupname}</option>)
@@ -83,7 +75,7 @@ export default function CreatePost (props) {
             <h3>Create a Post</h3>
         </div>
         <div className="post-community">
-          <select name="communityId" defaultValue="1" onChange={handleSelect}>
+          <select name="subshreddit_id" defaultValue="1" onChange={handleSelect}>
             <option disabled value="1">select subshreddit</option>
             {mapGroups}
           </select>
@@ -91,13 +83,10 @@ export default function CreatePost (props) {
         <div className="post-add">
         <form onSubmit={handleSubmit}>
           <input name="title" placeholder="Title" value={title} onChange={handleTitle}/>
-          <ReactQuill
+          <Quill
             className="new-post"
-            name="body"
-            value={body}
-            onChange={handleChange}
-            placeholder="Text (optional)"
-            modules={ modules }
+            body={body}
+            handleChange={handleChange}
           />
           { title ? <button>Post</button> : <button disabled>Post</button>}
         </form>

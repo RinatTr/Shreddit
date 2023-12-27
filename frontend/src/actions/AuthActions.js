@@ -26,9 +26,6 @@ export const getError = (key, errCode) => {
     errCode
   }
 }
-//load full user details when logging in. will need them.
-//fire either here or navbar component and map to props.
-
 
 export const signUpUser = (user) => dispatch => {
 // thunk is expecting a function not an action. action is sent to reducer, hence wrapped in another function.
