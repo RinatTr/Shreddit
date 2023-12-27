@@ -1,4 +1,4 @@
-import AuthForm from "./AuthForm.js";
+import AuthService from "./AuthService.js";
 import { connect } from "react-redux";
 import { signUpUser, loginUser, logoutUser, checkAuthenticateStatus } from "../../actions/AuthActions.js";
 
@@ -24,4 +24,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AuthForm);
+)(AuthService);

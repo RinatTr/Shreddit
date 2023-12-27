@@ -14,7 +14,3 @@ const rootReducer = combineReducers({
 })
 
 export default rootReducer;
-
-// component state for forms.
-// util - different set of api calls in different file
-// reducers have the same. sessions, errors - display to user.

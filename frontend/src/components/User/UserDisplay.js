@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const UserInfo = ({username, avatar, cakeDay, handleFollow, handleUnfollow, isSubscribed, isLoggedUserPage}) => {
+function UserInfo ({username, avatar, cakeDay, handleFollow, handleUnfollow, isSubscribed, isLoggedUserPage}) {
   let date = new Date(cakeDay)
   return (
     <div className="user-info-container">
