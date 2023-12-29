@@ -127,6 +127,7 @@ const logoutUser = (req, res, next) => {
 }
 
 const loginUser = (req, res) => {
+  console.log("made it", this)
   res.json(req.user.username);
 }
 
