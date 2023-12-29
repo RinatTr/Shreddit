@@ -10,6 +10,12 @@ const comments = require('./routes/comments.js')
 const follows = require('./routes/follows.js')
 const subscriptions = require('./routes/subscriptions.js')
 const subshreddits = require('./routes/subshreddits.js')
+
+if (process.env.NODE_ENV !== 'production') {
+  //for DEV: sets NODE_ENV to get env variables from local .env file
+  require('dotenv').config();
+}
+
 const app = express()
 
 app.use(cookieParser("shreddit passport"));
@@ -40,7 +46,6 @@ app.use('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error("Not Found");
@@ -60,7 +65,7 @@ app.use(function(err, req, res, next) {
               error: err
               })
 });
-// app.use(express.static(path.join(__dirname, "frontend/build")))
-app.listen(process.env.PORT || 3100, () => {
-  console.log('Shreddit: listening to 3100');
+
+app.listen(process.env.PORT, () => {
+  console.log(`Shreddit: ${process.env.NODE_ENV} listening to ${process.env.PORT}`);
 })

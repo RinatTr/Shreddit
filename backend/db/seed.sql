@@ -1,8 +1,3 @@
--- DROP DATABASE IF EXISTS shreddit;
--- CREATE DATABASE shreddit;
-
--- \c shreddit;
-
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR UNIQUE NOT NULL,
