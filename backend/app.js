@@ -11,16 +11,20 @@ const follows = require('./routes/follows.js')
 const subscriptions = require('./routes/subscriptions.js')
 const subshreddits = require('./routes/subshreddits.js')
 
-if (process.env.NODE_ENV !== 'production') {
-  //for DEV: sets NODE_ENV to get env variables from local .env file
-  require('dotenv').config();
-}
-
 const app = express()
 
 app.use(cookieParser("shreddit passport"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+if (process.env.NODE_ENV !== 'production') {
+  //for DEV: sets NODE_ENV to get env variables from local .env file
+  require('dotenv').config();
+
+  app.use((_, res, next) => {
+    res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL_CORS);
+    next();
+  });
+}
 app.use(express.static(path.join(__dirname, "../frontend/build")))
 
 app.use(

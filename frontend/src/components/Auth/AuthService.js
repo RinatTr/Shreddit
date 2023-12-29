@@ -11,7 +11,6 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser }) {
     email: '',
   });
 
-  // const lastReturnPath = useRef()
   const isPathLogin = (match.path === "/auth/login");
   const { username, password, email } = formData;
 
