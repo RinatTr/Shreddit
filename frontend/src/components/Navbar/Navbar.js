@@ -44,8 +44,9 @@ function Navbar (props) {
  
 
   const handleLogout = () => {
+    console.log("[AUTH:] handleLogout")
     props.logoutUser();
-    window.location.reload();
+    // window.location.reload();
   }
 
   const handleChange = (e) => {

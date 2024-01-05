@@ -1,9 +1,10 @@
 const { db } = require("./q-index.js");
 
 const getAllSubshreddits = (_, res, next) => {
+  console.log("in shreddits")
   db.any('SELECT * FROM subshreddits')
     .then(data => {
-      console.log("in promise")
+      console.log("in promise!!!!!!")
       res.status(200).json({
         status: "success",
         message: "got all subshreddits",

@@ -25,8 +25,8 @@ for (let i = 0; i < 25; i++) {
 let posts = [];
 
 for (let i = 0; i < 100; i++) {
-  let poster_id = Math.floor(Math.random() * 25) + 1;
-  let subshreddit_id = Math.floor(Math.random() * 10) + 21;
+  let poster_id = Math.floor(Math.random() * 6) + 1;
+  let subshreddit_id = Math.floor(Math.random() * 10) + 1;
   let votes = Math.floor(Math.random() * 300);
   let header = faker.lorem.words()
   let body = faker.lorem.paragraph()
@@ -57,12 +57,12 @@ for (let i = 0; i < 150; i++) {
 
 }
 
-users = users.join(", ");
+// users = users.join(", ");
 // subshreddits = subshreddits.join(", ")
 // console.log(subshreddits);
 posts = posts.join(", ");
-comments = comments.join(", ");
-follows = follows.join(", ");
+// comments = comments.join(", ");
+// follows = follows.join(", ");
 // votes = votes.join(", ");
 
 // db.none(
@@ -71,30 +71,32 @@ follows = follows.join(", ");
 //   .catch(err => {
 //     console.log(err);
 //   });
-db.none(
-  "INSERT INTO follows(follower_id, followed_id) VALUES " +
-    follows +
-    ";"
-)
-  .catch(err => {
-    console.log(err);
-  });
+// db.none(
+//   "INSERT INTO follows(follower_id, followed_id) VALUES " +
+//     follows +
+//     ";"
+// )
+//   .catch(err => {
+//     console.log(err);
+//   });
 db.none(
   "INSERT INTO posts(poster_id, subshreddit_id, votes, header, body) VALUES " +
     posts +
     ";"
-)
+).then(() => {
+  console.log("Posts data inserted successfully");
+})
   .catch(err => {
     console.log(err);
   });
-db.none(
-  "INSERT INTO comments(commenter_id, post_id, votes, body) VALUES " +
-    comments +
-    ";"
-)
-  .catch(err => {
-    console.log(err);
-  });
+// db.none(
+//   "INSERT INTO comments(commenter_id, post_id, votes, body) VALUES " +
+//     comments +
+//     ";"
+// )
+//   .catch(err => {
+//     console.log(err);
+//   });
 
 // db.none(
 //   "INSERT INTO saved_posts(user_id, post_id) VALUES " +
@@ -105,12 +107,12 @@ db.none(
 //     console.log(err);
 //   });
 
-db.none(
-  "INSERT INTO follows(follower_id, followed_id) VALUES " +
-    follows +
-    ";"
-)
-  .catch(err => {
-    console.log(err);
-  });
+// db.none(
+//   "INSERT INTO follows(follower_id, followed_id) VALUES " +
+//     follows +
+//     ";"
+// )
+//   .catch(err => {
+//     console.log(err);
+//   });
   

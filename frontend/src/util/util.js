@@ -1,6 +1,7 @@
 import axios from 'axios';
 const BASE_URL = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
-const createAxios = () => axios.create({ baseURL: BASE_URL })
+const createAxios = () => axios.create({ baseURL: BASE_URL, withCredentials: true })
+const BREAK_CALL = "balh"
 //Posts
 export const getPosts = () => createAxios().get("/api/posts")
 export const getCommentsPerPost = (id) => createAxios().get(`/api/posts/${id}/comments`)

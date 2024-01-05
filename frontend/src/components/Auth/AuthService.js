@@ -38,7 +38,7 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser }) {
   }
 
   const handleDemo = () => {
-    loginUser({ username: "Lauren28", password: "12345"})
+    loginUser({ username: "rinati", password: "12345"})
     history.push('/All');
   }
 

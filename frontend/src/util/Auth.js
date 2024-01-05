@@ -1,11 +1,14 @@
 const Auth = {
   authenticateUser: token => {
+    console.log("0 AUTH: setting Token")
     localStorage.setItem("token", token);
+    console.log("0 AUTH: Token set:", Auth.getToken())
   },
   isUserAuthenticated: () => {
     return localStorage.getItem("token") !== null;
   },
   deauthenticateUser: () => {
+    console.log("4 AUTH: deauth for:", Auth.getToken())
     localStorage.removeItem("token");
   },
   getToken: () => {

@@ -27,7 +27,7 @@ export const getError = (key, errCode) => {
   }
 }
 
-export const signUpUser = (user) => dispatch => {
+export const signupUser = (user) => dispatch => {
 // thunk is expecting a function not an action. action is sent to reducer, hence wrapped in another function.
   return Util.createUser(user)
             .then(() => {
@@ -40,14 +40,16 @@ export const signUpUser = (user) => dispatch => {
 
 export const loginUser = (user) => dispatch => {
   return Util.login(user)
-            .then(() => {
+            .then((res) => {
+              console.log("AUTH: login request res:", res)
               Auth.authenticateUser(user.username)
             })
             .then(() => {
               return dispatch(checkAuthenticateStatus())
             })
             .catch(err => {
-              return dispatch(getError("login", err.response.status))
+              console.log(err)
+              return dispatch(getError("login", err))
             })
 }
 
@@ -67,9 +69,13 @@ export const logoutUser = () => dispatch => {
 export const checkAuthenticateStatus = () => dispatch => {
   return Util.isLoggedIn()
               .then(res => {
+                console.trace(checkAuthenticateStatus)
+                console.log("2 AUTH: in checkAuth, isLoggedIn -  token:", Auth.getToken(), res)
                 if (res.data.username === Auth.getToken()) {
+                  console.log("3 AUTH: username matches token:", res, Auth.getToken())
                   Util.getUser(res.data.username)
                       .then(user => {
+                        console.log("4 AUTH: getUser:", user)
                         return dispatch(login({
                           isLoggedIn: Auth.isUserAuthenticated(),
                           username: Auth.getToken(),
@@ -77,6 +83,7 @@ export const checkAuthenticateStatus = () => dispatch => {
                         }))
                       })
                 } else {
+                  console.log("3 AUTH: username:", res.data.username, "doesnt match token:", Auth.getToken())
                   if (res.data.username) {
                     logoutUser();
                   } else {
