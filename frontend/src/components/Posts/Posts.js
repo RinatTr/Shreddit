@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import axios from 'axios';
+import { createAxios } from '../../util/util' 
 import Post from './PostDisplay.js'
 import PostModal from './PostModal.js'
 import '../../css/Posts.css'
@@ -26,14 +26,14 @@ export default function Posts (props) {
       let postId = e.target.parentElement.id;
       let comment_id = e.target.id;
       let type = e.target.alt;
-      axios.patch(`/api/comments/${comment_id}`, { type: type })
+      createAxios().patch(`/api/comments/${comment_id}`, { type: type })
         .then(() => {
           props.fetchCommentsPerPost(postId)
         })
     } else {
       let post_id = e.target.id;
       let type = e.target.alt;
-      axios.patch(`/api/posts/${post_id}`, { type: type })
+      createAxios().patch(`/api/posts/${post_id}`, { type: type })
         .then(() => {
           props.fetchPosts()
         })
@@ -44,12 +44,12 @@ export default function Posts (props) {
     let { loggedUser, fetchUserSavedPosts } = props;
     if (loggedUser) {
       if (e.target.className === "save-container") {
-        axios.post(`/api/users/${loggedUser.userData.id}/save`, {postId : e.target.id})
+        createAxios().post(`/api/users/${loggedUser.userData.id}/save`, {postId : e.target.id})
         .then(() => {
           fetchUserSavedPosts(loggedUser.userData.id)
         })
       } else {
-        axios.delete(`/api/users/${loggedUser.userData.id}/save`, { data: {postId : e.target.id} }) //delete requests use config.data to add req.body
+        createAxios().delete(`/api/users/${loggedUser.userData.id}/save`, { data: {postId : e.target.id} }) //delete requests use config.data to add req.body
         .then(() => {
           fetchUserSavedPosts(loggedUser.userData.id)
         })

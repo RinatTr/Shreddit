@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-function UserNav () {
-    let { loggedUser, location } = this.props;
+function UserNav (props) {
+    let { loggedUser, location } = props;
     let isSavedPath = location.pathname.slice(-5) === "saved"
     return(
       <>

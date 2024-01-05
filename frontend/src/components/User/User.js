@@ -7,7 +7,6 @@ import { addFollow, deleteFollow } from '../../util/util';
 import '../../css/User.css';
 
 export default function User (props) {
-
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoggedUserPage, setIsLoggedUserPage] = useState(false);
 
@@ -63,10 +62,13 @@ export default function User (props) {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async () => {    
       let { fetchUser, fetchUserPosts, fetchCommentCount, match } = props;
       await fetchUser(match.params.username);
-      await fetchUserPosts(props.user.id);
+      if (props.user) {
+        console.log("3 USER fetchUserPosts")
+        await fetchUserPosts(props.user.id);
+      }
       await fetchCommentCount();
       if (props.loggedUser) {
         if (props.loggedUser.username === props.user.username) {
@@ -75,8 +77,7 @@ export default function User (props) {
       }
       validateSubscription();
     };
-
-    fetchData();
+      fetchData();
   }, [props.match.params.username]);
 
   let { posts, count, match, user, loggedUser, saved_posts, location } = props;
