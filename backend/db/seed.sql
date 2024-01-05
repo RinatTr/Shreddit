@@ -1,8 +1,3 @@
--- DROP DATABASE IF EXISTS shreddit;
--- CREATE DATABASE shreddit;
-
--- \c shreddit;
-
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR UNIQUE NOT NULL,
@@ -59,3 +54,4 @@ INSERT INTO users (username, password_digest, avatar_url, email) VALUES
 ('piglet', '1234', 'https://api.adorable.io/avatars/200/94a48175813e415cb24f92fcc04347e1.png','chik@peak.co'),
 ('quincy', 'quincy123', 'https://api.adorable.io/avatars/200/46b64bf09825e951f8ccc6ce70236c08.png','quin@pro.co'),
 ('toothpicker', 'cavity1!', 'https://api.adorable.io/avatars/400/34bf7cb9bc1cca1ba1d0586894107181.png','arius@bak.tus')
+-- ATTN: the Auth will fail for the above users since the saved password is not hashed and will fail during password comparison.

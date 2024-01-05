@@ -122,16 +122,24 @@ const createUser = (req, res, next) => {
 }
 
 const logoutUser = (req, res, next) => {
-  req.logout();
-  res.status(200).send("log out success");
-}
+  req.logout((err) => {
+    if (err) {
+      console.error('Error logging out:', err);
+      return res.status(500).send('Error logging out');
+    }
+    res.status(200).send('Logged out successfully');
+  });
+};
 
 const loginUser = (req, res) => {
+  console.log('[AUTH:] in loginUser query, req.session.passport:', req.session.passport);
   res.json(req.user.username);
 }
 
 const isLoggedIn = (req, res) => {
-  if (req.user) {
+  console.log("[AUTH:] isLoggedIn:",req.isAuthenticated(), "req.session.passport:", req.session.passport)
+  //passport populates req.user with the user after its successful auth.
+  if (req.isAuthenticated()) {
     res.json({ username: req.user });
   } else {
     res.json({ username: null });

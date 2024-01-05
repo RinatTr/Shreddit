@@ -5,9 +5,15 @@ const db = require("../queries/q-users.js");
 const passport = require("../auth/local.js");
 const { loginRequired } = require("../auth/helpers");
 
+const debugLocal = (error, user, info) => {
+    console.log(error);
+    console.log(user);
+    console.log(info);
+}
+
 // each request made to api/users/new => handled by db.createUser
 router.post("/auth/new", db.createUser); //middleware
-router.post("/auth/login", passport.authenticate("local", {}), db.loginUser);
+router.post("/auth/login", passport.authenticate("local", {keepSessionInfo:true}), db.loginUser);
 router.get("/auth/isLoggedIn", db.isLoggedIn);
 router.post("/auth/logout", loginRequired, db.logoutUser);
 
