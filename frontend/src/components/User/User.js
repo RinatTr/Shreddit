@@ -7,7 +7,6 @@ import { addFollow, deleteFollow } from '../../util/util';
 import '../../css/User.css';
 
 export default function User (props) {
-
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoggedUserPage, setIsLoggedUserPage] = useState(false);
 
@@ -61,30 +60,41 @@ export default function User (props) {
     await props.fetchFollows(followObj.follower_id);
     validateSubscription();
   };
+  
+  const fetchData = async () => {
+    let { fetchUser, fetchUserPosts, fetchCommentCount, match } = props;
+    await fetchUser(match.params.username)
+    if (props.user) {
+      await fetchUserPosts(props.user.id);
+    }
+    await fetchCommentCount()
+    if (props.loggedUser) {
+      const isLoggedCheck = props.loggedUser.username === props.user.username;
+      setIsLoggedUserPage(isLoggedCheck);
+    }
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
-      let { fetchUser, fetchUserPosts, fetchCommentCount, match } = props;
-      await fetchUser(match.params.username);
-      await fetchUserPosts(props.user.id);
-      await fetchCommentCount();
-      if (props.loggedUser) {
-        if (props.loggedUser.username === props.user.username) {
-          setIsLoggedUserPage(true);
-        }
-      }
-      validateSubscription();
-    };
+    fetchData()
+    validateSubscription()
+  }, [])
 
+  useEffect(() => { 
     fetchData();
-  }, [props.match.params.username]);
-
+    //conditions for refresh data are new username path, and once we got the data back for said user.
+}, [props.match.params.username, props.user ? props.user.id : null])
   let { posts, count, match, user, loggedUser, saved_posts, location } = props;
   let mapPosts;
-  //saved feature for loggedUser page only
+  //saved posts is only available if its the loggedUser page
   let isSavedPath = location.pathname.slice(-5) === "saved";
 
-  if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined))) {
+  const hasValidPostsAndCommentCounts = Array.isArray(posts) && count;  
+  const hasValidLoggedUserData = loggedUser && saved_posts;
+  const hasValidNoLoggedUserData = !loggedUser && saved_posts === undefined;
+
+  const shouldRenderPosts = hasValidPostsAndCommentCounts && (hasValidLoggedUserData || hasValidNoLoggedUserData)
+
+  if (shouldRenderPosts) {
       mapPosts = (saved_posts && isSavedPath ? saved_posts : posts).map((post) => {
       return <Link key={isSavedPath ? post.post_id : post.id} to={`/post/${isSavedPath ? post.post_id : post.id}`}>
               <Post
@@ -103,18 +113,25 @@ export default function User (props) {
               /></Link>
     })
   }
+
+  const renderPosts = (mapPosts) => {
+    if (mapPosts && mapPosts.length) {
+      return <div className="user-posts-container">{mapPosts}</div>;
+    } else {
+      return (
+        <div className="user-posts-container">
+          <div className="post-collapsed" style={{ cursor: 'default' }}>
+            &nbsp;<strong>No posts to display yet...</strong>
+          </div>
+        </div>
+      );
+    }
+  }
     return (
       <React.Fragment>
         {isLoggedUserPage && loggedUser ? <UserNav loggedUser={loggedUser}/> : null}
         <div className={isLoggedUserPage ? "logged-user-page":"user-page"}>
-          {mapPosts
-            ? (mapPosts.length
-                ? <div className="user-posts-container">{mapPosts}</div>
-                : <div className="user-posts-container">
-                    <div className="post-collapsed" style={{cursor:'default'}}>&nbsp;<strong>No posts to display yet...</strong>
-                    </div>
-                  </div>)
-            : null}
+          {renderPosts(mapPosts)}
           {user ? <UserInfo
                     username={user.username}
                     avatar={user.avatar_url}

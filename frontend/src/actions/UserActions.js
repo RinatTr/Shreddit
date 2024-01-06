@@ -25,6 +25,7 @@ export const receiveUserSubshreddits = (userSubs) => {
 }
 
 export const receiveUser = (user) => {
+  console.log("USER: 2 dispatching receive user action")
   return {
     type: RECEIVE_USER,
     user
@@ -34,6 +35,7 @@ export const receiveUser = (user) => {
 export const fetchUser = (username) => dispatch => {
   return Util.getUser(username)
               .then(res => {
+                console.log("USER: 1 fetch user successful")
                 return dispatch(receiveUser(res.data.user))
               })
               .catch(err => {
