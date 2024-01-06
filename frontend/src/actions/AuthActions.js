@@ -69,7 +69,6 @@ export const logoutUser = () => dispatch => {
 export const checkAuthenticateStatus = () => dispatch => {
   return Util.isLoggedIn()
               .then(res => {
-                console.trace(checkAuthenticateStatus)
                 console.log("2 AUTH: in checkAuth, isLoggedIn -  token:", Auth.getToken(), res)
                 if (res.data.username === Auth.getToken()) {
                   console.log("3 AUTH: username matches token:", res, Auth.getToken())

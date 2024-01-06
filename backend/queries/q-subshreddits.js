@@ -1,10 +1,8 @@
 const { db } = require("./q-index.js");
 
 const getAllSubshreddits = (_, res, next) => {
-  console.log("in shreddits")
   db.any('SELECT * FROM subshreddits')
     .then(data => {
-      console.log("in promise!!!!!!")
       res.status(200).json({
         status: "success",
         message: "got all subshreddits",
@@ -75,6 +73,4 @@ module.exports = {
   * Creates new subshreddit community
 * `GET /api/subshreddit/`
   * Get all subshreddits for search
-* `GET /api/subshreddit/:id/posts`
-  * Get all posts in a subshreddit
 */
