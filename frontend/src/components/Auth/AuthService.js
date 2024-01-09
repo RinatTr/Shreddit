@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import icon from '../../icons/iconfinder_Faint_2695614.png'
 import '../../css/Authform.css'
 
-function AuthService ({ match, history, signupUser, loginUser, loggedInUser }) {
+function AuthService ({ match, history, signupUser, loginUser, loggedInUser, authError, authStatus }) {
  
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     email: '',
   });
+  const [displayAuthError, setDisplayAuthError] = useState("");
 
   const isPathLogin = (match.path === "/auth/login");
   const { username, password, email } = formData;
@@ -19,10 +20,11 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser }) {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    // setDisplayAuthError("");
   };
 
 //ERRORS: 401 - wrong username or password. 500 - no such user (login) user already exists (signup).
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const newUser = { username, password, email };
     const userLogin = { username, password }
@@ -30,21 +32,40 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser }) {
     if (isPathLogin) {
       loginUser(userLogin)
       history.push('/All');
-    } else {
-      signupUser(newUser)
-      loginUser(userLogin)
-      history.push('/All');
+    } else { 
+      await signupUser(newUser)
     }
   }
 
   const handleDemo = () => {
-    loginUser({ username: "rinati", password: "12345"})
+    loginUser({ username: "missyE", password: "asdf"})
     history.push('/All');
   }
+
+  useEffect(() => {
+    if (authError) {
+      setDisplayAuthError(getAuthDisplay(authError))
+    }
+
+    if (authStatus) {
+      loginUser({ username, password })
+      history.push('/All');
+    }
+  }, [authError, authStatus])
 
   const userState = loggedInUser;
   const isLoggedIn = userState ? userState.isLoggedIn : "";
 
+  const getAuthDisplay = (code) => {
+    switch (code) {
+      case 409:
+        return "*User already exists.";
+      case 500:
+        return "*Internal server error. Try again later."
+      default:
+        return "*Signup failed. Try again later."
+    }   
+  }
   return (
     isLoggedIn
     ? <Redirect to="/all" />
@@ -84,6 +105,9 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser }) {
                     onChange={handleChange}
                     required
                   /> }
+                  <div class="error-container">
+                    <div class="error-text">{displayAuthError}</div>
+                  </div>
                   <button type="submit">{isPathLogin ? "SIGN IN" : "SIGN UP"}</button>
                 </form>
                 <button onClick={handleDemo} id="demo-login">DEMO LOGIN</button>
@@ -95,8 +119,6 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser }) {
             </div>
         </div>
         </div>
-        {/*add error handler*/}
-        {/*<p>{isLoggedIn ? "Logged In!" : ""}</p>*/}
       </React.Fragment>
   )
 }

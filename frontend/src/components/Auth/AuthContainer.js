@@ -7,7 +7,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     signedUpUser: state.auth.signedUpUser,
     loggedInUser: state.auth.loggedUser,
-    authError: state.auth.error
+    authError: state.auth.error,
+    authStatus: state.auth.statusCode
   };
 };
 
