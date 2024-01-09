@@ -27,8 +27,8 @@ export default function User (props) {
   };
 
   const countPerPost = (id, count) => {
-    if (count) {
-      let post = count.find(post => post.post_id === +id);
+    if (id && count) {
+      let post = count.find(post => post.post_id === id);
       return post ? post.comments_count : "0";
     }
   };
@@ -81,8 +81,10 @@ export default function User (props) {
 
   useEffect(() => { 
     fetchData();
-    //conditions for refresh data are new username path, and once we got the data back for said user.
-}, [props.match.params.username, props.user ? props.user.id : null])
+    //conditions for data refresh are new username path, and 
+    //once we got the data back for said user.
+  }, [props.match.params.username, props.user ? props.user.id : null])
+
   let { posts, count, match, user, loggedUser, saved_posts, location } = props;
   let mapPosts;
   //saved posts is only available if its the loggedUser page
@@ -92,15 +94,15 @@ export default function User (props) {
   const hasValidLoggedUserData = loggedUser && saved_posts;
   const hasValidNoLoggedUserData = !loggedUser && saved_posts === undefined;
 
-  const shouldRenderPosts = hasValidPostsAndCommentCounts && (hasValidLoggedUserData || hasValidNoLoggedUserData)
+  const shouldMapPosts = hasValidPostsAndCommentCounts && (hasValidLoggedUserData || hasValidNoLoggedUserData)
 
-  if (shouldRenderPosts) {
-      mapPosts = (saved_posts && isSavedPath ? saved_posts : posts).map((post) => {
+  if (shouldMapPosts) {
+      mapPosts = ((saved_posts && isSavedPath) ? saved_posts : posts).map((post) => {
       return <Link key={isSavedPath ? post.post_id : post.id} to={`/post/${isSavedPath ? post.post_id : post.id}`}>
               <Post
                 key={isSavedPath ? post.post_id : post.id}
                 id={isSavedPath ? post.post_id : post.id}
-                commentCount={countPerPost(isSavedPath ? post.post_id : post.id, count)}
+                commentCount={countPerPost((isSavedPath ? post.post_id : post.id), count)}
                 votes={post.votes}
                 timestamp={post.created_at}
                 header={post.header}
@@ -115,7 +117,7 @@ export default function User (props) {
   }
 
   const renderPosts = (mapPosts) => {
-    if (mapPosts && mapPosts.length) {
+    if (mapPosts) {
       return <div className="user-posts-container">{mapPosts}</div>;
     } else {
       return (

@@ -115,9 +115,16 @@ const createUser = (req, res, next) => {
       });
     })
     .catch(err => {
-      res.status(500).json({
-        message: err
-      });
+      if (err.code == "23505") {
+        res.status(409).json({
+          message: `Registration failed: username or email already exists.`
+        })
+      } else {
+        res.status(500).json({
+          message: `Registration failed: Internal server error.`
+        })
+      }
+      
     });
 }
 

@@ -5,10 +5,11 @@ export const SIGN_UP = "SIGN_UP";
 export const LOGIN = "LOGIN";
 export const RECEIVE_ERROR = "RECEIVE_ERROR";
 
-export const signUp = signedUpUser => {
+export const signUp = (signedUpUser, statusCode) => {
   return {
     type: SIGN_UP,
-    signedUpUser
+    signedUpUser,
+    statusCode
   }
 }
 
@@ -30,8 +31,8 @@ export const getError = (key, errCode) => {
 export const signupUser = (user) => dispatch => {
 // thunk is expecting a function not an action. action is sent to reducer, hence wrapped in another function.
   return Util.createUser(user)
-            .then(() => {
-              return dispatch(signUp(user.username))
+            .then((res) => {
+              return dispatch(signUp(user.username, res.status))
             })
             .catch(err => {
               return dispatch(getError("signup", err.response.status))
@@ -48,7 +49,6 @@ export const loginUser = (user) => dispatch => {
               return dispatch(checkAuthenticateStatus())
             })
             .catch(err => {
-              console.log(err)
               return dispatch(getError("login", err))
             })
 }

@@ -4,11 +4,12 @@ const AuthReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
     case SIGN_UP:
-      return { signedUpUser: action.signedUpUser}
+      return { signedUpUser: action.signedUpUser, 
+               statusCode: action.statusCode }
     case LOGIN:
       return { loggedUser: action.loggedUser}
     case RECEIVE_ERROR:
-      return { error: action.error}
+      return { error: action.errCode}
     default:
       return oldState
   }

@@ -120,3 +120,14 @@
 .auth-form-content hr {
   margin: 20px 0px 20px 0px ;
 }
+
+.error-container {
+  position: relative;
+  height: 20px; 
+}
+
+.error-text {
+  position: absolute;
+  color: red; 
+  white-space: nowrap;
+}
