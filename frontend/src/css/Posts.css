@@ -197,8 +197,20 @@
   text-decoration: underline;
 }
 
+.save-container {
+  position: relative;
+  bottom: 1px;
+}
+
 .saved-container {
   color: #0079d3;
+  position: relative;
+  bottom: 1px;
+}
+
+.save-container img, .saved-container img {
+  position: relative;
+  top: 1px;
 }
 
 .post-add-container {
