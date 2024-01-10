@@ -35,6 +35,7 @@ export const signupUser = (user) => dispatch => {
               return dispatch(signUp(user.username, res.status))
             })
             .catch(err => {
+              console.log(err.response)
               return dispatch(getError("signup", err.response.status))
             })
 };

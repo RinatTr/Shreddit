@@ -11,6 +11,7 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser, aut
     email: '',
   });
   const [displayAuthError, setDisplayAuthError] = useState("");
+  const [authAttemptCount, setAuthAttemptCount] = useState(0);
 
   const isPathLogin = (match.path === "/auth/login");
   const { username, password, email } = formData;
@@ -20,7 +21,7 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser, aut
       ...formData,
       [e.target.name]: e.target.value,
     });
-    // setDisplayAuthError("");
+    setDisplayAuthError("")
   };
 
 //ERRORS: 401 - wrong username or password. 500 - no such user (login) user already exists (signup).
@@ -31,9 +32,11 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser, aut
 
     if (isPathLogin) {
       loginUser(userLogin)
+      setDisplayAuthError("")
       history.push('/All');
     } else { 
       await signupUser(newUser)
+      setAuthAttemptCount((prev) => prev + 1);
     }
   }
 
@@ -42,16 +45,26 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser, aut
     history.push('/All');
   }
 
+  const handleClose = () => {
+    setDisplayAuthError("")
+    history.push('/All')
+  }
+
   useEffect(() => {
-    if (authError) {
+    if (authError && authAttemptCount > 0) {
+      //auth failed
       setDisplayAuthError(getAuthDisplay(authError))
     }
 
     if (authStatus) {
+      //auth success
       loginUser({ username, password })
       history.push('/All');
     }
-  }, [authError, authStatus])
+    //due to the shallow comparison authStatus is not retriggeiring useEffect 
+    //as long as the status code from each fetch returns the same.
+    //hence addind a third trigger for each authAttempt.
+  }, [authError, authStatus, authAttemptCount])
 
   const userState = loggedInUser;
   const isLoggedIn = userState ? userState.isLoggedIn : "";
@@ -75,7 +88,7 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser, aut
             <div className="art"></div>
             <div className="auth-form-container">
               <div className="auth-close-modal">
-                <span className="auth-close" onClick={()=>{history.push('/All')}}>&times;</span>
+                <span className="auth-close" onClick={handleClose}>&times;</span>
               </div>
               <div className="auth-form-content">
                 {isPathLogin && <img alt="icon" src={icon} /> }
@@ -105,12 +118,14 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser, aut
                     onChange={handleChange}
                     required
                   /> }
-                  <div class="error-container">
-                    <div class="error-text">{displayAuthError}</div>
+                  <div className="error-container">
+                    <div className="error-text">{displayAuthError}</div>
                   </div>
-                  <button type="submit">{isPathLogin ? "SIGN IN" : "SIGN UP"}</button>
+                  <div className="auth-buttons">
+                    <button type="submit">{isPathLogin ? "SIGN IN" : "SIGN UP"}</button>
+                    <button onClick={handleDemo} id="demo-login">DEMO LOGIN</button>
+                  </div>
                 </form>
-                <button onClick={handleDemo} id="demo-login">DEMO LOGIN</button>
                 <hr />
                 {isPathLogin
                   ? <span>New to Shreddit? <Link to="/auth/signup">SIGN UP</Link></span>
