@@ -4,6 +4,7 @@ import Auth from '../util/Auth.js'
 export const SIGN_UP = "SIGN_UP";
 export const LOGIN = "LOGIN";
 export const RECEIVE_ERROR = "RECEIVE_ERROR";
+export const CLEAR_ERROR = "CLEAR_ERROR";
 
 export const signUp = (signedUpUser, statusCode) => {
   return {
@@ -28,14 +29,24 @@ export const getError = (key, errCode) => {
   }
 }
 
+export const clearError = () => {
+  return {
+    type: CLEAR_ERROR
+  }
+}
+
 export const signupUser = (user) => dispatch => {
 // thunk is expecting a function not an action. action is sent to reducer, hence wrapped in another function.
   return Util.createUser(user)
             .then((res) => {
               return dispatch(signUp(user.username, res.status))
             })
+            .then(() => {
+              //clear error will only cleanup older attempt errors from store and 
+              //will not interfere with potential errors in this chain 
+              return dispatch(clearError())
+            })
             .catch(err => {
-              console.log(err.response)
               return dispatch(getError("signup", err.response.status))
             })
 };
@@ -47,10 +58,15 @@ export const loginUser = (user) => dispatch => {
               Auth.authenticateUser(user.username)
             })
             .then(() => {
+              //clear error will only cleanup older attempt errors from store and 
+              //will not interfere with potential errors in this chain 
+              return dispatch(clearError())
+            })
+            .then(() => {
               return dispatch(checkAuthenticateStatus())
             })
             .catch(err => {
-              return dispatch(getError("login", err))
+              return dispatch(getError("login", err.response.status))
             })
 }
 
