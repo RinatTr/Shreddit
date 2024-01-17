@@ -1,19 +1,26 @@
 import { RECEIVE_USER_POSTS, RECEIVE_USER, RECEIVE_USER_SAVED_POSTS, RECEIVE_USER_SUBSHREDDITS } from '../actions/UserActions.js';
 
-const UserReducer = (oldState = {}, action) => {
-  Object.freeze(oldState);
+const initialState = {
+  posts: [],
+  user: "",
+  saved_posts: [],
+  userSubshreddits: [],
+};
+
+const UserReducer = (state = initialState, action) => {
+  Object.freeze(state);
   switch (action.type) {
     case RECEIVE_USER_POSTS:
-      return {...oldState, posts: action.posts}
+      return { ...state, posts: action.posts };
     case RECEIVE_USER:
-      return {...oldState, user: action.user}
+      return { ...state, user: action.user };
     case RECEIVE_USER_SAVED_POSTS:
-      return {...oldState, saved_posts: action.savedPosts}
+      return { ...state, saved_posts: action.savedPosts };
     case RECEIVE_USER_SUBSHREDDITS:
-      return {...oldState, userSubshreddits: action.userSubs}
+      return { ...state, userSubshreddits: action.userSubs };
     default:
-      return oldState
+      return state;
   }
-}
+};
 
 export default UserReducer;

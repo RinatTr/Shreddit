@@ -19,7 +19,7 @@
   height: 100px;
   margin-bottom: 0px;
   margin-top: 2px;
-  border-radius: 0px;
+  border-radius: 20px;
   color: #393939;
 }
 
@@ -54,6 +54,8 @@
 }
 
 .avatar-wrapper {
+  border: 1px solid transparent;
+  box-shadow: rgba(0,0,0,0.2) 0 2px 3px;
   margin-top: -60px;
   height: 92px;
   width: 92px;

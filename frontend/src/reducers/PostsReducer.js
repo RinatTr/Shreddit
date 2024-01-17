@@ -1,20 +1,27 @@
 import { RECEIVE_POSTS } from '../actions/PostActions.js';
 import { RECEIVE_COMMENTS, RECEIVE_COMMENT_COUNT, ADD_COMMENT } from '../actions/CommentActions.js';
 
-const PostsReducer = (oldState = {}, action) => {
-  Object.freeze(oldState);
+const initialState = {
+  posts: [],
+  comments: [],
+  comment_count: null,
+  added_comment: null,
+};
+
+const PostsReducer = (state = initialState, action) => {
+  Object.freeze(state);
   switch (action.type) {
     case RECEIVE_POSTS:
-      return {...oldState, posts: action.posts}
+      return { ...state, posts: action.posts };
     case RECEIVE_COMMENTS:
-      return {...oldState, comments: action.comments}
+      return { ...state, comments: action.comments };
     case RECEIVE_COMMENT_COUNT:
-      return {...oldState, comment_count: action.commentCount}
+      return { ...state, comment_count: action.commentCount };
     case ADD_COMMENT:
-      return {...oldState, added_comment: action.comment}
+      return { ...state, added_comment: action.comment };
     default:
-      return oldState
+      return state;
   }
-}
+};
 
 export default PostsReducer;

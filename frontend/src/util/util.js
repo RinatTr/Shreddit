@@ -34,3 +34,18 @@ export const createUser = (bodyObj) => createAxios().post("/api/users/auth/new",
 export const login = (bodyObj) => createAxios().post("/api/users/auth/login", bodyObj)
 export const logout = (bodyObj) => createAxios().post("/api/users/auth/logout", bodyObj)
 export const isLoggedIn = () => createAxios().get("/api/users/auth/isLoggedIn")
+
+//Util Functions
+
+export const extractCommentCountPerPost = (postId, commentsCount) => {
+    //relying on comment_count in props
+    if (commentsCount) {
+      let post = commentsCount.find(post => post.post_id === +postId)
+      return post ? post.comments_count : "0";
+    }
+  }
+
+ export const isPostSaved = (postId, savedPosts) => {
+    //relying on saved_posts in props
+    return savedPosts.find(savedPost => savedPost.post_id === postId) ? true : false;
+  }
