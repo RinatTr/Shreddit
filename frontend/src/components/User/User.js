@@ -3,39 +3,28 @@ import { Link } from 'react-router-dom';
 import Post from '../Posts/PostDisplay';
 import UserInfo from './UserDisplay';
 import UserNav from './UserNav';
-import { addFollow, deleteFollow } from '../../util/util';
+import { addFollow, deleteFollow, extractCommentCountPerPost, isPostSaved } from '../../util/util';
 import '../../css/User.css';
 
 export default function User (props) {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoggedUserPage, setIsLoggedUserPage] = useState(false);
 
-  const validateSubscription = () => {
+  const refreshUserFollows = () => {
     if (props.loggedUser) {
       let loggedUserId = props.loggedUser.userData.id;
-      let userPageId = props.user.id;
       props.fetchFollows(loggedUserId)
-        .then(() => {
-          //if identical id's then set subscribed true
-          if (props.follows.find(follow => follow.followed_id === userPageId)) {
-            setIsSubscribed(true);
-          } else {
-            setIsSubscribed(false);
-          }
-        });
     }
-  };
+  }
 
-  const countPerPost = (id, count) => {
-    if (id && count) {
-      let post = count.find(post => post.post_id === id);
-      return post ? post.comments_count : "0";
+  const validateSubscription = () => { 
+    let userPageId = props.user.id;
+    if (props.follows.find(follow => follow.followed_id === userPageId)) {
+      setIsSubscribed(true);
+    } else {
+      setIsSubscribed(false);
     }
-  };
-
-  const isSaved = (postId) => {
-    return props.saved_posts.find(savedPost => savedPost.post_id === postId) ? true : false;
-  };
+  }
 
   const handleFollow = async () => {
     if (!props.loggedUser) {
@@ -47,8 +36,7 @@ export default function User (props) {
       };
 
       await addFollow(followObj).catch((err) => console.log(err));
-      props.fetchFollows(followObj.follower_id);
-      validateSubscription();
+      refreshUserFollows()
     }
   };
 
@@ -57,8 +45,7 @@ export default function User (props) {
     let userPageId = props.user.id;
     let followObj = props.follows.find(follow => follow.followed_id === userPageId);
     await deleteFollow(followObj.id).catch((err) => console.log(err));
-    await props.fetchFollows(followObj.follower_id);
-    validateSubscription();
+    refreshUserFollows()
   };
   
   const fetchData = async () => {
@@ -75,24 +62,30 @@ export default function User (props) {
   }
 
   useEffect(() => {
-    fetchData()
-    validateSubscription()
+    fetchData();
   }, [])
 
   useEffect(() => { 
     fetchData();
+    validateSubscription();
     //conditions for data refresh are new username path, and 
     //once we got the data back for said user.
   }, [props.match.params.username, props.user ? props.user.id : null])
 
+  useEffect(()=> {
+    //once we got new data on follows from either refreshUserFollows
+    //or fetchData, we validate subscription and update the display
+    validateSubscription();
+  }, [props.follows])
+
   let { posts, count, match, user, loggedUser, saved_posts, location } = props;
   let mapPosts;
-  //saved posts is only available if its the loggedUser page
+  //saved posts is only available if it's the loggedUser page
   let isSavedPath = location.pathname.slice(-5) === "saved";
 
-  const hasValidPostsAndCommentCounts = Array.isArray(posts) && count;  
+  const hasValidPostsAndCommentCounts = posts && count;  
   const hasValidLoggedUserData = loggedUser && saved_posts;
-  const hasValidNoLoggedUserData = !loggedUser && saved_posts === undefined;
+  const hasValidNoLoggedUserData = !loggedUser && !saved_posts.length;
 
   const shouldMapPosts = hasValidPostsAndCommentCounts && (hasValidLoggedUserData || hasValidNoLoggedUserData)
 
@@ -102,7 +95,7 @@ export default function User (props) {
               <Post
                 key={isSavedPath ? post.post_id : post.id}
                 id={isSavedPath ? post.post_id : post.id}
-                commentCount={countPerPost((isSavedPath ? post.post_id : post.id), count)}
+                commentCount={extractCommentCountPerPost((isSavedPath ? post.post_id : post.id), count)}
                 votes={post.votes}
                 timestamp={post.created_at}
                 header={post.header}
@@ -111,13 +104,13 @@ export default function User (props) {
                 groupname={post.groupname}
                 groupId={post.subshreddit_id}
                 groupImgUrl={post.img_url}
-                isSaved={loggedUser ? isSaved(isSavedPath ? post.post_id : post.id) : false}
+                isSaved={loggedUser ? isPostSaved((isSavedPath ? post.post_id : post.id), saved_posts) : false}
               /></Link>
     })
   }
 
   const renderPosts = (mapPosts) => {
-    if (mapPosts) {
+    if (mapPosts && mapPosts.length) {
       return <div className="user-posts-container">{mapPosts}</div>;
     } else {
       return (

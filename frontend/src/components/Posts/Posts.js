@@ -88,7 +88,7 @@ export default function Posts (props) {
   let { posts, comments, count, saved_posts, loggedUser } = props;
   let mapPosts;
   let currentPost;
-  if (Array.isArray(posts) && count && ((loggedUser && saved_posts) || (!loggedUser && saved_posts === undefined)) ) {
+  if (posts.length && count && ((loggedUser && saved_posts) || (!loggedUser && !saved_posts.length)) ) {
     //collapsed posts rendering
       mapPosts = posts.map((post) => {
       return <Post

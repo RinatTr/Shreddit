@@ -68,4 +68,5 @@ export const fetchUserSubshreddits = (id) => dispatch => {
                 .then(res => {
                   return dispatch(receiveUserSubshreddits(res.data.subshreddits))
                 })
+                .catch((err) => console.log("Error during fetchUserSubs",err))
 }

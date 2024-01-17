@@ -15,7 +15,7 @@ function UserInfo ({username, avatar, cakeDay, handleFollow, handleUnfollow, isS
           <span>Cake Day:</span>
           <span>{date.toDateString()}</span>
           {!isLoggedUserPage ? (isSubscribed
-            ? <button className="follow" onClick={handleUnfollow}>UNSUBSCRIBE</button>
+            ? <button className="follow" onClick={handleUnfollow}>UNFOLLOW</button>
             : <button className="follow" onClick={handleFollow}>FOLLOW</button>) : null}
         </div>
       </div>
