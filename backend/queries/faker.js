@@ -7,7 +7,7 @@ let users = [];
 for (let i = 0; i < 25; i++) {
   let username = faker.internet.userName();
   let password_digest = faker.internet.password();
-  let avatar_url = 'https://api.adorable.io/avatars/285/'+username;
+  let avatar_url = `https://robohash.org/${req.body.username}?size=100x100`;
   let email = faker.internet.email();
   let str = `('${username}', '${password_digest}', '${avatar_url}', '${email}')`;
   users.push(str);

@@ -140,8 +140,3 @@ export default function User (props) {
       </React.Fragment>
     )
 }
-
-//display posts in same way as posts.js :
-//  import PostDisplay, and map user_posts. when mapping <Link> each post to its id.
-// correct the post Modal display (posts.js) to be using nested routing.
-// have the posts/:id route in the main app.

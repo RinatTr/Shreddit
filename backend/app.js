@@ -1,5 +1,4 @@
 const express = require('express');
-const morgan = require('morgan');
 const passport = require("passport");
 const session = require("express-session");
 const path = require('path');
@@ -69,12 +68,17 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.json({  message: err.message,
-              error: err
-              })
+  
+  //User-fault login failure error:
+  if (req.originalUrl === '/api/users/auth/login' && err.code === 0) {
+    //queryResultErrorCodes: https://vitaly-t.github.io/pg-promise/errors_query-result-error.js.html
+    res.status(401).json({ message: "User doesn't exist" });
+  } else {
+    // render the error page
+    res.status(err.status || 500);
+    res.json({ message: err.message,
+               error: err.code });
+  }
 });
 
 app.listen(process.env.PORT, () => {

@@ -105,7 +105,7 @@ const createUser = (req, res, next) => {
     "INSERT INTO users (username, password_digest, avatar_url, email) VALUES (${username}, ${password_digest}, ${avatar_url}, ${email})",
     { username: req.body.username,
       password_digest: hash,
-      avatar_url: `https://api.adorable.io/avatars/285/`+req.body.username,
+      avatar_url: `https://robohash.org/${req.body.username}?size=100x100`,
       email: req.body.email
     }
   )
