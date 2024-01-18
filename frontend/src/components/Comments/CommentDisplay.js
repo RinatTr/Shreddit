@@ -17,29 +17,31 @@ const Comment = ({  commentId,
                       }) => {
     return (
       <React.Fragment>
-      <div className="comment-collapsed" id={commentId} >
-        <div className="comment-votes" id={postId}>
-          <img alt="upvote" className="upvote" src={upvote} id={commentId} name="vote-comment" onClick={handleVote}/>
-          <img alt="downvote" className="downvote" src={downvote} id={commentId} name="vote-comment" onClick={handleVote}/>
-        </div>
-        <div className="comment-content">
-          <div className="comment-text">
-            <p className="info">
-              <span className="commenter-username">
-                <Link className="commenter-username" to={`/user/${commenter}`}>{commenter}</Link>
-              </span>
-              <span className="comment-points">
-                {votes} Points ·
-              </span>
-              <span className="comment-timeago">
-               <TimeAgo date={timestamp}/>
-              </span>
-            </p>
-            <span>{ReactHtmlParser(body)}</span>
-            <hr/>
+      <section>
+        <div className="comment-collapsed" id={commentId} >
+          <div className="comment-votes" id={postId}>
+            <img alt="upvote" className="upvote" src={upvote} id={commentId} name="vote-comment" onClick={handleVote}/>
+            <img alt="downvote" className="downvote" src={downvote} id={commentId} name="vote-comment" onClick={handleVote}/>
+          </div>
+          <div className="comment-content">
+            <div className="comment-text">
+              <p className="info">
+                <span className="commenter-username">
+                  <Link className="commenter-username" to={`/user/${commenter}`}>{commenter}</Link>
+                </span>
+                <span className="comment-points">
+                  {votes} Points ·
+                </span>
+                <span className="comment-timeago">
+                <TimeAgo date={timestamp}/>
+                </span>
+              </p>
+              <span>{ReactHtmlParser(body)}</span>
+              <hr/>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
       </React.Fragment>
     )
   }

@@ -25,6 +25,7 @@ const Post = ({ id,
                 handleSave }) => {
     return (
       <React.Fragment>
+      <article>
       <div className="post-collapsed" id={id} onClick={handleExpand}>
         <div className="votes">
           <img alt="upvote" className="upvote" src={upvote} id={id} onClick={handleVote}/>
@@ -55,6 +56,7 @@ const Post = ({ id,
             </div>
         </div>
       </div>
+      </article>
       </React.Fragment>
     )
   }
