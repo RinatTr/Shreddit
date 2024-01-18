@@ -43,46 +43,52 @@ const PostModal = ({  id,
     return (
       <React.Fragment>
       <div className="black">
-        <div className="close-modal">
-          <div className="votes">
-            <img alt="upvote" className="upvote" src={upvote} id={id} onClick={handleVote}/>
-            {votes}
-            <img alt="downvote" className="downvote" src={downvote} id={id} onClick={handleVote}/>
-          </div>
-          <span className="close" onClick={handleExpand}>&times;&nbsp;<div>CLOSE</div></span>
-        </div>
-        <div className="post-expanded">
-          <div className="post-content">
-            <div className="post-text">
-              <p className="info">
-                <span>
-                  {groupImgUrl ? <span className="center-cropped-icon"><img alt="subshr" src={groupImgUrl} /></span> : null }
-                    <strong><Link className="groupname" to={`/subshreddit/${groupId}`}>/s/{groupname}</Link></strong>
-                </span>
-                <span>
-                 Posted by {username}
-                </span>
-                <span>
-                 <TimeAgo date={timestamp}/>
-                </span>
-               </p>
-              <h3>{header}</h3>
-              <p>{ReactHtmlParser(body)}</p>
+        <article>
+          <section>
+            <div className="close-modal">
+              <div className="votes">
+                <img alt="upvote" className="upvote" src={upvote} id={id} onClick={handleVote}/>
+                {votes}
+                <img alt="downvote" className="downvote" src={downvote} id={id} onClick={handleVote}/>
+              </div>
+              <span className="close" onClick={handleExpand}>&times;&nbsp;<div>CLOSE</div></span>
             </div>
-            <div className="post-buttons">
-              <img alt="comment" src={comment} />
-              {commentCount} Comments
-              {isSaved ? <><span className="saved-container" id={id} onClick={handleSave}><img alt="save" src={saved} id={id} onClick={handleSave}/>Saved</span></> : <><span className="save-container" id={id} onClick={handleSave}><img alt="save" src={save} />Save</span></>}
-              {/*<img alt="hide" src={hide} />
-            Hide*/}
+          </section>
+          <section>
+            <div className="post-expanded">
+              <div className="post-content">
+                <div className="post-text">
+                  <p className="info">
+                    <span>
+                      {groupImgUrl ? <span className="center-cropped-icon"><img alt="subshr" src={groupImgUrl} /></span> : null }
+                        <strong><Link className="groupname" to={`/subshreddit/${groupId}`}>/s/{groupname}</Link></strong>
+                    </span>
+                    <span>
+                    Posted by {username}
+                    </span>
+                    <span>
+                    <TimeAgo date={timestamp}/>
+                    </span>
+                  </p>
+                  <h3>{header}</h3>
+                  <p>{ReactHtmlParser(body)}</p>
+                </div>
+                <div className="post-buttons">
+                  <img alt="comment" src={comment} />
+                  {commentCount} Comments
+                  {isSaved ? <><span className="saved-container" id={id} onClick={handleSave}><img alt="save" src={saved} id={id} onClick={handleSave}/>Saved</span></> : <><span className="save-container" id={id} onClick={handleSave}><img alt="save" src={save} />Save</span></>}
+                  {/*<img alt="hide" src={hide} />
+                Hide*/}
+                </div>
+              </div>
+              <AddCommentContainer postId={id}/>
+              <div className="comments">
+              <hr />
+                {mapComments}
+              </div>
             </div>
-          </div>
-          <AddCommentContainer postId={id}/>
-          <div className="comments">
-          <hr />
-            {mapComments}
-          </div>
-        </div>
+          </section>
+        </article>
       </div>
       </React.Fragment>
     )
