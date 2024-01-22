@@ -81,7 +81,7 @@ function Navbar (props) {
   let mapUsers = follows ? follows.map((follow, i) => {return <option key={i+"user"} id="user">{follow.followed_user}</option>}) : null;
     return (
       <nav>
-        <Link to="/popular"><img alt="icon" src={icon}/>shreddit</Link>
+        <Link to="/popular"><img alt="icon" src={icon}/><span className="mobile-hide">shreddit</span></Link>
         <select id="select" name="select" onChange={(e) => {handleChange(e)}}>
           <option id="default" disabled defaultValue={defaultOpt}>{defaultOpt}</option>
           <option id="popular">Popular</option>
@@ -102,13 +102,17 @@ function Navbar (props) {
           />
         <Search searchInput={searchInput} posts={posts} handleClick={handleClick}/>
         </div>
-        <Link to="/popular"><img alt="all" src={popular}/></Link>
-        <Link to="/all"><img alt="all" src={all}/></Link>
+        <Link className="mobile-hide" to="/popular"><img  alt="all" src={popular}/></Link>
+        <Link className="mobile-hide" to="/all"><img  alt="all" src={all}/></Link>
         {currentUser
-          ? <><Link to="/submit"><img alt="createPost" src={createPost}/></Link><Link to={`/user/${currentUser}`} id="username">{currentUser}</Link><button onClick={handleLogout}>LOG OUT</button></>
-        : <><Link to="/auth/login"><button className="button-login">LOG IN</button></Link>
-              <Link to="/auth/signup"><button>SIGN UP</button></Link>
-              </>}
+          ? <>
+              <Link to="/submit"><img alt="createPost" src={createPost}/></Link>
+              <Link to={`/user/${currentUser}`} id="username">{currentUser}</Link>
+              <button onClick={handleLogout}>LOG OUT</button></>
+          : <>
+              <Link to="/auth/login"><button className="button-login">LOG IN</button></Link>
+              <Link className="mobile-hide" to="/auth/signup"><button>SIGN UP</button></Link>
+            </>}
       </nav>
     )
 }

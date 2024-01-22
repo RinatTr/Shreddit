@@ -70,9 +70,6 @@ select#select {
   font-family: 'Open Sans', sans-serif;
   font-size: 13px;
   font-weight: 500;
-  /* border-bottom: 4px solid #fff;
-  border-left: 4px solid #fff;
-  border-right: 4px solid #fff; */
   border-radius: 0px 0px 4px 4px;
 }
 
@@ -94,3 +91,4 @@ ul li {
 ul li:hover {
   background: #fff8b8;
 }
+

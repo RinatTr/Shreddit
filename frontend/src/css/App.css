@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800');
 
+@media screen and (max-width: 645px) {
+  .mobile-hide {
+    display: none;
+  }
+  button {
+    font-size: 0.8rem;
+  }
+
+  select {
+    max-width: 60px;
+    text-overflow: ellipsis;
+  }
+}
+
 .App {
   text-align: center;
   min-height: 100vh;
