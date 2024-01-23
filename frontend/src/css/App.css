@@ -4,12 +4,9 @@
   .mobile-hide {
     display: none;
   }
-  button {
-    font-size: 0.8rem;
-  }
 
   select {
-    max-width: 60px;
+    max-width: 70px;
     text-overflow: ellipsis;
   }
 }
