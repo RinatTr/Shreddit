@@ -1,9 +1,15 @@
+:root {
+  --nav-offset: 50px;
+  --mobile-feed: 92vw;
+}
+
 .user-nav {
-  margin-top: 50px;
+  margin-top: var(--nav-offset);
 }
 .user-page {
-  margin-top: 50px;
+  margin-top: var(--nav-offset);
   display: flex;
+  flex-direction: column-reverse;
 }
 
 .logged-user-page {
@@ -49,7 +55,7 @@
 
 .user-floater span a {
   margin-left: 12px;
-  margin-top: -20px;
+  margin-top: -12px;
   color: #393939;
 }
 
@@ -82,7 +88,6 @@ img#avatar {
   width: 100%;
   font-family: 'Open Sans', sans-serif;
   font-size: 15px;
-  /* font-weight: bold; */
   position: fixed;
   z-index: 5;
 }
@@ -111,4 +116,30 @@ img#avatar {
 
 button {
   height: 30px;
+}
+
+@media screen and (max-width: 645px) {
+  .user-info-container {
+    margin-left: 0px;
+    margin-top: 10px;
+    min-width: var(--mobile-feed);
+    height: 180px;
+  }
+
+  .user-posts-container {
+    min-width: var(--mobile-feed);
+  }
+
+  .user-posts-container > a {
+    width: 100%;
+  }
+
+  .user-posts-container .post-collapsed {
+    width: inherit;
+  }
+
+  #username {
+    text-overflow: ellipsis;
+    max-width: 60px;
+  }
 }

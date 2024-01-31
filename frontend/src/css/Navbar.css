@@ -60,13 +60,13 @@ select, input, button {
 
 input#search {
   background: url('https://www.iconfinder.com/icons/111124/download/png/16') no-repeat scroll 7px 7px;
-  background-color: #f2f8fd;
   padding-left: 30px;
   font-family: 'Open Sans', sans-serif;
-  font-size: 12px;
+  font-size: 0.5em;
+  border: 0;
 }
 
-select#select {
+select {
   width: 90px;
 }
 
@@ -118,7 +118,7 @@ ul li:hover {
 
 .nav-dropdown-container a {
   color: black;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   padding: 8px;
 }
@@ -144,5 +144,10 @@ ul li:hover {
 
   button {
     white-space: nowrap;
+  }
+
+  select#select {
+    text-overflow: ellipsis;
+    max-width: 70px;
   }
 }

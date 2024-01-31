@@ -17,6 +17,7 @@ function Navbar (props) {
 
   const prevLoggedInUser = useRef(loggedInUser);
   const prevLocation = useRef(location);
+  const prevNav = useRef();
 
   useEffect(() => {
     if (loggedInUser) {
@@ -43,8 +44,20 @@ function Navbar (props) {
   useEffect(() => {
     props.checkAuthenticateStatus();
     setDefaultOpt(location.pathname)
+
+    const handleOutsideClick = (e) => {
+      if (prevNav.current && !prevNav.current.contains(e.target)) {
+        // Clicked outside the nav, so close it
+        setOpenAvatarDropdown(false);
+      }
+    };
+
+    document.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
     }, [])
- 
 
   const handleLogout = () => {
     console.log("[AUTH:] handleLogout")
@@ -87,7 +100,7 @@ function Navbar (props) {
   let mapSubs = subshreddits ? subshreddits.map((sub, i) => {return <option key={i+"subs"} id={"subs"+sub.subshreddit_id}>{sub.groupname}</option>}) : null;
   let mapUsers = follows ? follows.map((follow, i) => {return <option key={i+"user"} id="user">{follow.followed_user}</option>}) : null;
     return (
-      <nav>
+      <nav ref={prevNav}>
         <Link to="/popular"><img alt="icon" src={icon}/><span className="mobile-hide">shreddit</span></Link>
         <select id="select" name="select" onChange={(e) => {handleChange(e)}}>
           <option id="default" disabled defaultValue={defaultOpt}>{defaultOpt}</option>
@@ -131,6 +144,5 @@ function Navbar (props) {
       </nav>
     )
 }
-
 
 export default withRouter(Navbar);
