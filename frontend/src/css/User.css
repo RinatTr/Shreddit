@@ -1,6 +1,8 @@
 :root {
   --nav-offset: 50px;
-  --mobile-feed: 92vw;
+  --mobile-feed: 90vw;
+  --screen-feed: 65vw;
+  --screen-user-info: 31vw;
 }
 
 .user-nav {
@@ -9,7 +11,6 @@
 .user-page {
   margin-top: var(--nav-offset);
   display: flex;
-  flex-direction: column-reverse;
 }
 
 .logged-user-page {
@@ -21,7 +22,7 @@
   margin-top: 8px;
 }
 .user-posts-container .post-collapsed {
-  width: 65vw;
+  width: var(--screen-feed);
   height: 100px;
   margin-bottom: 0px;
   margin-top: 2px;
@@ -32,7 +33,7 @@
 .user-info-container {
   margin-left: 5px;
   margin-top: 10px;
-  width: 250px;
+  width: var(--screen-user-info);
   height: 270px;
   background: white;
   border-radius: 4px;
@@ -119,6 +120,10 @@ button {
 }
 
 @media screen and (max-width: 645px) {
+  .user-page {
+    flex-direction: column-reverse;
+  }
+  
   .user-info-container {
     margin-left: 0px;
     margin-top: 10px;
@@ -126,17 +131,17 @@ button {
     height: 180px;
   }
 
-  .user-posts-container {
+  .user-posts-container .post-collapsed {
     min-width: var(--mobile-feed);
   }
 
-  .user-posts-container > a {
+  /* .user-posts-container > a {
     width: 100%;
   }
 
   .user-posts-container .post-collapsed {
-    width: inherit;
-  }
+    width: 95vw;
+  } */
 
   #username {
     text-overflow: ellipsis;
