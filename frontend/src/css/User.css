@@ -113,7 +113,7 @@ button {
 }
 
 @media screen and (max-width: 645px) {
-  .user-page {
+  .user-page, .logged-user-page {
     flex-direction: column-reverse;
   }
   
