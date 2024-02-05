@@ -1,7 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700');
-:root {
-  --nav-offset: 50px;
-}
 
 nav {
   display: flex;
