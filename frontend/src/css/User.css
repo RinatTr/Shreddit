@@ -135,14 +135,6 @@ button {
     min-width: var(--mobile-feed);
   }
 
-  /* .user-posts-container > a {
-    width: 100%;
-  }
-
-  .user-posts-container .post-collapsed {
-    width: 95vw;
-  } */
-
   #username {
     text-overflow: ellipsis;
     max-width: 60px;
