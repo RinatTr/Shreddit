@@ -17,7 +17,7 @@ const AuthDisplay = ({
     <React.Fragment>
       <div className="auth-black">
         <div className="auth-wrapper">
-          <div className="art"></div>
+          <div className="art mobile-hide"></div>
           <div className="auth-form-container">
             <div className="auth-close-modal">
               <span className="auth-close" onClick={handleClose}>
