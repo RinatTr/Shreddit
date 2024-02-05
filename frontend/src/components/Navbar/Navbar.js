@@ -3,17 +3,21 @@ import { Link, withRouter } from 'react-router-dom';
 import icon from '../../icons/iconfinder_Faint_2695614.png'
 import all from '../../icons/iconfinder_ic_clear_all_48px_352269.png'
 import popular from '../../icons/iconfinder_ic_trending_up_48px_352184.png'
-import createPost from '../../icons/createPostTeal.png'
+import createPost from '../../icons/create_post_32.png'
+import logout from '../../icons/logout_32.png'
+import profile from '../../icons/profile_32.png'
 import '../../css/Navbar.css';
 import Search from './Search.js'
 
 function Navbar (props) {
   const [searchInput, setSearchInput] = useState("");
   const [defaultOpt, setDefaultOpt] = useState("");
+  const [openAvatarDropdown, setOpenAvatarDropdown] = useState(false);
   const { loggedInUser, fetchFollows, fetchUserSavedPosts, fetchUserSubshreddits, location } = props;
 
   const prevLoggedInUser = useRef(loggedInUser);
   const prevLocation = useRef(location);
+  const prevNav = useRef();
 
   useEffect(() => {
     if (loggedInUser) {
@@ -40,8 +44,20 @@ function Navbar (props) {
   useEffect(() => {
     props.checkAuthenticateStatus();
     setDefaultOpt(location.pathname)
+
+    const handleOutsideClick = (e) => {
+      if (prevNav.current && !prevNav.current.contains(e.target)) {
+        // Clicked outside the nav, so close it
+        setOpenAvatarDropdown(false);
+      }
+    };
+
+    document.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
     }, [])
- 
 
   const handleLogout = () => {
     console.log("[AUTH:] handleLogout")
@@ -75,13 +91,17 @@ function Navbar (props) {
     setSearchInput("")
   }
 
+  const toggleAvatarDropdown = () => {
+    setOpenAvatarDropdown(!openAvatarDropdown);
+};
+
   let { follows, posts, subshreddits } = props;
   let currentUser = loggedInUser ? loggedInUser.username : "";
   let mapSubs = subshreddits ? subshreddits.map((sub, i) => {return <option key={i+"subs"} id={"subs"+sub.subshreddit_id}>{sub.groupname}</option>}) : null;
   let mapUsers = follows ? follows.map((follow, i) => {return <option key={i+"user"} id="user">{follow.followed_user}</option>}) : null;
     return (
-      <nav>
-        <Link to="/popular"><img alt="icon" src={icon}/>shreddit</Link>
+      <nav ref={prevNav}>
+        <Link to="/popular"><img alt="icon" src={icon}/><span className="mobile-hide">shreddit</span></Link>
         <select id="select" name="select" onChange={(e) => {handleChange(e)}}>
           <option id="default" disabled defaultValue={defaultOpt}>{defaultOpt}</option>
           <option id="popular">Popular</option>
@@ -102,16 +122,27 @@ function Navbar (props) {
           />
         <Search searchInput={searchInput} posts={posts} handleClick={handleClick}/>
         </div>
-        <Link to="/popular"><img alt="all" src={popular}/></Link>
-        <Link to="/all"><img alt="all" src={all}/></Link>
+        <Link className="mobile-hide" to="/popular"><img  alt="all" src={popular}/></Link>
+        <Link className="mobile-hide" to="/all"><img  alt="all" src={all}/></Link>
         {currentUser
-          ? <><Link to="/submit"><img alt="createPost" src={createPost}/></Link><Link to={`/user/${currentUser}`} id="username">{currentUser}</Link><button onClick={handleLogout}>LOG OUT</button></>
-        : <><Link to="/auth/login"><button className="button-login">LOG IN</button></Link>
-              <Link to="/auth/signup"><button>SIGN UP</button></Link>
-              </>}
+          ? <>
+              <img onClick={toggleAvatarDropdown} alt="user-avatar" className="user-avatar" src={loggedInUser.userData.avatar_url}/>
+              {openAvatarDropdown 
+                ?
+                  <div className="nav-dropdown-container">
+                    <Link to={`/user/${currentUser}`} id="username"><img alt="profile" src={profile}/>{currentUser}</Link>
+                    <Link to="/submit" id="create-post"><img alt="create post" src={createPost}/>Create Post</Link>
+                    <a href="/" onClick={handleLogout}><img alt="log out" src={logout}/>Log Out</a> 
+                  </div>
+                : null}
+              
+            </>
+          : <>
+              <Link to="/auth/login"><button className="button-login">LOG IN</button></Link>
+              <Link className="mobile-hide" to="/auth/signup"><button>SIGN UP</button></Link>
+            </>}
       </nav>
     )
 }
-
 
 export default withRouter(Navbar);

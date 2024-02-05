@@ -138,3 +138,14 @@
   color: red; 
   white-space: nowrap;
 }
+
+@media screen and (max-width: 645px) {
+  .auth-wrapper {
+    width: 100%;
+  }
+
+  .auth-form-container {
+    width: 100%;
+    height: fit-content;
+  }
+}

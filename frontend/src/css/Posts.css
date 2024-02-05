@@ -56,7 +56,7 @@
 .votes {
   display: flex;
   flex-direction: column;
-  width: 40px;
+  min-width: 35px;
   height: 100%;
   align-items: center;
   background: #fff2c6;
@@ -277,4 +277,10 @@ h3 {
 
 h4 {
   text-align: left;
+}
+
+@media screen and (max-width: 645px) {
+  .post-expanded, .close-modal {
+    width: 100%;
+  }
 }

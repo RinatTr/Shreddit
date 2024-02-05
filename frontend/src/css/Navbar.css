@@ -6,7 +6,7 @@ nav {
   align-items: center;
   justify-content: space-around;
   background: white;
-  height: 50px;
+  height: var(--nav-offset);
   width: 100%;
   font-family: 'PT Sans Narrow', sans-serif;
   font-size: 25px;
@@ -20,6 +20,11 @@ img {
   width: 35px;
 }
 
+.user-avatar {
+  border: 1px solid aliceblue;
+  border-radius: 20px;
+}
+
 a {
   display: flex;
   flex-direction: row;
@@ -29,9 +34,7 @@ a {
 }
 
 a#username {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+  align-self: center;
   color: #0097FF;
 }
 
@@ -44,19 +47,23 @@ a#username:visited {
    color: #0097FF;
 }
 
+a#create-post, a#logout {
+  border-bottom: 1px solid white;
+}
+
 select, input, button {
   height: 30px;
 }
 
 input#search {
   background: url('https://www.iconfinder.com/icons/111124/download/png/16') no-repeat scroll 7px 7px;
-  background-color: #f2f8fd;
   padding-left: 30px;
   font-family: 'Open Sans', sans-serif;
-  font-size: 12px;
+  font-size: 0.5em;
+  border: 0;
 }
 
-select#select {
+select {
   width: 90px;
 }
 
@@ -66,13 +73,10 @@ select#select {
   top: 50px;
   width: 158px;
   text-align: left;
-  background: #F2F8FD;
+  background: #f2f8fd;
   font-family: 'Open Sans', sans-serif;
   font-size: 13px;
   font-weight: 500;
-  /* border-bottom: 4px solid #fff;
-  border-left: 4px solid #fff;
-  border-right: 4px solid #fff; */
   border-radius: 0px 0px 4px 4px;
 }
 
@@ -93,4 +97,55 @@ ul li {
 
 ul li:hover {
   background: #fff8b8;
+}
+
+.nav-dropdown-container {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #f6f7f8;
+  box-shadow: rgba(0,0,0,0.2) 0 2px 3px;
+  width: 35vw;
+  padding: 5px;
+  border-top: 0px;
+  border-bottom-left-radius: 10px;
+  position: absolute;
+  top: var(--nav-offset);
+  right: 2px;
+}
+
+.nav-dropdown-container a {
+  color: black;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 8px;
+}
+
+.nav-dropdown-container a:hover {
+  background-color:whitesmoke;
+}
+
+.nav-dropdown-container img {
+  height: 22px;
+  width: 22px;
+  margin-right: 2px;
+}
+
+@media screen and (max-width: 645px) {
+  input {
+    max-width: 60vw;
+  }
+  #username {
+    text-overflow: ellipsis;
+    max-width: 60px;
+  }
+
+  button {
+    white-space: nowrap;
+  }
+
+  select#select {
+    text-overflow: ellipsis;
+    max-width: 70px;
+  }
 }

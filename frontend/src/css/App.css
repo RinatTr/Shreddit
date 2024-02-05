@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800');
 
+:root {
+  --nav-offset: 50px;
+  --mobile-feed: 90vw;
+  --screen-feed: 65vw;
+  --screen-user-info: 31vw;
+}
+
+@media screen and (max-width: 645px) {
+  .mobile-hide {
+    display: none;
+  }
+
+  select {
+    max-width: 70px;
+    text-overflow: ellipsis;
+  }
+}
+
 .App {
   text-align: center;
   min-height: 100vh;

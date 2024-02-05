@@ -1,8 +1,8 @@
 .user-nav {
-  margin-top: 50px;
+  margin-top: var(--nav-offset);
 }
 .user-page {
-  margin-top: 50px;
+  margin-top: var(--nav-offset);
   display: flex;
 }
 
@@ -15,7 +15,7 @@
   margin-top: 8px;
 }
 .user-posts-container .post-collapsed {
-  width: 65vw;
+  width: var(--screen-feed);
   height: 100px;
   margin-bottom: 0px;
   margin-top: 2px;
@@ -26,7 +26,7 @@
 .user-info-container {
   margin-left: 5px;
   margin-top: 10px;
-  width: 250px;
+  width: var(--screen-user-info);
   height: 270px;
   background: white;
   border-radius: 4px;
@@ -49,7 +49,7 @@
 
 .user-floater span a {
   margin-left: 12px;
-  margin-top: -20px;
+  margin-top: -12px;
   color: #393939;
 }
 
@@ -82,7 +82,6 @@ img#avatar {
   width: 100%;
   font-family: 'Open Sans', sans-serif;
   font-size: 15px;
-  /* font-weight: bold; */
   position: fixed;
   z-index: 5;
 }
@@ -111,4 +110,26 @@ img#avatar {
 
 button {
   height: 30px;
+}
+
+@media screen and (max-width: 645px) {
+  .user-page, .logged-user-page {
+    flex-direction: column-reverse;
+  }
+  
+  .user-info-container {
+    margin-left: 0px;
+    margin-top: 10px;
+    min-width: var(--mobile-feed);
+    height: 180px;
+  }
+
+  .user-posts-container .post-collapsed {
+    min-width: var(--mobile-feed);
+  }
+
+  #username {
+    text-overflow: ellipsis;
+    max-width: 60px;
+  }
 }
