@@ -56,7 +56,7 @@
 .votes {
   display: flex;
   flex-direction: column;
-  width: 40px;
+  min-width: 35px;
   height: 100%;
   align-items: center;
   background: #fff2c6;
