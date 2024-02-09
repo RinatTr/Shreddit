@@ -54,7 +54,7 @@ export const signupUser = (user) => dispatch => {
 export const loginUser = (user) => dispatch => {
   return Util.login(user)
             .then((res) => {
-              console.log("AUTH: login request res:", res)
+              // console.log("AUTH: login request res:", res)
               Auth.authenticateUser(user.username)
             })
             .then(() => {
@@ -86,12 +86,12 @@ export const logoutUser = () => dispatch => {
 export const checkAuthenticateStatus = () => dispatch => {
   return Util.isLoggedIn()
               .then(res => {
-                console.log("2 AUTH: in checkAuth, isLoggedIn -  token:", Auth.getToken(), res)
+                // console.log("2 AUTH: in checkAuth, isLoggedIn -  token:", Auth.getToken(), res)
                 if (res.data.username === Auth.getToken()) {
-                  console.log("3 AUTH: username matches token:", res, Auth.getToken())
+                  // console.log("3 AUTH: username matches token:", res, Auth.getToken())
                   Util.getUser(res.data.username)
                       .then(user => {
-                        console.log("4 AUTH: getUser:", user)
+                        // console.log("4 AUTH: getUser:", user)
                         return dispatch(login({
                           isLoggedIn: Auth.isUserAuthenticated(),
                           username: Auth.getToken(),
@@ -99,7 +99,7 @@ export const checkAuthenticateStatus = () => dispatch => {
                         }))
                       })
                 } else {
-                  console.log("3 AUTH: username:", res.data.username, "doesnt match token:", Auth.getToken())
+                  // console.log("3 AUTH: username:", res.data.username, "doesnt match token:", Auth.getToken())
                   if (res.data.username) {
                     logoutUser();
                   } else {
