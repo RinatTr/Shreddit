@@ -10,7 +10,8 @@ import rootReducer from './reducers/rootReducer.js'
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 
-const store = createStore(rootReducer, {}, applyMiddleware(thunk, logger));
+const isNotProd = process.env.NODE_ENV !== 'production';
+const store = createStore(rootReducer, {}, applyMiddleware(thunk, isNotProd ?? logger));
 
 ReactDOM.render(
   <Provider store={store}>
