@@ -67,8 +67,8 @@ function Navbar (props) {
   }
 
   const handleChange = (e) => {
-    let path = e.target.selectedOptions[0].innerText
-    let optionId = e.target.selectedOptions[0].id
+    let path = e.target.selectedOptions[0].innerText || ""
+    let optionId = e.target.selectedOptions[0].id || ""
     switch (optionId.slice(0,4)) {
       case "user":
       props.history.push(`/user/${path}`)
