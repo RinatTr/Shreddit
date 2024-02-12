@@ -84,11 +84,17 @@ export default function Posts (props) {
     }
   }
 
-
   let { posts, comments, count, saved_posts, loggedUser } = props;
+
+  const hasValidPostsAndCommentCounts = posts && count;  
+  const hasValidLoggedUserData = loggedUser && saved_posts;
+  const hasValidNoLoggedUserData = !loggedUser && !saved_posts.length;
+
+  const shouldMapPosts = hasValidPostsAndCommentCounts && (hasValidLoggedUserData || hasValidNoLoggedUserData)
+  
   let mapPosts;
   let currentPost;
-  if (posts.length && count && ((loggedUser && saved_posts) || (!loggedUser && !saved_posts.length)) ) {
+  if (shouldMapPosts) {
     //collapsed posts rendering
       mapPosts = posts.map((post) => {
       return <Post
