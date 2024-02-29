@@ -13,12 +13,10 @@ const logSends = require('./logSends')
 
 const app = express()
 
-if (process.env.NODE_ENV !== 'production') {
-  //for DEV: sets NODE_ENV to get env variables from local .env file
-  require('dotenv').config();
-  app.use(cors({origin: 'http://localhost:3000',
-  credentials: true}));
-}
+require('dotenv').config();
+app.use(cors({origin: 'https://shreddit-one.vercel.app/',
+credentials: true}));
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
