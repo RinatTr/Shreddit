@@ -8,10 +8,11 @@ const follows = require('./routes/follows.js')
 const subscriptions = require('./routes/subscriptions.js')
 const subshreddits = require('./routes/subshreddits.js')
 const logSends = require('./logSends')
-const corsConfig = require('./corsConfig')
+const corsConfig = require('./cors.config')
+
 
 const app = express()
-
+//CORS configuration needs to be applied as early as possible in the middleware chain. This ensures that CORS headers are set on the response before any potential errors occur during body parsing.
 app.use(corsConfig);
 
 app.use(express.json());
