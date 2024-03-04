@@ -1,8 +1,6 @@
 const express = require('express');
 const passport = require("passport");
 const session = require("express-session");
-const path = require('path');
-const cors = require('cors');
 const users = require('./routes/users.js')
 const posts = require('./routes/posts.js')
 const comments = require('./routes/comments.js')
@@ -10,17 +8,16 @@ const follows = require('./routes/follows.js')
 const subscriptions = require('./routes/subscriptions.js')
 const subshreddits = require('./routes/subshreddits.js')
 const logSends = require('./logSends')
+const corsConfig = require('./cors.config')
+
 
 const app = express()
-
-require('dotenv').config();
-app.use(cors({origin: 'https://shreddit-one.vercel.app',
-credentials: true}));
-
+//CORS configuration needs to be applied as early as possible in the middleware chain. This ensures that CORS headers are set on the response before any potential errors occur during body parsing.
+app.use(corsConfig);
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, "../frontend/build")))
+// app.use(express.static(path.join(__dirname, "../frontend/build")))
 
 console.log("[AUTH:] init session")
 app.use(
@@ -40,7 +37,7 @@ app.use((req, _, next)=> {
   console.log(req.method, "req:", req.originalUrl, req.sessionID, "cookie:", req.session.cookie.expires, req.session.cookie.httpOnly)
   next()
 })
-// app.use(morgan('dev'));
+
 app.use(logSends)
 
 app.use('/api/users', users)
@@ -50,19 +47,25 @@ app.use('/api/subshreddits', subshreddits)
 app.use('/api/follows', follows)
 app.use('/api/subscriptions', subscriptions)
 
+app.get('/', (_, res) => {
+  res.send('Shreddit-api server running')
+})
 // app.use('*', (req, res, next) => {
 //   res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 // });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function(req, _, next) {
+
+  console.log("req in catch 404:", req.originalUrl)
   var err = new Error("Resource Not Found");
   err.status = 404;
+  err.message = "Requested resource or path not found"
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
