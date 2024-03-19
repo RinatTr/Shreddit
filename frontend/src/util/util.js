@@ -1,6 +1,7 @@
 import axios from 'axios';
+import Auth from './Auth';
 const BASE_URL = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
-export const createAxios = () => axios.create({ baseURL: BASE_URL, withCredentials: true })
+export const createAxios = () => axios.create({ baseURL: BASE_URL, withCredentials: true, headers: {'Authorization': Auth.getToken()} })
 
 //Posts
 export const getPosts = () => createAxios().get("/api/posts")
@@ -12,7 +13,7 @@ export const createPost = (post) => createAxios().post(`/api/posts/add`, post)
 //User
 export const getUser = (username) => createAxios().get(`/api/users/${username}`)
 export const getUserPosts = (id) => createAxios().get(`/api/users/${id}/posts/`)
-export const getSavedPosts = (id) => createAxios().get(`/api/users/${id}/posts/saved`)
+export const getSavedPosts = (id) => createAxios().get(`/api/users/${id}/posts/saved`) //ADD TOKEN
 export const getUserComments = (id) => createAxios().get(`/api/users/${id}/comments`)
 export const getAllSubshredditsPerUser = (id) => createAxios().get(`/api/subshreddits/user/${id}`)
 
@@ -32,8 +33,14 @@ export const deleteSubscription = (subId) => createAxios().delete(`/api/subscrip
 //Auth
 export const createUser = (bodyObj) => createAxios().post("/api/users/auth/new", bodyObj)
 export const login = (bodyObj) => createAxios().post("/api/users/auth/login", bodyObj)
-export const logout = (bodyObj) => createAxios().post("/api/users/auth/logout", bodyObj)
+
+//deprecated
 export const isLoggedIn = () => createAxios().get("/api/users/auth/isLoggedIn")
+
+//deprecated
+export const logout = (bodyObj) => createAxios().post("/api/users/auth/logout", bodyObj)
+
+
 
 //Util Functions
 

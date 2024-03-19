@@ -21,6 +21,7 @@ function Navbar (props) {
 
   useEffect(() => {
     if (loggedInUser) {
+      console.log("HERE IN LOGGEDINUSER")
       if (!prevLoggedInUser.current || loggedInUser.username !== prevLoggedInUser.current.username) {
         fetchFollows(loggedInUser.userData.id);
         fetchUserSavedPosts(loggedInUser.userData.id);
@@ -42,7 +43,6 @@ function Navbar (props) {
   }, [loggedInUser, location.pathname]);
 
   useEffect(() => {
-    props.checkAuthenticateStatus();
     setDefaultOpt(location.pathname)
 
     const handleOutsideClick = (e) => {
@@ -96,7 +96,6 @@ function Navbar (props) {
 };
 
   let { follows, posts, subshreddits } = props;
-  let currentUser = loggedInUser ? loggedInUser.username : "";
   let mapSubs = subshreddits ? subshreddits.map((sub, i) => {return <option key={i+"subs"} id={"subs"+sub.subshreddit_id}>{sub.groupname}</option>}) : null;
   let mapUsers = follows ? follows.map((follow, i) => {return <option key={i+"user"} id="user">{follow.followed_user}</option>}) : null;
     return (
@@ -124,13 +123,13 @@ function Navbar (props) {
         </div>
         <Link className="mobile-hide" to="/popular"><img  alt="all" src={popular}/></Link>
         <Link className="mobile-hide" to="/all"><img  alt="all" src={all}/></Link>
-        {currentUser
+        {loggedInUser
           ? <>
               <img onClick={toggleAvatarDropdown} alt="user-avatar" className="user-avatar" src={loggedInUser.userData.avatar_url}/>
               {openAvatarDropdown 
                 ?
                   <div className="nav-dropdown-container">
-                    <Link to={`/user/${currentUser}`} id="username"><img alt="profile" src={profile}/>{currentUser}</Link>
+                    <Link to={`/user/${loggedInUser.username}`} id="username"><img alt="profile" src={profile}/>{loggedInUser.username}</Link>
                     <Link to="/submit" id="create-post"><img alt="create post" src={createPost}/>Create Post</Link>
                     <a href="/" onClick={handleLogout}><img alt="log out" src={logout}/>Log Out</a> 
                   </div>

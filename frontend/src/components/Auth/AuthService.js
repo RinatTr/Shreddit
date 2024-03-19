@@ -40,7 +40,7 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser, aut
   }
 
   const handleDemo = () => {
-    loginUser({ username: "missyE", password: "asdf"})
+    loginUser({ username: "river", password: "solid"})
     history.push('/All');
   }
 
@@ -51,7 +51,6 @@ function AuthService ({ match, history, signupUser, loginUser, loggedInUser, aut
 
   useEffect(() => {
     if (authStatus) {
-      // console.log("in authStatus", authStatus)
       //signup auth success
       loginUser({ username, password })
       history.push('/All');

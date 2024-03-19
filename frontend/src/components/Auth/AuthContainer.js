@@ -1,6 +1,6 @@
 import AuthService from "./AuthService.js";
 import { connect } from "react-redux";
-import { signupUser, loginUser, logoutUser, checkAuthenticateStatus } from "../../actions/AuthActions.js";
+import { signupUser, loginUser, logoutUser } from "../../actions/AuthActions.js";
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -16,8 +16,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     signupUser: (newUser) => dispatch(signupUser(newUser)),
     loginUser: (user) => dispatch(loginUser(user)),
-    logoutUser: () => dispatch(logoutUser()),
-    checkAuthenticateStatus: () => dispatch(checkAuthenticateStatus())
+    logoutUser: () => dispatch(logoutUser())
   };
 };
 

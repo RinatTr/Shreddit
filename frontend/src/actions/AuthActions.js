@@ -51,19 +51,28 @@ export const signupUser = (user) => dispatch => {
             })
 };
 
+//TODO: modify flow for JWT
 export const loginUser = (user) => dispatch => {
   return Util.login(user)
             .then((res) => {
-              // console.log("AUTH: login request res:", res)
-              Auth.authenticateUser(user.username)
+              console.log("AUTH: login request successful:", res)
+              //extract token and store it in localStorage
+              Auth.authenticateUser(res.data.token)
+              
+              Util.getUser(res.data.username)
+              .then(res => {
+                console.log("4 AUTH: getUser:", res)
+                return dispatch(login({
+                  isLoggedIn: Auth.isUserAuthenticated(),
+                  username: res.data.user.username,
+                  userData: res.data.user
+                }))
+              })
             })
             .then(() => {
               //clear error will only cleanup older attempt errors from store and 
               //will not interfere with potential errors in this chain 
               return dispatch(clearError())
-            })
-            .then(() => {
-              return dispatch(checkAuthenticateStatus())
             })
             .catch(err => {
               return dispatch(getError("login", err.response.status))
@@ -71,43 +80,6 @@ export const loginUser = (user) => dispatch => {
 }
 
 export const logoutUser = () => dispatch => {
-  return Util.logout()
-            .then(() => {
-              Auth.deauthenticateUser();
-            })
-            .then(() => {
-              checkAuthenticateStatus()
-            })
-            .catch(err => {
-              return dispatch(getError(err))
-            })
+  return Auth.deauthenticateUser();
 }
 
-export const checkAuthenticateStatus = () => dispatch => {
-  return Util.isLoggedIn()
-              .then(res => {
-                // console.log("2 AUTH: in checkAuth, isLoggedIn -  token:", Auth.getToken(), res)
-                if (res.data.username === Auth.getToken()) {
-                  // console.log("3 AUTH: username matches token:", res, Auth.getToken())
-                  Util.getUser(res.data.username)
-                      .then(user => {
-                        // console.log("4 AUTH: getUser:", user)
-                        return dispatch(login({
-                          isLoggedIn: Auth.isUserAuthenticated(),
-                          username: Auth.getToken(),
-                          userData: user.data.user
-                        }))
-                      })
-                } else {
-                  // console.log("3 AUTH: username:", res.data.username, "doesnt match token:", Auth.getToken())
-                  if (res.data.username) {
-                    logoutUser();
-                  } else {
-                    Auth.deauthenticateUser();
-                  }
-                }
-              })
-              .catch(err => {
-                return dispatch(getError(err))
-              })
-}
