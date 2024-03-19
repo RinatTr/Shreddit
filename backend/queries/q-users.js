@@ -1,5 +1,8 @@
 const { db } = require("./q-index.js");
+
 const authHelpers = require("../auth/helpers");
+var jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const getAllUsers = (req, res, next) => {
   db.any("SELECT * FROM users")
@@ -138,19 +141,46 @@ const logoutUser = (req, res, next) => {
   });
 };
 
-const loginUser = (req, res) => {
-  console.log('[AUTH:] in loginUser query, req.session.passport:', req.session.passport);
-  res.json(req.user.username);
-}
-
-const isLoggedIn = (req, res) => {
-  console.log("[AUTH:] isLoggedIn:",req.isAuthenticated(), "req.session.passport:", req.session.passport)
-  //passport populates req.user with the user after its successful auth.
-  if (req.isAuthenticated()) {
-    res.json({ username: req.user });
-  } else {
-    res.json({ username: null });
-  }
+const loginUser = (req, res, next) => {
+  console.log('[AUTH:] in loginUser query');
+  //look for user in the DB, .then() =>
+  db.one("SELECT * FROM users WHERE username = ${username}", {
+    username: req.body.username
+  })
+    .then(user => {       
+        if (!authHelpers.comparePass(req.body.password, user.password_digest)) {
+          console.log('[AUTH:] password from client does not match decrypted password')
+          //password from client does not match decrypted password
+            return res.status(401).json({
+                message: "Incorrect credentials"
+            })
+        } else {
+            const payload = {
+                username: user.username,
+                id: user.id
+            }
+            //authentication success - generate a JWT token
+            const token = jwt.sign(payload, process.env.SECRET_JWT, { expiresIn: "1d" })
+            // TODO: client used to receive successful login as such // res.json(req.user.username);
+            return res.status(200).json({
+                message: "Logged in successfully!",
+                token: "Bearer " + token,
+                username: user.username
+            })
+        }
+    }).catch(err => {
+      console.log("err.code", err.code, err)
+      if (err.code == "0") {
+        //error code 0 = no data returned from DB query, meaning username doesn't exist
+        res.status(401).json({
+          message: `Incorrect credentials`
+        })
+      } else {
+        res.status(500).json({
+          message: `Registration failed: Internal server error.`
+        })
+      }
+    });
 }
 
 module.exports = {
@@ -163,6 +193,5 @@ module.exports = {
   getCommentsPerUser,
   createUser,
   logoutUser,
-  loginUser,
-  isLoggedIn
+  loginUser
 };

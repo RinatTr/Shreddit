@@ -1,38 +1,33 @@
-const passport = require("passport");
 const { db } = require("../queries/q-index.js");
+const JwtStrategy = require('passport-jwt').Strategy,
+    ExtractJwt = require('passport-jwt').ExtractJwt;
+const opts = {}
+const passport = require('passport')
+require('dotenv').config();
 
-module.exports = () => {
-  console.log("[AUTH:] init serializer")
-  passport.serializeUser((user, done) => {
-    console.log('[AUTH:] Serialized user:', user.username);
-//processes a user token into plain text, which is
-//how it can be assigned to our request header.
-    done(null, user.username);
-  });
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = process.env.SECRET_JWT;
 
-  passport.deserializeUser((username, done) => {
-    console.log('[AUTH:] Deserializing user:', username);
-/*
-Deserialization occurs on subsequent requests.
-When a user makes a new request, Passport.js middleware (e.g., passport.initialize() 
-and passport.session()) checks if there is a session associated with the request.
-If a session exists, the deserializeUser function is called with the serialized user
-data stored in the session.
-*/
-//takes a plain text request header, converts it into a JavaScript-readable format,
-//and checks our database to make sure that user actually exists.
-//This accomplishes two things: It lets us process a session token,
-//and it makes sure a hacker isn't throwing together a request
-//header without an actual user account to back it up.
-    db.one("SELECT * FROM users WHERE username = ${username}", {
-      username: username
+console.log("[AUTH:] init JWT strategy")
+passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+  //Passport will go here to authenticate protected paths
+  console.log("[AUTH:] Authenticating request...")
+  db.one("SELECT * FROM users WHERE username = ${username}", {
+    username: jwt_payload.username
+  })
+    .then(user => {
+      console.log('[AUTH:] User authenticated:', user.username);
+      done(null, user.username);
     })
-      .then(user => {
-        console.log('[AUTH:] Deserialized user:', user.username);
-        done(null, user.username);
-      })
-      .catch(err => {
-        done(err, null);
-      });
-  });
-};
+    .catch(err => {
+      if (err.code == "0") {
+        console.log('[AUTH:] user does not exist');
+        //error code 0 = no data returned from DB query, meaning username doesn't exist
+        done(null, false)
+      } else {
+        console.log('[AUTH:] JWT authentication failed');
+        done(err, false);
+      }
+    });
+}
+))

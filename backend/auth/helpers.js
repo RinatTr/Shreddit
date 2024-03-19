@@ -16,7 +16,8 @@ function createHash(password) {
   return hash;
 }
 
-//middleware that makes sure a user's session token is on our request header.
+//middleware that makes sure a user's JWT token is in our request's header under Authorization key.
+//will always come after passport.authenticate middleware.
 //use this in routes that we want a user to be logged in to access.
 function loginRequired(req, res, next) {
   if (!req.user) {
