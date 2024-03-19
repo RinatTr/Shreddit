@@ -21,7 +21,6 @@ function Navbar (props) {
 
   useEffect(() => {
     if (loggedInUser) {
-      console.log("HERE IN LOGGEDINUSER")
       if (!prevLoggedInUser.current || loggedInUser.username !== prevLoggedInUser.current.username) {
         fetchFollows(loggedInUser.userData.id);
         fetchUserSavedPosts(loggedInUser.userData.id);
