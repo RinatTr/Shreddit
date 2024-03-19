@@ -1,6 +1,5 @@
 const express = require('express');
 const passport = require("passport");
-const session = require("express-session");
 const users = require('./routes/users.js')
 const posts = require('./routes/posts.js')
 const comments = require('./routes/comments.js')
@@ -19,22 +18,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 // app.use(express.static(path.join(__dirname, "../frontend/build")))
 
-console.log("[AUTH:] init session")
-app.use(
-  session({
-    secret: "shreddit passport",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {maxAge: 1 * 24 * 60 * 60 * 1000} //one day in miliseconds
-  })
-);
-
 //must be ordered before routes
 app.use(passport.initialize());
-app.use(passport.session());
+require('./auth/passport');
 
+//TODO - update logging for JWT auth
 app.use((req, _, next)=> {
-  console.log(req.method, "req:", req.originalUrl, req.sessionID, "cookie:", req.session.cookie.expires, req.session.cookie.httpOnly)
+  console.log(req.method, "req:", req.originalUrl)
   next()
 })
 

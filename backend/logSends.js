@@ -6,13 +6,13 @@ const logSends = (req, res, next) => {
   
     // Override res.send to log the response and then call the original function
     res.send = function (body) {
-      console.log(req.method, "res:", req.originalUrl, req.sessionID, "cookies:", req.cookies, "body:", body.status, ":", body.message, body)
+      console.log(req.method, "res:", req.originalUrl, "body:", body.status, ":", body.message, body)
       originalSend.apply(res, arguments);
     };
   
     // Override res.json to log the response and then call the original function
     res.json = function (body) {
-      console.log(req.method, "res:", req.originalUrl, req.sessionID, "cookie:", req.session.cookie.expires, "body:", body.status, ":", body.message, body)
+      console.log(req.method, "res:", req.originalUrl, "body:", body.status, ":", body.message, body)
       originalJson.apply(res, arguments);
       console.log("===========================================\n")
     };
