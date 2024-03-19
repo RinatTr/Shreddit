@@ -20,5 +20,5 @@ Check out the [Docs](./Docs) for more information such as MVP, wireframes, API_e
 
 ### Local Installation ###
 
-[Live demo version](https://shreddit-app.herokuapp.com/)
-To install Shreddit locally, clone this repo, install npm packages in backend and front end folder `$ npm install`, and seed the database in `/backend/db` with the command `psql -f seed.sql` (you will need to have Postgres installed).
+[Live version](https://shreddit-one.vercel.app/)
+To install Shreddit locally, clone this repo, install npm packages in backend and frontend folder `$ npm install`, and seed the database in `/backend/db` with the command `psql -f seed.sql` (you will need to have Postgres installed and configured).
